@@ -2,6 +2,7 @@ syntax = "proto3";
 package pb;
 
 import "token.proto";
+import "type.proto";
 import "google/protobuf/any.proto";
 
 message Comment {
@@ -30,27 +31,33 @@ message FieldList {
 message BadExpr {
   int32 from = 1;
   int32 to = 2;
+  TypeInfo type_info = 3;
 }
 
 message Ident {
   int32 name_pos = 1;
   string name = 2;
+  TypeInfo type_info = 3;
+  TypeInfo def_type_info = 4;
 }
 
 message Ellipsis {
   int32 ellipsis = 1;
   google.protobuf.Any elt = 2;
+  TypeInfo type_info = 3;
 }
 
 message BasicLit {
   int32 value_pos = 1;
   Token kind = 2;
   string value = 3;
+  TypeInfo type_info = 4;
 }
 
 message FuncLit {
   FuncType type = 1;
   BlockStmt body = 2;
+  TypeInfo type_info = 3;
 }
 
 message CompositeLit {
@@ -58,17 +65,20 @@ message CompositeLit {
   int32 lbrace = 2;
   repeated google.protobuf.Any elts = 3;
   int32 rbrace = 4;
+  TypeInfo type_info = 5;
 }
 
 message ParenExpr {
   int32 lparen = 1;
   google.protobuf.Any x = 2;
   int32 rparen = 3;
+  TypeInfo type_info = 4;
 }
 
 message SelectorExpr {
   google.protobuf.Any x = 1;
   Ident sel = 2;
+  TypeInfo type_info = 3;
 }
 
 message IndexExpr {
@@ -76,6 +86,7 @@ message IndexExpr {
   int32 lbrack = 2;
   google.protobuf.Any index = 3;
   int32 rbrack = 4;
+  TypeInfo type_info = 5;
 }
 
 message SliceExpr {
@@ -86,6 +97,7 @@ message SliceExpr {
   google.protobuf.Any max = 5;
   bool slice3 = 6;
   int32 rbrack = 7;
+  TypeInfo type_info = 8;
 }
 
 message TypeAssertExpr {
@@ -93,6 +105,7 @@ message TypeAssertExpr {
   int32 lparen = 2;
   google.protobuf.Any type = 3;
   int32 rparen = 4;
+  TypeInfo type_info = 5;
 }
 
 message CallExpr {
@@ -101,17 +114,20 @@ message CallExpr {
   repeated google.protobuf.Any args = 3;
   int32 ellipsis = 4;
   int32 rparen = 5;
+  TypeInfo type_info = 6;
 }
 
 message StarExpr {
   int32 star = 1;
   google.protobuf.Any x = 2;
+  TypeInfo type_info = 3;
 }
 
 message UnaryExpr {
   int32 op_pos = 1;
   Token op = 2;
   google.protobuf.Any x = 3;
+  TypeInfo type_info = 4;
 }
 
 message BinaryExpr {
@@ -119,49 +135,58 @@ message BinaryExpr {
   int32 op_pos = 2;
   Token op = 3;
   google.protobuf.Any y = 4;
+  TypeInfo type_info = 5;
 }
 
 message KeyValueExpr {
   google.protobuf.Any key = 1;
   int32 colon = 2;
   google.protobuf.Any value = 3;
+  TypeInfo type_info = 4;
 }
 
 message ArrayType {
   int32 lbrack = 1;
   google.protobuf.Any len = 2;
   google.protobuf.Any elt = 3;
+  TypeInfo type_info = 4;
 }
 
 message StructType {
   int32 struct = 1;
   FieldList fields = 2;
   bool incomplete = 3;
+  TypeInfo type_info = 4;
 }
 
 message FuncType {
   int32 func = 1;
   FieldList params = 2;
   FieldList results = 3;
+  TypeInfo type_info = 4;
 }
 
 message InterfaceType {
   int32 interface = 1;
   FieldList methods = 2;
   bool incomplete = 3;
+  TypeInfo type_info = 4;
 }
 
 message MapType {
   int32 map = 1;
   google.protobuf.Any key = 2;
   google.protobuf.Any value = 3;
+  TypeInfo type_info = 4;
 }
 
 message ChanType {
   int32 begin = 1;
   int32 arrow = 2;
-  int32 dir = 3;
-  google.protobuf.Any value = 4;
+  bool send_dir = 3;
+  bool recv_dir = 4;
+  google.protobuf.Any value = 5;
+  TypeInfo type_info = 6;
 }
 
 message BadStmt {
