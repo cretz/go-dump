@@ -365,16 +365,23 @@ message FuncDecl {
 }
 
 message File {
-  CommentGroup doc = 1;
-  int32 package = 2;
-  Ident name = 3;
-  repeated google.protobuf.Any decls = 4;
-  repeated ImportSpec imports = 5;
-  repeated Ident unresolved = 6;
-  repeated CommentGroup comments = 7;
+  string file_name = 1;
+  CommentGroup doc = 2;
+  int32 package = 3;
+  Ident name = 4;
+  repeated google.protobuf.Any decls = 5;
+  repeated ImportSpec imports = 6;
+  repeated Ident unresolved = 7;
+  repeated CommentGroup comments = 8;
 }
 
 message Package {
   string name = 1;
-  map<string, File> files = 2;
+  string path = 2;
+  repeated File files = 3;
+  repeated string var_init_order = 4;
+}
+
+message Packages {
+  repeated Package packages = 1;
 }

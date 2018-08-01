@@ -1,48 +1,31 @@
 package dump
 
 import (
-	"go/ast"
-	"go/importer"
-	"go/parser"
-	"go/token"
-	"go/types"
+	"fmt"
+
+	"golang.org/x/tools/go/loader"
 
 	"github.com/cretz/go-dump/pb"
 )
 
-func LoadDir(path string) (map[string]*pb.Package, error) {
-	fileSet := token.NewFileSet()
-	// Parse
-	parsedPkgs, err := parser.ParseDir(fileSet, path, nil, parser.ParseComments)
-	// TODO: keep going on error?
+func FromArgs(args []string, includeTests bool) (*pb.Packages, error) {
+	conf := &loader.Config{}
+	if rest, err := conf.FromArgs(args, includeTests); err != nil {
+		return nil, fmt.Errorf("Unable to load args: %v", err)
+	} else if len(rest) > 0 {
+		return nil, fmt.Errorf("Unrecognized args: %v", rest)
+	}
+	prog, err := conf.Load()
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Failed loading: %v", err)
 	}
-	// Create conv contexts while type checking
-	convCtxs := []*ConversionContext{}
-	typesConf := types.Config{Importer: importer.Default()}
-	for _, parsedPkg := range parsedPkgs {
+	ret := &pb.Packages{}
+	for _, pkg := range prog.Imported {
 		convCtx := &ConversionContext{
-			ASTPackage: parsedPkg,
-			TypeInfo: &types.Info{
-				Types: map[ast.Expr]types.TypeAndValue{},
-				Defs:  map[*ast.Ident]types.Object{},
-				Uses:  map[*ast.Ident]types.Object{},
-			},
+			FileSet: prog.Fset,
+			Pkg:     pkg,
 		}
-		files := []*ast.File{}
-		for _, file := range parsedPkg.Files {
-			files = append(files, file)
-		}
-		if convCtx.TypePackage, err = typesConf.Check(path, fileSet, files, convCtx.TypeInfo); err != nil {
-			return nil, err
-		}
-		convCtxs = append(convCtxs, convCtx)
+		ret.Packages = append(ret.Packages, convCtx.ConvertPackage())
 	}
-	// Convert
-	ret := map[string]*pb.Package{}
-	for _, convCtx := range convCtxs {
-		ret[convCtx.ASTPackage.Name] = convCtx.ConvertPackage()
-	}
-	return ret, err
+	return ret, nil
 }

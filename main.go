@@ -1,12 +1,14 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
-	"fmt"
 	"log"
+	"os"
+
+	"github.com/golang/protobuf/proto"
 
 	"github.com/cretz/go-dump/dump"
+	"github.com/golang/protobuf/jsonpb"
 )
 
 func main() {
@@ -16,22 +18,20 @@ func main() {
 }
 
 func run() error {
+	jsonOut := false
+	flag.BoolVar(&jsonOut, "json", false, "Output JSON instead of binary")
 	flag.Parse()
-	if flag.NArg() != 1 {
-		return fmt.Errorf("Expected dir got no arguments")
-	}
-	pkgs, err := dump.LoadDir(flag.Arg(0))
+	pkgs, err := dump.FromArgs(flag.Args(), false)
 	if err != nil {
 		return err
 	}
-	jsonable, err := dump.PackagesToJSONMap(pkgs)
-	if err != nil {
-		return err
+	if jsonOut {
+		marshaler := &jsonpb.Marshaler{Indent: "  "}
+		return marshaler.Marshal(os.Stdout, pkgs)
 	}
-	byts, err := json.MarshalIndent(jsonable, "", "  ")
-	if err != nil {
-		return err
+	byts, err := proto.Marshal(pkgs)
+	if err == nil {
+		_, err = os.Stdout.Write(byts)
 	}
-	println(string(byts))
-	return nil
+	return err
 }

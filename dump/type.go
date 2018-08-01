@@ -11,13 +11,13 @@ import (
 
 func (c *ConversionContext) ConvertTypeInfo(expr ast.Expr, def bool) *pb.TypeInfo {
 	if ident, ok := expr.(*ast.Ident); ok {
-		obj := c.TypeInfo.Uses[ident]
+		obj := c.Pkg.Info.Uses[ident]
 		if def {
-			obj = c.TypeInfo.Defs[ident]
+			obj = c.Pkg.Info.Defs[ident]
 		}
 		return c.ConvertTypeObject(obj)
 	}
-	return c.ConvertTypeAndValue(c.TypeInfo.Types[expr])
+	return c.ConvertTypeAndValue(c.Pkg.Info.Types[expr])
 }
 
 func (c *ConversionContext) ConvertType(t types.Type) *pb.TypeInfo {
@@ -146,13 +146,13 @@ func (c *ConversionContext) ConvertTypeObject(t types.Object) *pb.TypeInfo {
 			ret.Type = &pb.TypeInfo_TypeFunc{TypeFunc: typ.GetTypeSignature()}
 		}
 	case *types.Label:
-		panic("TODO")
+		ret.Type = &pb.TypeInfo_TypeLabel{TypeLabel: typ}
 	case *types.TypeName:
 		if typ != nil {
 			ret.Type = &pb.TypeInfo_TypeName{TypeName: typ}
 		}
 	case *types.Nil:
-		panic("TODO")
+		ret.Type = &pb.TypeInfo_TypeNil{TypeNil: typ}
 	case *types.PkgName:
 		ret.Type = &pb.TypeInfo_TypePackage{TypePackage: true}
 	case *types.Var:

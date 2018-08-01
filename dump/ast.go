@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"go/ast"
 	"go/token"
-	"go/types"
+	"path/filepath"
+
+	"golang.org/x/tools/go/loader"
 
 	"github.com/golang/protobuf/ptypes"
 	"github.com/golang/protobuf/ptypes/any"
@@ -14,9 +16,8 @@ import (
 )
 
 type ConversionContext struct {
-	ASTPackage  *ast.Package
-	TypeInfo    *types.Info
-	TypePackage *types.Package
+	FileSet *token.FileSet
+	Pkg     *loader.PackageInfo
 }
 
 func (c *ConversionContext) ConvertNode(n ast.Node) proto.Message {
@@ -784,6 +785,7 @@ func (c *ConversionContext) ConvertFile(n *ast.File) *pb.File {
 		return nil
 	}
 	r := &pb.File{
+		FileName:   filepath.Base(c.FileSet.File(n.Pos()).Name()),
 		Doc:        c.ConvertCommentGroup(n.Doc),
 		Package:    c.pos(n.Package),
 		Name:       c.ConvertIdent(n.Name),
@@ -808,15 +810,20 @@ func (c *ConversionContext) ConvertFile(n *ast.File) *pb.File {
 }
 
 func (c *ConversionContext) ConvertPackage() *pb.Package {
-	if c.ASTPackage == nil {
+	if c.Pkg == nil {
 		return nil
 	}
 	r := &pb.Package{
-		Name:  c.ASTPackage.Name,
-		Files: make(map[string]*pb.File, len(c.ASTPackage.Files)),
+		Name: c.Pkg.Pkg.Name(),
+		Path: c.Pkg.Pkg.Path(),
 	}
-	for i, v := range c.ASTPackage.Files {
-		r.Files[i] = c.ConvertFile(v)
+	for _, file := range c.Pkg.Files {
+		r.Files = append(r.Files, c.ConvertFile(file))
+	}
+	for _, varInit := range c.Pkg.InitOrder {
+		for _, v := range varInit.Lhs {
+			r.VarInitOrder = append(r.VarInitOrder, v.Name())
+		}
 	}
 	return r
 }
