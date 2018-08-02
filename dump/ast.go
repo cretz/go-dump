@@ -45,135 +45,135 @@ func (c *ConversionContext) ConvertNode(n ast.Node) proto.Message {
 	}
 }
 
-func (c *ConversionContext) ConvertExpr(n ast.Expr) proto.Message {
+func (c *ConversionContext) ConvertExpr(n ast.Expr) *pb.Expr {
 	switch v := n.(type) {
 	case nil:
 		return nil
 	case *ast.BadExpr:
-		return c.ConvertBadExpr(v)
+		return &pb.Expr{Expr: &pb.Expr_BadExpr{c.ConvertBadExpr(v)}}
 	case *ast.Ident:
-		return c.ConvertIdent(v)
+		return &pb.Expr{Expr: &pb.Expr_Ident{c.ConvertIdent(v)}}
 	case *ast.Ellipsis:
-		return c.ConvertEllipsis(v)
+		return &pb.Expr{Expr: &pb.Expr_Ellipsis{c.ConvertEllipsis(v)}}
 	case *ast.BasicLit:
-		return c.ConvertBasicLit(v)
+		return &pb.Expr{Expr: &pb.Expr_BasicLit{c.ConvertBasicLit(v)}}
 	case *ast.FuncLit:
-		return c.ConvertFuncLit(v)
+		return &pb.Expr{Expr: &pb.Expr_FuncLit{c.ConvertFuncLit(v)}}
 	case *ast.CompositeLit:
-		return c.ConvertCompositeLit(v)
+		return &pb.Expr{Expr: &pb.Expr_CompositeLit{c.ConvertCompositeLit(v)}}
 	case *ast.ParenExpr:
-		return c.ConvertParenExpr(v)
+		return &pb.Expr{Expr: &pb.Expr_ParenExpr{c.ConvertParenExpr(v)}}
 	case *ast.SelectorExpr:
-		return c.ConvertSelectorExpr(v)
+		return &pb.Expr{Expr: &pb.Expr_SelectorExpr{c.ConvertSelectorExpr(v)}}
 	case *ast.IndexExpr:
-		return c.ConvertIndexExpr(v)
+		return &pb.Expr{Expr: &pb.Expr_IndexExpr{c.ConvertIndexExpr(v)}}
 	case *ast.SliceExpr:
-		return c.ConvertSliceExpr(v)
+		return &pb.Expr{Expr: &pb.Expr_SliceExpr{c.ConvertSliceExpr(v)}}
 	case *ast.TypeAssertExpr:
-		return c.ConvertTypeAssertExpr(v)
+		return &pb.Expr{Expr: &pb.Expr_TypeAssertExpr{c.ConvertTypeAssertExpr(v)}}
 	case *ast.CallExpr:
-		return c.ConvertCallExpr(v)
+		return &pb.Expr{Expr: &pb.Expr_CallExpr{c.ConvertCallExpr(v)}}
 	case *ast.StarExpr:
-		return c.ConvertStarExpr(v)
+		return &pb.Expr{Expr: &pb.Expr_StarExpr{c.ConvertStarExpr(v)}}
 	case *ast.UnaryExpr:
-		return c.ConvertUnaryExpr(v)
+		return &pb.Expr{Expr: &pb.Expr_UnaryExpr{c.ConvertUnaryExpr(v)}}
 	case *ast.BinaryExpr:
-		return c.ConvertBinaryExpr(v)
+		return &pb.Expr{Expr: &pb.Expr_BinaryExpr{c.ConvertBinaryExpr(v)}}
 	case *ast.KeyValueExpr:
-		return c.ConvertKeyValueExpr(v)
+		return &pb.Expr{Expr: &pb.Expr_KeyValueExpr{c.ConvertKeyValueExpr(v)}}
 	case *ast.ArrayType:
-		return c.ConvertArrayType(v)
+		return &pb.Expr{Expr: &pb.Expr_ArrayType{c.ConvertArrayType(v)}}
 	case *ast.StructType:
-		return c.ConvertStructType(v)
+		return &pb.Expr{Expr: &pb.Expr_StructType{c.ConvertStructType(v)}}
 	case *ast.FuncType:
-		return c.ConvertFuncType(v)
+		return &pb.Expr{Expr: &pb.Expr_FuncType{c.ConvertFuncType(v)}}
 	case *ast.InterfaceType:
-		return c.ConvertInterfaceType(v)
+		return &pb.Expr{Expr: &pb.Expr_InterfaceType{c.ConvertInterfaceType(v)}}
 	case *ast.MapType:
-		return c.ConvertMapType(v)
+		return &pb.Expr{Expr: &pb.Expr_MapType{c.ConvertMapType(v)}}
 	case *ast.ChanType:
-		return c.ConvertChanType(v)
+		return &pb.Expr{Expr: &pb.Expr_ChanType{c.ConvertChanType(v)}}
 	default:
 		panic(fmt.Sprintf("Unknown expr type: %T", n))
 	}
 }
 
-func (c *ConversionContext) ConvertStmt(n ast.Stmt) proto.Message {
+func (c *ConversionContext) ConvertStmt(n ast.Stmt) *pb.Stmt {
 	switch v := n.(type) {
 	case nil:
 		return nil
 	case *ast.BadStmt:
-		return c.ConvertBadStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_BadStmt{c.ConvertBadStmt(v)}}
 	case *ast.DeclStmt:
-		return c.ConvertDeclStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_DeclStmt{c.ConvertDeclStmt(v)}}
 	case *ast.EmptyStmt:
-		return c.ConvertEmptyStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_EmptyStmt{c.ConvertEmptyStmt(v)}}
 	case *ast.LabeledStmt:
-		return c.ConvertLabeledStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_LabeledStmt{c.ConvertLabeledStmt(v)}}
 	case *ast.ExprStmt:
-		return c.ConvertExprStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_ExprStmt{c.ConvertExprStmt(v)}}
 	case *ast.SendStmt:
-		return c.ConvertSendStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_SendStmt{c.ConvertSendStmt(v)}}
 	case *ast.IncDecStmt:
-		return c.ConvertIncDecStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_IncDecStmt{c.ConvertIncDecStmt(v)}}
 	case *ast.AssignStmt:
-		return c.ConvertAssignStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_AssignStmt{c.ConvertAssignStmt(v)}}
 	case *ast.GoStmt:
-		return c.ConvertGoStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_GoStmt{c.ConvertGoStmt(v)}}
 	case *ast.DeferStmt:
-		return c.ConvertDeferStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_DeferStmt{c.ConvertDeferStmt(v)}}
 	case *ast.ReturnStmt:
-		return c.ConvertReturnStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_ReturnStmt{c.ConvertReturnStmt(v)}}
 	case *ast.BranchStmt:
-		return c.ConvertBranchStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_BranchStmt{c.ConvertBranchStmt(v)}}
 	case *ast.BlockStmt:
-		return c.ConvertBlockStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_BlockStmt{c.ConvertBlockStmt(v)}}
 	case *ast.IfStmt:
-		return c.ConvertIfStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_IfStmt{c.ConvertIfStmt(v)}}
 	case *ast.CaseClause:
-		return c.ConvertCaseClause(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_CaseClause{c.ConvertCaseClause(v)}}
 	case *ast.SwitchStmt:
-		return c.ConvertSwitchStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_SwitchStmt{c.ConvertSwitchStmt(v)}}
 	case *ast.TypeSwitchStmt:
-		return c.ConvertTypeSwitchStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_TypeSwitchStmt{c.ConvertTypeSwitchStmt(v)}}
 	case *ast.CommClause:
-		return c.ConvertCommClause(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_CommClause{c.ConvertCommClause(v)}}
 	case *ast.SelectStmt:
-		return c.ConvertSelectStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_SelectStmt{c.ConvertSelectStmt(v)}}
 	case *ast.ForStmt:
-		return c.ConvertForStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_ForStmt{c.ConvertForStmt(v)}}
 	case *ast.RangeStmt:
-		return c.ConvertRangeStmt(v)
+		return &pb.Stmt{Stmt: &pb.Stmt_RangeStmt{c.ConvertRangeStmt(v)}}
 	default:
 		panic(fmt.Sprintf("Unknown stmt type: %T", n))
 	}
 }
 
-func (c *ConversionContext) ConvertSpec(n ast.Spec) proto.Message {
+func (c *ConversionContext) ConvertSpec(n ast.Spec) *pb.Spec {
 	switch v := n.(type) {
 	case nil:
 		return nil
 	case *ast.ImportSpec:
-		return c.ConvertImportSpec(v)
+		return &pb.Spec{Spec: &pb.Spec_ImportSpec{c.ConvertImportSpec(v)}}
 	case *ast.ValueSpec:
-		return c.ConvertValueSpec(v)
+		return &pb.Spec{Spec: &pb.Spec_ValueSpec{c.ConvertValueSpec(v)}}
 	case *ast.TypeSpec:
-		return c.ConvertTypeSpec(v)
+		return &pb.Spec{Spec: &pb.Spec_TypeSpec{c.ConvertTypeSpec(v)}}
 	default:
 		panic(fmt.Sprintf("Unknown spec type: %T", n))
 	}
 }
 
-func (c *ConversionContext) ConvertDecl(n ast.Decl) proto.Message {
+func (c *ConversionContext) ConvertDecl(n ast.Decl) *pb.Decl {
 	switch v := n.(type) {
 	case nil:
 		return nil
 	case *ast.BadDecl:
-		return c.ConvertBadDecl(v)
+		return &pb.Decl{Decl: &pb.Decl_BadDecl{c.ConvertBadDecl(v)}}
 	case *ast.GenDecl:
-		return c.ConvertGenDecl(v)
+		return &pb.Decl{Decl: &pb.Decl_GenDecl{c.ConvertGenDecl(v)}}
 	case *ast.FuncDecl:
-		return c.ConvertFuncDecl(v)
+		return &pb.Decl{Decl: &pb.Decl_FuncDecl{c.ConvertFuncDecl(v)}}
 	default:
 		panic(fmt.Sprintf("Unknown decl type: %T", n))
 	}
@@ -191,10 +191,6 @@ func (c *ConversionContext) pbAny(msg proto.Message) *any.Any {
 	}
 	return ret
 }
-func (c *ConversionContext) expr(n ast.Expr) *any.Any         { return c.pbAny(c.ConvertExpr(n)) }
-func (c *ConversionContext) stmt(n ast.Stmt) *any.Any         { return c.pbAny(c.ConvertStmt(n)) }
-func (c *ConversionContext) spec(n ast.Spec) *any.Any         { return c.pbAny(c.ConvertSpec(n)) }
-func (c *ConversionContext) decl(n ast.Decl) *any.Any         { return c.pbAny(c.ConvertDecl(n)) }
 func (c *ConversionContext) pbTok(tok token.Token) pb.Token   { return pb.Token(tok) }
 func (c *ConversionContext) typeInfo(n ast.Expr) *pb.TypeInfo { return c.ConvertTypeInfo(n, false) }
 
@@ -223,7 +219,7 @@ func (c *ConversionContext) ConvertField(n *ast.Field) *pb.Field {
 	r := &pb.Field{
 		Doc:     c.ConvertCommentGroup(n.Doc),
 		Names:   make([]*pb.Ident, len(n.Names)),
-		Type:    c.expr(n.Type),
+		Type:    c.ConvertExpr(n.Type),
 		Tag:     c.ConvertBasicLit(n.Tag),
 		Comment: c.ConvertCommentGroup(n.Comment),
 	}
@@ -271,7 +267,7 @@ func (c *ConversionContext) ConvertEllipsis(n *ast.Ellipsis) *pb.Ellipsis {
 	if n == nil {
 		return nil
 	}
-	return &pb.Ellipsis{Ellipsis: c.pos(n.Ellipsis), Elt: c.expr(n.Elt), TypeInfo: c.typeInfo(n)}
+	return &pb.Ellipsis{Ellipsis: c.pos(n.Ellipsis), Elt: c.ConvertExpr(n.Elt), TypeInfo: c.typeInfo(n)}
 }
 
 func (c *ConversionContext) ConvertBasicLit(n *ast.BasicLit) *pb.BasicLit {
@@ -293,14 +289,14 @@ func (c *ConversionContext) ConvertCompositeLit(n *ast.CompositeLit) *pb.Composi
 		return nil
 	}
 	r := &pb.CompositeLit{
-		Type:     c.expr(n.Type),
+		Type:     c.ConvertExpr(n.Type),
 		Lbrace:   c.pos(n.Lbrace),
-		Elts:     make([]*any.Any, len(n.Elts)),
+		Elts:     make([]*pb.Expr, len(n.Elts)),
 		Rbrace:   c.pos(n.Rbrace),
 		TypeInfo: c.typeInfo(n),
 	}
 	for i, v := range n.Elts {
-		r.Elts[i] = c.expr(v)
+		r.Elts[i] = c.ConvertExpr(v)
 	}
 	return r
 }
@@ -309,14 +305,19 @@ func (c *ConversionContext) ConvertParenExpr(n *ast.ParenExpr) *pb.ParenExpr {
 	if n == nil {
 		return nil
 	}
-	return &pb.ParenExpr{Lparen: c.pos(n.Lparen), X: c.expr(n.X), Rparen: c.pos(n.Rparen), TypeInfo: c.typeInfo(n)}
+	return &pb.ParenExpr{
+		Lparen:   c.pos(n.Lparen),
+		X:        c.ConvertExpr(n.X),
+		Rparen:   c.pos(n.Rparen),
+		TypeInfo: c.typeInfo(n),
+	}
 }
 
 func (c *ConversionContext) ConvertSelectorExpr(n *ast.SelectorExpr) *pb.SelectorExpr {
 	if n == nil {
 		return nil
 	}
-	return &pb.SelectorExpr{X: c.expr(n.X), Sel: c.ConvertIdent(n.Sel), TypeInfo: c.typeInfo(n)}
+	return &pb.SelectorExpr{X: c.ConvertExpr(n.X), Sel: c.ConvertIdent(n.Sel), TypeInfo: c.typeInfo(n)}
 }
 
 func (c *ConversionContext) ConvertIndexExpr(n *ast.IndexExpr) *pb.IndexExpr {
@@ -324,9 +325,9 @@ func (c *ConversionContext) ConvertIndexExpr(n *ast.IndexExpr) *pb.IndexExpr {
 		return nil
 	}
 	return &pb.IndexExpr{
-		X:        c.expr(n.X),
+		X:        c.ConvertExpr(n.X),
 		Lbrack:   c.pos(n.Lbrack),
-		Index:    c.expr(n.Index),
+		Index:    c.ConvertExpr(n.Index),
 		Rbrack:   c.pos(n.Rbrack),
 		TypeInfo: c.typeInfo(n),
 	}
@@ -337,11 +338,11 @@ func (c *ConversionContext) ConvertSliceExpr(n *ast.SliceExpr) *pb.SliceExpr {
 		return nil
 	}
 	return &pb.SliceExpr{
-		X:        c.expr(n.X),
+		X:        c.ConvertExpr(n.X),
 		Lbrack:   c.pos(n.Lbrack),
-		Low:      c.expr(n.Low),
-		High:     c.expr(n.High),
-		Max:      c.expr(n.Max),
+		Low:      c.ConvertExpr(n.Low),
+		High:     c.ConvertExpr(n.High),
+		Max:      c.ConvertExpr(n.Max),
 		Slice3:   n.Slice3,
 		Rbrack:   c.pos(n.Rbrack),
 		TypeInfo: c.typeInfo(n),
@@ -353,9 +354,9 @@ func (c *ConversionContext) ConvertTypeAssertExpr(n *ast.TypeAssertExpr) *pb.Typ
 		return nil
 	}
 	return &pb.TypeAssertExpr{
-		X:        c.expr(n.X),
+		X:        c.ConvertExpr(n.X),
 		Lparen:   c.pos(n.Lparen),
-		Type:     c.expr(n.Type),
+		Type:     c.ConvertExpr(n.Type),
 		Rparen:   c.pos(n.Rparen),
 		TypeInfo: c.typeInfo(n),
 	}
@@ -366,15 +367,15 @@ func (c *ConversionContext) ConvertCallExpr(n *ast.CallExpr) *pb.CallExpr {
 		return nil
 	}
 	r := &pb.CallExpr{
-		Fun:      c.expr(n.Fun),
+		Fun:      c.ConvertExpr(n.Fun),
 		Lparen:   c.pos(n.Lparen),
-		Args:     make([]*any.Any, len(n.Args)),
+		Args:     make([]*pb.Expr, len(n.Args)),
 		Ellipsis: c.pos(n.Ellipsis),
 		Rparen:   c.pos(n.Rparen),
 		TypeInfo: c.typeInfo(n),
 	}
 	for i, v := range n.Args {
-		r.Args[i] = c.expr(v)
+		r.Args[i] = c.ConvertExpr(v)
 	}
 	return r
 }
@@ -383,14 +384,14 @@ func (c *ConversionContext) ConvertStarExpr(n *ast.StarExpr) *pb.StarExpr {
 	if n == nil {
 		return nil
 	}
-	return &pb.StarExpr{Star: c.pos(n.Star), X: c.expr(n.X), TypeInfo: c.typeInfo(n)}
+	return &pb.StarExpr{Star: c.pos(n.Star), X: c.ConvertExpr(n.X), TypeInfo: c.typeInfo(n)}
 }
 
 func (c *ConversionContext) ConvertUnaryExpr(n *ast.UnaryExpr) *pb.UnaryExpr {
 	if n == nil {
 		return nil
 	}
-	return &pb.UnaryExpr{OpPos: c.pos(n.OpPos), Op: c.pbTok(n.Op), X: c.expr(n.X), TypeInfo: c.typeInfo(n)}
+	return &pb.UnaryExpr{OpPos: c.pos(n.OpPos), Op: c.pbTok(n.Op), X: c.ConvertExpr(n.X), TypeInfo: c.typeInfo(n)}
 }
 
 func (c *ConversionContext) ConvertBinaryExpr(n *ast.BinaryExpr) *pb.BinaryExpr {
@@ -398,10 +399,10 @@ func (c *ConversionContext) ConvertBinaryExpr(n *ast.BinaryExpr) *pb.BinaryExpr 
 		return nil
 	}
 	return &pb.BinaryExpr{
-		X:        c.expr(n.X),
+		X:        c.ConvertExpr(n.X),
 		OpPos:    c.pos(n.OpPos),
 		Op:       c.pbTok(n.Op),
-		Y:        c.expr(n.Y),
+		Y:        c.ConvertExpr(n.Y),
 		TypeInfo: c.typeInfo(n),
 	}
 }
@@ -410,14 +411,19 @@ func (c *ConversionContext) ConvertKeyValueExpr(n *ast.KeyValueExpr) *pb.KeyValu
 	if n == nil {
 		return nil
 	}
-	return &pb.KeyValueExpr{Key: c.expr(n.Key), Colon: c.pos(n.Colon), Value: c.expr(n.Value), TypeInfo: c.typeInfo(n)}
+	return &pb.KeyValueExpr{
+		Key:      c.ConvertExpr(n.Key),
+		Colon:    c.pos(n.Colon),
+		Value:    c.ConvertExpr(n.Value),
+		TypeInfo: c.typeInfo(n),
+	}
 }
 
 func (c *ConversionContext) ConvertArrayType(n *ast.ArrayType) *pb.ArrayType {
 	if n == nil {
 		return nil
 	}
-	return &pb.ArrayType{Lbrack: c.pos(n.Lbrack), Len: c.expr(n.Len), Elt: c.expr(n.Elt), TypeInfo: c.typeInfo(n)}
+	return &pb.ArrayType{Lbrack: c.pos(n.Lbrack), Len: c.ConvertExpr(n.Len), Elt: c.ConvertExpr(n.Elt), TypeInfo: c.typeInfo(n)}
 }
 
 func (c *ConversionContext) ConvertStructType(n *ast.StructType) *pb.StructType {
@@ -460,7 +466,7 @@ func (c *ConversionContext) ConvertMapType(n *ast.MapType) *pb.MapType {
 	if n == nil {
 		return nil
 	}
-	return &pb.MapType{Map: c.pos(n.Map), Key: c.expr(n.Key), Value: c.expr(n.Value), TypeInfo: c.typeInfo(n)}
+	return &pb.MapType{Map: c.pos(n.Map), Key: c.ConvertExpr(n.Key), Value: c.ConvertExpr(n.Value), TypeInfo: c.typeInfo(n)}
 }
 
 func (c *ConversionContext) ConvertChanType(n *ast.ChanType) *pb.ChanType {
@@ -472,7 +478,7 @@ func (c *ConversionContext) ConvertChanType(n *ast.ChanType) *pb.ChanType {
 		Arrow:    c.pos(n.Arrow),
 		SendDir:  n.Dir&ast.SEND != 0,
 		RecvDir:  n.Dir&ast.RECV != 0,
-		Value:    c.expr(n.Value),
+		Value:    c.ConvertExpr(n.Value),
 		TypeInfo: c.typeInfo(n),
 	}
 }
@@ -488,7 +494,7 @@ func (c *ConversionContext) ConvertDeclStmt(n *ast.DeclStmt) *pb.DeclStmt {
 	if n == nil {
 		return nil
 	}
-	return &pb.DeclStmt{Decl: c.decl(n.Decl)}
+	return &pb.DeclStmt{Decl: c.ConvertDecl(n.Decl)}
 }
 
 func (c *ConversionContext) ConvertEmptyStmt(n *ast.EmptyStmt) *pb.EmptyStmt {
@@ -502,28 +508,28 @@ func (c *ConversionContext) ConvertLabeledStmt(n *ast.LabeledStmt) *pb.LabeledSt
 	if n == nil {
 		return nil
 	}
-	return &pb.LabeledStmt{Label: c.ConvertIdent(n.Label), Colon: c.pos(n.Colon), Stmt: c.stmt(n.Stmt)}
+	return &pb.LabeledStmt{Label: c.ConvertIdent(n.Label), Colon: c.pos(n.Colon), Stmt: c.ConvertStmt(n.Stmt)}
 }
 
 func (c *ConversionContext) ConvertExprStmt(n *ast.ExprStmt) *pb.ExprStmt {
 	if n == nil {
 		return nil
 	}
-	return &pb.ExprStmt{X: c.expr(n.X)}
+	return &pb.ExprStmt{X: c.ConvertExpr(n.X)}
 }
 
 func (c *ConversionContext) ConvertSendStmt(n *ast.SendStmt) *pb.SendStmt {
 	if n == nil {
 		return nil
 	}
-	return &pb.SendStmt{Chan: c.expr(n.Chan), Arrow: c.pos(n.Arrow), Value: c.expr(n.Value)}
+	return &pb.SendStmt{Chan: c.ConvertExpr(n.Chan), Arrow: c.pos(n.Arrow), Value: c.ConvertExpr(n.Value)}
 }
 
 func (c *ConversionContext) ConvertIncDecStmt(n *ast.IncDecStmt) *pb.IncDecStmt {
 	if n == nil {
 		return nil
 	}
-	return &pb.IncDecStmt{X: c.expr(n.X), TokPos: c.pos(n.TokPos), Tok: c.pbTok(n.Tok)}
+	return &pb.IncDecStmt{X: c.ConvertExpr(n.X), TokPos: c.pos(n.TokPos), Tok: c.pbTok(n.Tok)}
 }
 
 func (c *ConversionContext) ConvertAssignStmt(n *ast.AssignStmt) *pb.AssignStmt {
@@ -531,16 +537,16 @@ func (c *ConversionContext) ConvertAssignStmt(n *ast.AssignStmt) *pb.AssignStmt 
 		return nil
 	}
 	r := &pb.AssignStmt{
-		Lhs:    make([]*any.Any, len(n.Lhs)),
+		Lhs:    make([]*pb.Expr, len(n.Lhs)),
 		TokPos: c.pos(n.TokPos),
 		Tok:    c.pbTok(n.Tok),
-		Rhs:    make([]*any.Any, len(n.Rhs)),
+		Rhs:    make([]*pb.Expr, len(n.Rhs)),
 	}
 	for i, v := range n.Lhs {
-		r.Lhs[i] = c.expr(v)
+		r.Lhs[i] = c.ConvertExpr(v)
 	}
 	for i, v := range n.Rhs {
-		r.Rhs[i] = c.expr(v)
+		r.Rhs[i] = c.ConvertExpr(v)
 	}
 	return r
 }
@@ -563,9 +569,9 @@ func (c *ConversionContext) ConvertReturnStmt(n *ast.ReturnStmt) *pb.ReturnStmt 
 	if n == nil {
 		return nil
 	}
-	r := &pb.ReturnStmt{Return: c.pos(n.Return), Results: make([]*any.Any, len(n.Results))}
+	r := &pb.ReturnStmt{Return: c.pos(n.Return), Results: make([]*pb.Expr, len(n.Results))}
 	for i, v := range n.Results {
-		r.Results[i] = c.expr(v)
+		r.Results[i] = c.ConvertExpr(v)
 	}
 	return r
 }
@@ -583,11 +589,11 @@ func (c *ConversionContext) ConvertBlockStmt(n *ast.BlockStmt) *pb.BlockStmt {
 	}
 	r := &pb.BlockStmt{
 		Lbrace: c.pos(n.Lbrace),
-		List:   make([]*any.Any, len(n.List)),
+		List:   make([]*pb.Stmt, len(n.List)),
 		Rbrace: c.pos(n.Rbrace),
 	}
 	for i, v := range n.List {
-		r.List[i] = c.stmt(v)
+		r.List[i] = c.ConvertStmt(v)
 	}
 	return r
 }
@@ -598,10 +604,10 @@ func (c *ConversionContext) ConvertIfStmt(n *ast.IfStmt) *pb.IfStmt {
 	}
 	return &pb.IfStmt{
 		If:   c.pos(n.If),
-		Init: c.stmt(n.Init),
-		Cond: c.expr(n.Cond),
+		Init: c.ConvertStmt(n.Init),
+		Cond: c.ConvertExpr(n.Cond),
 		Body: c.ConvertBlockStmt(n.Body),
-		Else: c.stmt(n.Else),
+		Else: c.ConvertStmt(n.Else),
 	}
 }
 
@@ -611,15 +617,15 @@ func (c *ConversionContext) ConvertCaseClause(n *ast.CaseClause) *pb.CaseClause 
 	}
 	r := &pb.CaseClause{
 		Case:  c.pos(n.Case),
-		List:  make([]*any.Any, len(n.List)),
+		List:  make([]*pb.Expr, len(n.List)),
 		Colon: c.pos(n.Colon),
-		Body:  make([]*any.Any, len(n.Body)),
+		Body:  make([]*pb.Stmt, len(n.Body)),
 	}
 	for i, v := range n.List {
-		r.List[i] = c.expr(v)
+		r.List[i] = c.ConvertExpr(v)
 	}
 	for i, v := range n.Body {
-		r.Body[i] = c.stmt(v)
+		r.Body[i] = c.ConvertStmt(v)
 	}
 	return r
 }
@@ -630,8 +636,8 @@ func (c *ConversionContext) ConvertSwitchStmt(n *ast.SwitchStmt) *pb.SwitchStmt 
 	}
 	return &pb.SwitchStmt{
 		Switch: c.pos(n.Switch),
-		Init:   c.stmt(n.Init),
-		Tag:    c.expr(n.Tag),
+		Init:   c.ConvertStmt(n.Init),
+		Tag:    c.ConvertExpr(n.Tag),
 		Body:   c.ConvertBlockStmt(n.Body),
 	}
 }
@@ -642,8 +648,8 @@ func (c *ConversionContext) ConvertTypeSwitchStmt(n *ast.TypeSwitchStmt) *pb.Typ
 	}
 	return &pb.TypeSwitchStmt{
 		Switch: c.pos(n.Switch),
-		Init:   c.stmt(n.Init),
-		Assign: c.stmt(n.Assign),
+		Init:   c.ConvertStmt(n.Init),
+		Assign: c.ConvertStmt(n.Assign),
 		Body:   c.ConvertBlockStmt(n.Body),
 	}
 }
@@ -654,12 +660,12 @@ func (c *ConversionContext) ConvertCommClause(n *ast.CommClause) *pb.CommClause 
 	}
 	r := &pb.CommClause{
 		Case:  c.pos(n.Case),
-		Comm:  c.stmt(n.Comm),
+		Comm:  c.ConvertStmt(n.Comm),
 		Colon: c.pos(n.Colon),
-		Body:  make([]*any.Any, len(n.Body)),
+		Body:  make([]*pb.Stmt, len(n.Body)),
 	}
 	for i, v := range n.Body {
-		r.Body[i] = c.stmt(v)
+		r.Body[i] = c.ConvertStmt(v)
 	}
 	return r
 }
@@ -677,9 +683,9 @@ func (c *ConversionContext) ConvertForStmt(n *ast.ForStmt) *pb.ForStmt {
 	}
 	return &pb.ForStmt{
 		For:  c.pos(n.For),
-		Init: c.stmt(n.Init),
-		Cond: c.expr(n.Cond),
-		Post: c.stmt(n.Post),
+		Init: c.ConvertStmt(n.Init),
+		Cond: c.ConvertExpr(n.Cond),
+		Post: c.ConvertStmt(n.Post),
 		Body: c.ConvertBlockStmt(n.Body),
 	}
 }
@@ -690,11 +696,11 @@ func (c *ConversionContext) ConvertRangeStmt(n *ast.RangeStmt) *pb.RangeStmt {
 	}
 	return &pb.RangeStmt{
 		For:    c.pos(n.For),
-		Key:    c.expr(n.Key),
-		Value:  c.expr(n.Value),
+		Key:    c.ConvertExpr(n.Key),
+		Value:  c.ConvertExpr(n.Value),
 		TokPos: c.pos(n.TokPos),
 		Tok:    c.pbTok(n.Tok),
-		X:      c.expr(n.X),
+		X:      c.ConvertExpr(n.X),
 		Body:   c.ConvertBlockStmt(n.Body),
 	}
 }
@@ -719,15 +725,15 @@ func (c *ConversionContext) ConvertValueSpec(n *ast.ValueSpec) *pb.ValueSpec {
 	r := &pb.ValueSpec{
 		Doc:     c.ConvertCommentGroup(n.Doc),
 		Names:   make([]*pb.Ident, len(n.Names)),
-		Type:    c.expr(n.Type),
-		Values:  make([]*any.Any, len(n.Values)),
+		Type:    c.ConvertExpr(n.Type),
+		Values:  make([]*pb.Expr, len(n.Values)),
 		Comment: c.ConvertCommentGroup(n.Comment),
 	}
 	for i, v := range n.Names {
 		r.Names[i] = c.ConvertIdent(v)
 	}
 	for i, v := range n.Values {
-		r.Values[i] = c.expr(v)
+		r.Values[i] = c.ConvertExpr(v)
 	}
 	return r
 }
@@ -740,7 +746,7 @@ func (c *ConversionContext) ConvertTypeSpec(n *ast.TypeSpec) *pb.TypeSpec {
 		Doc:     c.ConvertCommentGroup(n.Doc),
 		Name:    c.ConvertIdent(n.Name),
 		Assign:  c.pos(n.Assign),
-		Type:    c.expr(n.Type),
+		Type:    c.ConvertExpr(n.Type),
 		Comment: c.ConvertCommentGroup(n.Comment),
 	}
 }
@@ -758,11 +764,11 @@ func (c *ConversionContext) ConvertGenDecl(n *ast.GenDecl) *pb.GenDecl {
 		TokPos: c.pos(n.TokPos),
 		Tok:    c.pbTok(n.Tok),
 		Lparen: c.pos(n.Lparen),
-		Specs:  make([]*any.Any, len(n.Specs)),
+		Specs:  make([]*pb.Spec, len(n.Specs)),
 		Rparen: c.pos(n.Rparen),
 	}
 	for i, v := range n.Specs {
-		r.Specs[i] = c.spec(v)
+		r.Specs[i] = c.ConvertSpec(v)
 	}
 	return r
 }
@@ -789,13 +795,13 @@ func (c *ConversionContext) ConvertFile(n *ast.File) *pb.File {
 		Doc:        c.ConvertCommentGroup(n.Doc),
 		Package:    c.pos(n.Package),
 		Name:       c.ConvertIdent(n.Name),
-		Decls:      make([]*any.Any, len(n.Decls)),
+		Decls:      make([]*pb.Decl, len(n.Decls)),
 		Imports:    make([]*pb.ImportSpec, len(n.Imports)),
 		Unresolved: make([]*pb.Ident, len(n.Unresolved)),
 		Comments:   make([]*pb.CommentGroup, len(n.Comments)),
 	}
 	for i, v := range n.Decls {
-		r.Decls[i] = c.decl(v)
+		r.Decls[i] = c.ConvertDecl(v)
 	}
 	for i, v := range n.Imports {
 		r.Imports[i] = c.ConvertImportSpec(v)

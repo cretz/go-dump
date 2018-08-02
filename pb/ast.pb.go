@@ -6,7 +6,6 @@ package pb
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import any "github.com/golang/protobuf/ptypes/any"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -31,7 +30,7 @@ func (m *Comment) Reset()         { *m = Comment{} }
 func (m *Comment) String() string { return proto.CompactTextString(m) }
 func (*Comment) ProtoMessage()    {}
 func (*Comment) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{0}
+	return fileDescriptor_ast_355744a0e72f954f, []int{0}
 }
 func (m *Comment) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Comment.Unmarshal(m, b)
@@ -76,7 +75,7 @@ func (m *CommentGroup) Reset()         { *m = CommentGroup{} }
 func (m *CommentGroup) String() string { return proto.CompactTextString(m) }
 func (*CommentGroup) ProtoMessage()    {}
 func (*CommentGroup) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{1}
+	return fileDescriptor_ast_355744a0e72f954f, []int{1}
 }
 func (m *CommentGroup) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CommentGroup.Unmarshal(m, b)
@@ -106,7 +105,7 @@ func (m *CommentGroup) GetList() []*Comment {
 type Field struct {
 	Doc                  *CommentGroup `protobuf:"bytes,1,opt,name=doc" json:"doc,omitempty"`
 	Names                []*Ident      `protobuf:"bytes,2,rep,name=names" json:"names,omitempty"`
-	Type                 *any.Any      `protobuf:"bytes,3,opt,name=type" json:"type,omitempty"`
+	Type                 *Expr         `protobuf:"bytes,3,opt,name=type" json:"type,omitempty"`
 	Tag                  *BasicLit     `protobuf:"bytes,4,opt,name=tag" json:"tag,omitempty"`
 	Comment              *CommentGroup `protobuf:"bytes,5,opt,name=comment" json:"comment,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
@@ -118,7 +117,7 @@ func (m *Field) Reset()         { *m = Field{} }
 func (m *Field) String() string { return proto.CompactTextString(m) }
 func (*Field) ProtoMessage()    {}
 func (*Field) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{2}
+	return fileDescriptor_ast_355744a0e72f954f, []int{2}
 }
 func (m *Field) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Field.Unmarshal(m, b)
@@ -152,7 +151,7 @@ func (m *Field) GetNames() []*Ident {
 	return nil
 }
 
-func (m *Field) GetType() *any.Any {
+func (m *Field) GetType() *Expr {
 	if m != nil {
 		return m.Type
 	}
@@ -186,7 +185,7 @@ func (m *FieldList) Reset()         { *m = FieldList{} }
 func (m *FieldList) String() string { return proto.CompactTextString(m) }
 func (*FieldList) ProtoMessage()    {}
 func (*FieldList) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{3}
+	return fileDescriptor_ast_355744a0e72f954f, []int{3}
 }
 func (m *FieldList) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FieldList.Unmarshal(m, b)
@@ -227,6 +226,769 @@ func (m *FieldList) GetClosing() int32 {
 	return 0
 }
 
+type Expr struct {
+	// Types that are valid to be assigned to Expr:
+	//	*Expr_BadExpr
+	//	*Expr_Ident
+	//	*Expr_Ellipsis
+	//	*Expr_BasicLit
+	//	*Expr_FuncLit
+	//	*Expr_CompositeLit
+	//	*Expr_ParenExpr
+	//	*Expr_SelectorExpr
+	//	*Expr_IndexExpr
+	//	*Expr_SliceExpr
+	//	*Expr_TypeAssertExpr
+	//	*Expr_CallExpr
+	//	*Expr_StarExpr
+	//	*Expr_UnaryExpr
+	//	*Expr_BinaryExpr
+	//	*Expr_KeyValueExpr
+	//	*Expr_ArrayType
+	//	*Expr_StructType
+	//	*Expr_FuncType
+	//	*Expr_InterfaceType
+	//	*Expr_MapType
+	//	*Expr_ChanType
+	Expr                 isExpr_Expr `protobuf_oneof:"expr"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *Expr) Reset()         { *m = Expr{} }
+func (m *Expr) String() string { return proto.CompactTextString(m) }
+func (*Expr) ProtoMessage()    {}
+func (*Expr) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ast_355744a0e72f954f, []int{4}
+}
+func (m *Expr) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Expr.Unmarshal(m, b)
+}
+func (m *Expr) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Expr.Marshal(b, m, deterministic)
+}
+func (dst *Expr) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Expr.Merge(dst, src)
+}
+func (m *Expr) XXX_Size() int {
+	return xxx_messageInfo_Expr.Size(m)
+}
+func (m *Expr) XXX_DiscardUnknown() {
+	xxx_messageInfo_Expr.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Expr proto.InternalMessageInfo
+
+type isExpr_Expr interface {
+	isExpr_Expr()
+}
+
+type Expr_BadExpr struct {
+	BadExpr *BadExpr `protobuf:"bytes,1,opt,name=bad_expr,json=badExpr,oneof"`
+}
+type Expr_Ident struct {
+	Ident *Ident `protobuf:"bytes,2,opt,name=ident,oneof"`
+}
+type Expr_Ellipsis struct {
+	Ellipsis *Ellipsis `protobuf:"bytes,3,opt,name=ellipsis,oneof"`
+}
+type Expr_BasicLit struct {
+	BasicLit *BasicLit `protobuf:"bytes,4,opt,name=basic_lit,json=basicLit,oneof"`
+}
+type Expr_FuncLit struct {
+	FuncLit *FuncLit `protobuf:"bytes,5,opt,name=func_lit,json=funcLit,oneof"`
+}
+type Expr_CompositeLit struct {
+	CompositeLit *CompositeLit `protobuf:"bytes,6,opt,name=composite_lit,json=compositeLit,oneof"`
+}
+type Expr_ParenExpr struct {
+	ParenExpr *ParenExpr `protobuf:"bytes,7,opt,name=paren_expr,json=parenExpr,oneof"`
+}
+type Expr_SelectorExpr struct {
+	SelectorExpr *SelectorExpr `protobuf:"bytes,8,opt,name=selector_expr,json=selectorExpr,oneof"`
+}
+type Expr_IndexExpr struct {
+	IndexExpr *IndexExpr `protobuf:"bytes,9,opt,name=index_expr,json=indexExpr,oneof"`
+}
+type Expr_SliceExpr struct {
+	SliceExpr *SliceExpr `protobuf:"bytes,10,opt,name=slice_expr,json=sliceExpr,oneof"`
+}
+type Expr_TypeAssertExpr struct {
+	TypeAssertExpr *TypeAssertExpr `protobuf:"bytes,11,opt,name=type_assert_expr,json=typeAssertExpr,oneof"`
+}
+type Expr_CallExpr struct {
+	CallExpr *CallExpr `protobuf:"bytes,12,opt,name=call_expr,json=callExpr,oneof"`
+}
+type Expr_StarExpr struct {
+	StarExpr *StarExpr `protobuf:"bytes,13,opt,name=star_expr,json=starExpr,oneof"`
+}
+type Expr_UnaryExpr struct {
+	UnaryExpr *UnaryExpr `protobuf:"bytes,14,opt,name=unary_expr,json=unaryExpr,oneof"`
+}
+type Expr_BinaryExpr struct {
+	BinaryExpr *BinaryExpr `protobuf:"bytes,15,opt,name=binary_expr,json=binaryExpr,oneof"`
+}
+type Expr_KeyValueExpr struct {
+	KeyValueExpr *KeyValueExpr `protobuf:"bytes,16,opt,name=key_value_expr,json=keyValueExpr,oneof"`
+}
+type Expr_ArrayType struct {
+	ArrayType *ArrayType `protobuf:"bytes,17,opt,name=array_type,json=arrayType,oneof"`
+}
+type Expr_StructType struct {
+	StructType *StructType `protobuf:"bytes,18,opt,name=struct_type,json=structType,oneof"`
+}
+type Expr_FuncType struct {
+	FuncType *FuncType `protobuf:"bytes,19,opt,name=func_type,json=funcType,oneof"`
+}
+type Expr_InterfaceType struct {
+	InterfaceType *InterfaceType `protobuf:"bytes,20,opt,name=interface_type,json=interfaceType,oneof"`
+}
+type Expr_MapType struct {
+	MapType *MapType `protobuf:"bytes,21,opt,name=map_type,json=mapType,oneof"`
+}
+type Expr_ChanType struct {
+	ChanType *ChanType `protobuf:"bytes,22,opt,name=chan_type,json=chanType,oneof"`
+}
+
+func (*Expr_BadExpr) isExpr_Expr()        {}
+func (*Expr_Ident) isExpr_Expr()          {}
+func (*Expr_Ellipsis) isExpr_Expr()       {}
+func (*Expr_BasicLit) isExpr_Expr()       {}
+func (*Expr_FuncLit) isExpr_Expr()        {}
+func (*Expr_CompositeLit) isExpr_Expr()   {}
+func (*Expr_ParenExpr) isExpr_Expr()      {}
+func (*Expr_SelectorExpr) isExpr_Expr()   {}
+func (*Expr_IndexExpr) isExpr_Expr()      {}
+func (*Expr_SliceExpr) isExpr_Expr()      {}
+func (*Expr_TypeAssertExpr) isExpr_Expr() {}
+func (*Expr_CallExpr) isExpr_Expr()       {}
+func (*Expr_StarExpr) isExpr_Expr()       {}
+func (*Expr_UnaryExpr) isExpr_Expr()      {}
+func (*Expr_BinaryExpr) isExpr_Expr()     {}
+func (*Expr_KeyValueExpr) isExpr_Expr()   {}
+func (*Expr_ArrayType) isExpr_Expr()      {}
+func (*Expr_StructType) isExpr_Expr()     {}
+func (*Expr_FuncType) isExpr_Expr()       {}
+func (*Expr_InterfaceType) isExpr_Expr()  {}
+func (*Expr_MapType) isExpr_Expr()        {}
+func (*Expr_ChanType) isExpr_Expr()       {}
+
+func (m *Expr) GetExpr() isExpr_Expr {
+	if m != nil {
+		return m.Expr
+	}
+	return nil
+}
+
+func (m *Expr) GetBadExpr() *BadExpr {
+	if x, ok := m.GetExpr().(*Expr_BadExpr); ok {
+		return x.BadExpr
+	}
+	return nil
+}
+
+func (m *Expr) GetIdent() *Ident {
+	if x, ok := m.GetExpr().(*Expr_Ident); ok {
+		return x.Ident
+	}
+	return nil
+}
+
+func (m *Expr) GetEllipsis() *Ellipsis {
+	if x, ok := m.GetExpr().(*Expr_Ellipsis); ok {
+		return x.Ellipsis
+	}
+	return nil
+}
+
+func (m *Expr) GetBasicLit() *BasicLit {
+	if x, ok := m.GetExpr().(*Expr_BasicLit); ok {
+		return x.BasicLit
+	}
+	return nil
+}
+
+func (m *Expr) GetFuncLit() *FuncLit {
+	if x, ok := m.GetExpr().(*Expr_FuncLit); ok {
+		return x.FuncLit
+	}
+	return nil
+}
+
+func (m *Expr) GetCompositeLit() *CompositeLit {
+	if x, ok := m.GetExpr().(*Expr_CompositeLit); ok {
+		return x.CompositeLit
+	}
+	return nil
+}
+
+func (m *Expr) GetParenExpr() *ParenExpr {
+	if x, ok := m.GetExpr().(*Expr_ParenExpr); ok {
+		return x.ParenExpr
+	}
+	return nil
+}
+
+func (m *Expr) GetSelectorExpr() *SelectorExpr {
+	if x, ok := m.GetExpr().(*Expr_SelectorExpr); ok {
+		return x.SelectorExpr
+	}
+	return nil
+}
+
+func (m *Expr) GetIndexExpr() *IndexExpr {
+	if x, ok := m.GetExpr().(*Expr_IndexExpr); ok {
+		return x.IndexExpr
+	}
+	return nil
+}
+
+func (m *Expr) GetSliceExpr() *SliceExpr {
+	if x, ok := m.GetExpr().(*Expr_SliceExpr); ok {
+		return x.SliceExpr
+	}
+	return nil
+}
+
+func (m *Expr) GetTypeAssertExpr() *TypeAssertExpr {
+	if x, ok := m.GetExpr().(*Expr_TypeAssertExpr); ok {
+		return x.TypeAssertExpr
+	}
+	return nil
+}
+
+func (m *Expr) GetCallExpr() *CallExpr {
+	if x, ok := m.GetExpr().(*Expr_CallExpr); ok {
+		return x.CallExpr
+	}
+	return nil
+}
+
+func (m *Expr) GetStarExpr() *StarExpr {
+	if x, ok := m.GetExpr().(*Expr_StarExpr); ok {
+		return x.StarExpr
+	}
+	return nil
+}
+
+func (m *Expr) GetUnaryExpr() *UnaryExpr {
+	if x, ok := m.GetExpr().(*Expr_UnaryExpr); ok {
+		return x.UnaryExpr
+	}
+	return nil
+}
+
+func (m *Expr) GetBinaryExpr() *BinaryExpr {
+	if x, ok := m.GetExpr().(*Expr_BinaryExpr); ok {
+		return x.BinaryExpr
+	}
+	return nil
+}
+
+func (m *Expr) GetKeyValueExpr() *KeyValueExpr {
+	if x, ok := m.GetExpr().(*Expr_KeyValueExpr); ok {
+		return x.KeyValueExpr
+	}
+	return nil
+}
+
+func (m *Expr) GetArrayType() *ArrayType {
+	if x, ok := m.GetExpr().(*Expr_ArrayType); ok {
+		return x.ArrayType
+	}
+	return nil
+}
+
+func (m *Expr) GetStructType() *StructType {
+	if x, ok := m.GetExpr().(*Expr_StructType); ok {
+		return x.StructType
+	}
+	return nil
+}
+
+func (m *Expr) GetFuncType() *FuncType {
+	if x, ok := m.GetExpr().(*Expr_FuncType); ok {
+		return x.FuncType
+	}
+	return nil
+}
+
+func (m *Expr) GetInterfaceType() *InterfaceType {
+	if x, ok := m.GetExpr().(*Expr_InterfaceType); ok {
+		return x.InterfaceType
+	}
+	return nil
+}
+
+func (m *Expr) GetMapType() *MapType {
+	if x, ok := m.GetExpr().(*Expr_MapType); ok {
+		return x.MapType
+	}
+	return nil
+}
+
+func (m *Expr) GetChanType() *ChanType {
+	if x, ok := m.GetExpr().(*Expr_ChanType); ok {
+		return x.ChanType
+	}
+	return nil
+}
+
+// XXX_OneofFuncs is for the internal use of the proto package.
+func (*Expr) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+	return _Expr_OneofMarshaler, _Expr_OneofUnmarshaler, _Expr_OneofSizer, []interface{}{
+		(*Expr_BadExpr)(nil),
+		(*Expr_Ident)(nil),
+		(*Expr_Ellipsis)(nil),
+		(*Expr_BasicLit)(nil),
+		(*Expr_FuncLit)(nil),
+		(*Expr_CompositeLit)(nil),
+		(*Expr_ParenExpr)(nil),
+		(*Expr_SelectorExpr)(nil),
+		(*Expr_IndexExpr)(nil),
+		(*Expr_SliceExpr)(nil),
+		(*Expr_TypeAssertExpr)(nil),
+		(*Expr_CallExpr)(nil),
+		(*Expr_StarExpr)(nil),
+		(*Expr_UnaryExpr)(nil),
+		(*Expr_BinaryExpr)(nil),
+		(*Expr_KeyValueExpr)(nil),
+		(*Expr_ArrayType)(nil),
+		(*Expr_StructType)(nil),
+		(*Expr_FuncType)(nil),
+		(*Expr_InterfaceType)(nil),
+		(*Expr_MapType)(nil),
+		(*Expr_ChanType)(nil),
+	}
+}
+
+func _Expr_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+	m := msg.(*Expr)
+	// expr
+	switch x := m.Expr.(type) {
+	case *Expr_BadExpr:
+		b.EncodeVarint(1<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.BadExpr); err != nil {
+			return err
+		}
+	case *Expr_Ident:
+		b.EncodeVarint(2<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.Ident); err != nil {
+			return err
+		}
+	case *Expr_Ellipsis:
+		b.EncodeVarint(3<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.Ellipsis); err != nil {
+			return err
+		}
+	case *Expr_BasicLit:
+		b.EncodeVarint(4<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.BasicLit); err != nil {
+			return err
+		}
+	case *Expr_FuncLit:
+		b.EncodeVarint(5<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.FuncLit); err != nil {
+			return err
+		}
+	case *Expr_CompositeLit:
+		b.EncodeVarint(6<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.CompositeLit); err != nil {
+			return err
+		}
+	case *Expr_ParenExpr:
+		b.EncodeVarint(7<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.ParenExpr); err != nil {
+			return err
+		}
+	case *Expr_SelectorExpr:
+		b.EncodeVarint(8<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.SelectorExpr); err != nil {
+			return err
+		}
+	case *Expr_IndexExpr:
+		b.EncodeVarint(9<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.IndexExpr); err != nil {
+			return err
+		}
+	case *Expr_SliceExpr:
+		b.EncodeVarint(10<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.SliceExpr); err != nil {
+			return err
+		}
+	case *Expr_TypeAssertExpr:
+		b.EncodeVarint(11<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.TypeAssertExpr); err != nil {
+			return err
+		}
+	case *Expr_CallExpr:
+		b.EncodeVarint(12<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.CallExpr); err != nil {
+			return err
+		}
+	case *Expr_StarExpr:
+		b.EncodeVarint(13<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.StarExpr); err != nil {
+			return err
+		}
+	case *Expr_UnaryExpr:
+		b.EncodeVarint(14<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.UnaryExpr); err != nil {
+			return err
+		}
+	case *Expr_BinaryExpr:
+		b.EncodeVarint(15<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.BinaryExpr); err != nil {
+			return err
+		}
+	case *Expr_KeyValueExpr:
+		b.EncodeVarint(16<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.KeyValueExpr); err != nil {
+			return err
+		}
+	case *Expr_ArrayType:
+		b.EncodeVarint(17<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.ArrayType); err != nil {
+			return err
+		}
+	case *Expr_StructType:
+		b.EncodeVarint(18<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.StructType); err != nil {
+			return err
+		}
+	case *Expr_FuncType:
+		b.EncodeVarint(19<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.FuncType); err != nil {
+			return err
+		}
+	case *Expr_InterfaceType:
+		b.EncodeVarint(20<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.InterfaceType); err != nil {
+			return err
+		}
+	case *Expr_MapType:
+		b.EncodeVarint(21<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.MapType); err != nil {
+			return err
+		}
+	case *Expr_ChanType:
+		b.EncodeVarint(22<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.ChanType); err != nil {
+			return err
+		}
+	case nil:
+	default:
+		return fmt.Errorf("Expr.Expr has unexpected type %T", x)
+	}
+	return nil
+}
+
+func _Expr_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+	m := msg.(*Expr)
+	switch tag {
+	case 1: // expr.bad_expr
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(BadExpr)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_BadExpr{msg}
+		return true, err
+	case 2: // expr.ident
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(Ident)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_Ident{msg}
+		return true, err
+	case 3: // expr.ellipsis
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(Ellipsis)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_Ellipsis{msg}
+		return true, err
+	case 4: // expr.basic_lit
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(BasicLit)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_BasicLit{msg}
+		return true, err
+	case 5: // expr.func_lit
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(FuncLit)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_FuncLit{msg}
+		return true, err
+	case 6: // expr.composite_lit
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(CompositeLit)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_CompositeLit{msg}
+		return true, err
+	case 7: // expr.paren_expr
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(ParenExpr)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_ParenExpr{msg}
+		return true, err
+	case 8: // expr.selector_expr
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(SelectorExpr)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_SelectorExpr{msg}
+		return true, err
+	case 9: // expr.index_expr
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(IndexExpr)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_IndexExpr{msg}
+		return true, err
+	case 10: // expr.slice_expr
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(SliceExpr)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_SliceExpr{msg}
+		return true, err
+	case 11: // expr.type_assert_expr
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(TypeAssertExpr)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_TypeAssertExpr{msg}
+		return true, err
+	case 12: // expr.call_expr
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(CallExpr)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_CallExpr{msg}
+		return true, err
+	case 13: // expr.star_expr
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(StarExpr)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_StarExpr{msg}
+		return true, err
+	case 14: // expr.unary_expr
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(UnaryExpr)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_UnaryExpr{msg}
+		return true, err
+	case 15: // expr.binary_expr
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(BinaryExpr)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_BinaryExpr{msg}
+		return true, err
+	case 16: // expr.key_value_expr
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(KeyValueExpr)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_KeyValueExpr{msg}
+		return true, err
+	case 17: // expr.array_type
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(ArrayType)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_ArrayType{msg}
+		return true, err
+	case 18: // expr.struct_type
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(StructType)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_StructType{msg}
+		return true, err
+	case 19: // expr.func_type
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(FuncType)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_FuncType{msg}
+		return true, err
+	case 20: // expr.interface_type
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(InterfaceType)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_InterfaceType{msg}
+		return true, err
+	case 21: // expr.map_type
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(MapType)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_MapType{msg}
+		return true, err
+	case 22: // expr.chan_type
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(ChanType)
+		err := b.DecodeMessage(msg)
+		m.Expr = &Expr_ChanType{msg}
+		return true, err
+	default:
+		return false, nil
+	}
+}
+
+func _Expr_OneofSizer(msg proto.Message) (n int) {
+	m := msg.(*Expr)
+	// expr
+	switch x := m.Expr.(type) {
+	case *Expr_BadExpr:
+		s := proto.Size(x.BadExpr)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_Ident:
+		s := proto.Size(x.Ident)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_Ellipsis:
+		s := proto.Size(x.Ellipsis)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_BasicLit:
+		s := proto.Size(x.BasicLit)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_FuncLit:
+		s := proto.Size(x.FuncLit)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_CompositeLit:
+		s := proto.Size(x.CompositeLit)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_ParenExpr:
+		s := proto.Size(x.ParenExpr)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_SelectorExpr:
+		s := proto.Size(x.SelectorExpr)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_IndexExpr:
+		s := proto.Size(x.IndexExpr)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_SliceExpr:
+		s := proto.Size(x.SliceExpr)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_TypeAssertExpr:
+		s := proto.Size(x.TypeAssertExpr)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_CallExpr:
+		s := proto.Size(x.CallExpr)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_StarExpr:
+		s := proto.Size(x.StarExpr)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_UnaryExpr:
+		s := proto.Size(x.UnaryExpr)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_BinaryExpr:
+		s := proto.Size(x.BinaryExpr)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_KeyValueExpr:
+		s := proto.Size(x.KeyValueExpr)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_ArrayType:
+		s := proto.Size(x.ArrayType)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_StructType:
+		s := proto.Size(x.StructType)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_FuncType:
+		s := proto.Size(x.FuncType)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_InterfaceType:
+		s := proto.Size(x.InterfaceType)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_MapType:
+		s := proto.Size(x.MapType)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Expr_ChanType:
+		s := proto.Size(x.ChanType)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	return n
+}
+
 type BadExpr struct {
 	From                 int32     `protobuf:"varint,1,opt,name=from" json:"from,omitempty"`
 	To                   int32     `protobuf:"varint,2,opt,name=to" json:"to,omitempty"`
@@ -240,7 +1002,7 @@ func (m *BadExpr) Reset()         { *m = BadExpr{} }
 func (m *BadExpr) String() string { return proto.CompactTextString(m) }
 func (*BadExpr) ProtoMessage()    {}
 func (*BadExpr) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{4}
+	return fileDescriptor_ast_355744a0e72f954f, []int{5}
 }
 func (m *BadExpr) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BadExpr.Unmarshal(m, b)
@@ -295,7 +1057,7 @@ func (m *Ident) Reset()         { *m = Ident{} }
 func (m *Ident) String() string { return proto.CompactTextString(m) }
 func (*Ident) ProtoMessage()    {}
 func (*Ident) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{5}
+	return fileDescriptor_ast_355744a0e72f954f, []int{6}
 }
 func (m *Ident) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Ident.Unmarshal(m, b)
@@ -345,7 +1107,7 @@ func (m *Ident) GetDefTypeInfo() *TypeInfo {
 
 type Ellipsis struct {
 	Ellipsis             int32     `protobuf:"varint,1,opt,name=ellipsis" json:"ellipsis,omitempty"`
-	Elt                  *any.Any  `protobuf:"bytes,2,opt,name=elt" json:"elt,omitempty"`
+	Elt                  *Expr     `protobuf:"bytes,2,opt,name=elt" json:"elt,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,3,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
@@ -356,7 +1118,7 @@ func (m *Ellipsis) Reset()         { *m = Ellipsis{} }
 func (m *Ellipsis) String() string { return proto.CompactTextString(m) }
 func (*Ellipsis) ProtoMessage()    {}
 func (*Ellipsis) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{6}
+	return fileDescriptor_ast_355744a0e72f954f, []int{7}
 }
 func (m *Ellipsis) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Ellipsis.Unmarshal(m, b)
@@ -383,7 +1145,7 @@ func (m *Ellipsis) GetEllipsis() int32 {
 	return 0
 }
 
-func (m *Ellipsis) GetElt() *any.Any {
+func (m *Ellipsis) GetElt() *Expr {
 	if m != nil {
 		return m.Elt
 	}
@@ -411,7 +1173,7 @@ func (m *BasicLit) Reset()         { *m = BasicLit{} }
 func (m *BasicLit) String() string { return proto.CompactTextString(m) }
 func (*BasicLit) ProtoMessage()    {}
 func (*BasicLit) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{7}
+	return fileDescriptor_ast_355744a0e72f954f, []int{8}
 }
 func (m *BasicLit) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BasicLit.Unmarshal(m, b)
@@ -472,7 +1234,7 @@ func (m *FuncLit) Reset()         { *m = FuncLit{} }
 func (m *FuncLit) String() string { return proto.CompactTextString(m) }
 func (*FuncLit) ProtoMessage()    {}
 func (*FuncLit) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{8}
+	return fileDescriptor_ast_355744a0e72f954f, []int{9}
 }
 func (m *FuncLit) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FuncLit.Unmarshal(m, b)
@@ -514,21 +1276,21 @@ func (m *FuncLit) GetTypeInfo() *TypeInfo {
 }
 
 type CompositeLit struct {
-	Type                 *any.Any   `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
-	Lbrace               int32      `protobuf:"varint,2,opt,name=lbrace" json:"lbrace,omitempty"`
-	Elts                 []*any.Any `protobuf:"bytes,3,rep,name=elts" json:"elts,omitempty"`
-	Rbrace               int32      `protobuf:"varint,4,opt,name=rbrace" json:"rbrace,omitempty"`
-	TypeInfo             *TypeInfo  `protobuf:"bytes,5,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
+	Type                 *Expr     `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
+	Lbrace               int32     `protobuf:"varint,2,opt,name=lbrace" json:"lbrace,omitempty"`
+	Elts                 []*Expr   `protobuf:"bytes,3,rep,name=elts" json:"elts,omitempty"`
+	Rbrace               int32     `protobuf:"varint,4,opt,name=rbrace" json:"rbrace,omitempty"`
+	TypeInfo             *TypeInfo `protobuf:"bytes,5,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *CompositeLit) Reset()         { *m = CompositeLit{} }
 func (m *CompositeLit) String() string { return proto.CompactTextString(m) }
 func (*CompositeLit) ProtoMessage()    {}
 func (*CompositeLit) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{9}
+	return fileDescriptor_ast_355744a0e72f954f, []int{10}
 }
 func (m *CompositeLit) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CompositeLit.Unmarshal(m, b)
@@ -548,7 +1310,7 @@ func (m *CompositeLit) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_CompositeLit proto.InternalMessageInfo
 
-func (m *CompositeLit) GetType() *any.Any {
+func (m *CompositeLit) GetType() *Expr {
 	if m != nil {
 		return m.Type
 	}
@@ -562,7 +1324,7 @@ func (m *CompositeLit) GetLbrace() int32 {
 	return 0
 }
 
-func (m *CompositeLit) GetElts() []*any.Any {
+func (m *CompositeLit) GetElts() []*Expr {
 	if m != nil {
 		return m.Elts
 	}
@@ -585,7 +1347,7 @@ func (m *CompositeLit) GetTypeInfo() *TypeInfo {
 
 type ParenExpr struct {
 	Lparen               int32     `protobuf:"varint,1,opt,name=lparen" json:"lparen,omitempty"`
-	X                    *any.Any  `protobuf:"bytes,2,opt,name=x" json:"x,omitempty"`
+	X                    *Expr     `protobuf:"bytes,2,opt,name=x" json:"x,omitempty"`
 	Rparen               int32     `protobuf:"varint,3,opt,name=rparen" json:"rparen,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,4,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
@@ -597,7 +1359,7 @@ func (m *ParenExpr) Reset()         { *m = ParenExpr{} }
 func (m *ParenExpr) String() string { return proto.CompactTextString(m) }
 func (*ParenExpr) ProtoMessage()    {}
 func (*ParenExpr) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{10}
+	return fileDescriptor_ast_355744a0e72f954f, []int{11}
 }
 func (m *ParenExpr) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ParenExpr.Unmarshal(m, b)
@@ -624,7 +1386,7 @@ func (m *ParenExpr) GetLparen() int32 {
 	return 0
 }
 
-func (m *ParenExpr) GetX() *any.Any {
+func (m *ParenExpr) GetX() *Expr {
 	if m != nil {
 		return m.X
 	}
@@ -646,7 +1408,7 @@ func (m *ParenExpr) GetTypeInfo() *TypeInfo {
 }
 
 type SelectorExpr struct {
-	X                    *any.Any  `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
+	X                    *Expr     `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
 	Sel                  *Ident    `protobuf:"bytes,2,opt,name=sel" json:"sel,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,3,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
@@ -658,7 +1420,7 @@ func (m *SelectorExpr) Reset()         { *m = SelectorExpr{} }
 func (m *SelectorExpr) String() string { return proto.CompactTextString(m) }
 func (*SelectorExpr) ProtoMessage()    {}
 func (*SelectorExpr) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{11}
+	return fileDescriptor_ast_355744a0e72f954f, []int{12}
 }
 func (m *SelectorExpr) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SelectorExpr.Unmarshal(m, b)
@@ -678,7 +1440,7 @@ func (m *SelectorExpr) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_SelectorExpr proto.InternalMessageInfo
 
-func (m *SelectorExpr) GetX() *any.Any {
+func (m *SelectorExpr) GetX() *Expr {
 	if m != nil {
 		return m.X
 	}
@@ -700,9 +1462,9 @@ func (m *SelectorExpr) GetTypeInfo() *TypeInfo {
 }
 
 type IndexExpr struct {
-	X                    *any.Any  `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
+	X                    *Expr     `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
 	Lbrack               int32     `protobuf:"varint,2,opt,name=lbrack" json:"lbrack,omitempty"`
-	Index                *any.Any  `protobuf:"bytes,3,opt,name=index" json:"index,omitempty"`
+	Index                *Expr     `protobuf:"bytes,3,opt,name=index" json:"index,omitempty"`
 	Rbrack               int32     `protobuf:"varint,4,opt,name=rbrack" json:"rbrack,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,5,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
@@ -714,7 +1476,7 @@ func (m *IndexExpr) Reset()         { *m = IndexExpr{} }
 func (m *IndexExpr) String() string { return proto.CompactTextString(m) }
 func (*IndexExpr) ProtoMessage()    {}
 func (*IndexExpr) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{12}
+	return fileDescriptor_ast_355744a0e72f954f, []int{13}
 }
 func (m *IndexExpr) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IndexExpr.Unmarshal(m, b)
@@ -734,7 +1496,7 @@ func (m *IndexExpr) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_IndexExpr proto.InternalMessageInfo
 
-func (m *IndexExpr) GetX() *any.Any {
+func (m *IndexExpr) GetX() *Expr {
 	if m != nil {
 		return m.X
 	}
@@ -748,7 +1510,7 @@ func (m *IndexExpr) GetLbrack() int32 {
 	return 0
 }
 
-func (m *IndexExpr) GetIndex() *any.Any {
+func (m *IndexExpr) GetIndex() *Expr {
 	if m != nil {
 		return m.Index
 	}
@@ -770,11 +1532,11 @@ func (m *IndexExpr) GetTypeInfo() *TypeInfo {
 }
 
 type SliceExpr struct {
-	X                    *any.Any  `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
+	X                    *Expr     `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
 	Lbrack               int32     `protobuf:"varint,2,opt,name=lbrack" json:"lbrack,omitempty"`
-	Low                  *any.Any  `protobuf:"bytes,3,opt,name=low" json:"low,omitempty"`
-	High                 *any.Any  `protobuf:"bytes,4,opt,name=high" json:"high,omitempty"`
-	Max                  *any.Any  `protobuf:"bytes,5,opt,name=max" json:"max,omitempty"`
+	Low                  *Expr     `protobuf:"bytes,3,opt,name=low" json:"low,omitempty"`
+	High                 *Expr     `protobuf:"bytes,4,opt,name=high" json:"high,omitempty"`
+	Max                  *Expr     `protobuf:"bytes,5,opt,name=max" json:"max,omitempty"`
 	Slice3               bool      `protobuf:"varint,6,opt,name=slice3" json:"slice3,omitempty"`
 	Rbrack               int32     `protobuf:"varint,7,opt,name=rbrack" json:"rbrack,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,8,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
@@ -787,7 +1549,7 @@ func (m *SliceExpr) Reset()         { *m = SliceExpr{} }
 func (m *SliceExpr) String() string { return proto.CompactTextString(m) }
 func (*SliceExpr) ProtoMessage()    {}
 func (*SliceExpr) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{13}
+	return fileDescriptor_ast_355744a0e72f954f, []int{14}
 }
 func (m *SliceExpr) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SliceExpr.Unmarshal(m, b)
@@ -807,7 +1569,7 @@ func (m *SliceExpr) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_SliceExpr proto.InternalMessageInfo
 
-func (m *SliceExpr) GetX() *any.Any {
+func (m *SliceExpr) GetX() *Expr {
 	if m != nil {
 		return m.X
 	}
@@ -821,21 +1583,21 @@ func (m *SliceExpr) GetLbrack() int32 {
 	return 0
 }
 
-func (m *SliceExpr) GetLow() *any.Any {
+func (m *SliceExpr) GetLow() *Expr {
 	if m != nil {
 		return m.Low
 	}
 	return nil
 }
 
-func (m *SliceExpr) GetHigh() *any.Any {
+func (m *SliceExpr) GetHigh() *Expr {
 	if m != nil {
 		return m.High
 	}
 	return nil
 }
 
-func (m *SliceExpr) GetMax() *any.Any {
+func (m *SliceExpr) GetMax() *Expr {
 	if m != nil {
 		return m.Max
 	}
@@ -864,9 +1626,9 @@ func (m *SliceExpr) GetTypeInfo() *TypeInfo {
 }
 
 type TypeAssertExpr struct {
-	X                    *any.Any  `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
+	X                    *Expr     `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
 	Lparen               int32     `protobuf:"varint,2,opt,name=lparen" json:"lparen,omitempty"`
-	Type                 *any.Any  `protobuf:"bytes,3,opt,name=type" json:"type,omitempty"`
+	Type                 *Expr     `protobuf:"bytes,3,opt,name=type" json:"type,omitempty"`
 	Rparen               int32     `protobuf:"varint,4,opt,name=rparen" json:"rparen,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,5,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
@@ -878,7 +1640,7 @@ func (m *TypeAssertExpr) Reset()         { *m = TypeAssertExpr{} }
 func (m *TypeAssertExpr) String() string { return proto.CompactTextString(m) }
 func (*TypeAssertExpr) ProtoMessage()    {}
 func (*TypeAssertExpr) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{14}
+	return fileDescriptor_ast_355744a0e72f954f, []int{15}
 }
 func (m *TypeAssertExpr) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeAssertExpr.Unmarshal(m, b)
@@ -898,7 +1660,7 @@ func (m *TypeAssertExpr) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypeAssertExpr proto.InternalMessageInfo
 
-func (m *TypeAssertExpr) GetX() *any.Any {
+func (m *TypeAssertExpr) GetX() *Expr {
 	if m != nil {
 		return m.X
 	}
@@ -912,7 +1674,7 @@ func (m *TypeAssertExpr) GetLparen() int32 {
 	return 0
 }
 
-func (m *TypeAssertExpr) GetType() *any.Any {
+func (m *TypeAssertExpr) GetType() *Expr {
 	if m != nil {
 		return m.Type
 	}
@@ -934,22 +1696,22 @@ func (m *TypeAssertExpr) GetTypeInfo() *TypeInfo {
 }
 
 type CallExpr struct {
-	Fun                  *any.Any   `protobuf:"bytes,1,opt,name=fun" json:"fun,omitempty"`
-	Lparen               int32      `protobuf:"varint,2,opt,name=lparen" json:"lparen,omitempty"`
-	Args                 []*any.Any `protobuf:"bytes,3,rep,name=args" json:"args,omitempty"`
-	Ellipsis             int32      `protobuf:"varint,4,opt,name=ellipsis" json:"ellipsis,omitempty"`
-	Rparen               int32      `protobuf:"varint,5,opt,name=rparen" json:"rparen,omitempty"`
-	TypeInfo             *TypeInfo  `protobuf:"bytes,6,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
+	Fun                  *Expr     `protobuf:"bytes,1,opt,name=fun" json:"fun,omitempty"`
+	Lparen               int32     `protobuf:"varint,2,opt,name=lparen" json:"lparen,omitempty"`
+	Args                 []*Expr   `protobuf:"bytes,3,rep,name=args" json:"args,omitempty"`
+	Ellipsis             int32     `protobuf:"varint,4,opt,name=ellipsis" json:"ellipsis,omitempty"`
+	Rparen               int32     `protobuf:"varint,5,opt,name=rparen" json:"rparen,omitempty"`
+	TypeInfo             *TypeInfo `protobuf:"bytes,6,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
 }
 
 func (m *CallExpr) Reset()         { *m = CallExpr{} }
 func (m *CallExpr) String() string { return proto.CompactTextString(m) }
 func (*CallExpr) ProtoMessage()    {}
 func (*CallExpr) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{15}
+	return fileDescriptor_ast_355744a0e72f954f, []int{16}
 }
 func (m *CallExpr) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CallExpr.Unmarshal(m, b)
@@ -969,7 +1731,7 @@ func (m *CallExpr) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_CallExpr proto.InternalMessageInfo
 
-func (m *CallExpr) GetFun() *any.Any {
+func (m *CallExpr) GetFun() *Expr {
 	if m != nil {
 		return m.Fun
 	}
@@ -983,7 +1745,7 @@ func (m *CallExpr) GetLparen() int32 {
 	return 0
 }
 
-func (m *CallExpr) GetArgs() []*any.Any {
+func (m *CallExpr) GetArgs() []*Expr {
 	if m != nil {
 		return m.Args
 	}
@@ -1013,7 +1775,7 @@ func (m *CallExpr) GetTypeInfo() *TypeInfo {
 
 type StarExpr struct {
 	Star                 int32     `protobuf:"varint,1,opt,name=star" json:"star,omitempty"`
-	X                    *any.Any  `protobuf:"bytes,2,opt,name=x" json:"x,omitempty"`
+	X                    *Expr     `protobuf:"bytes,2,opt,name=x" json:"x,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,3,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
@@ -1024,7 +1786,7 @@ func (m *StarExpr) Reset()         { *m = StarExpr{} }
 func (m *StarExpr) String() string { return proto.CompactTextString(m) }
 func (*StarExpr) ProtoMessage()    {}
 func (*StarExpr) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{16}
+	return fileDescriptor_ast_355744a0e72f954f, []int{17}
 }
 func (m *StarExpr) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StarExpr.Unmarshal(m, b)
@@ -1051,7 +1813,7 @@ func (m *StarExpr) GetStar() int32 {
 	return 0
 }
 
-func (m *StarExpr) GetX() *any.Any {
+func (m *StarExpr) GetX() *Expr {
 	if m != nil {
 		return m.X
 	}
@@ -1068,7 +1830,7 @@ func (m *StarExpr) GetTypeInfo() *TypeInfo {
 type UnaryExpr struct {
 	OpPos                int32     `protobuf:"varint,1,opt,name=op_pos,json=opPos" json:"op_pos,omitempty"`
 	Op                   Token     `protobuf:"varint,2,opt,name=op,enum=pb.Token" json:"op,omitempty"`
-	X                    *any.Any  `protobuf:"bytes,3,opt,name=x" json:"x,omitempty"`
+	X                    *Expr     `protobuf:"bytes,3,opt,name=x" json:"x,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,4,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
@@ -1079,7 +1841,7 @@ func (m *UnaryExpr) Reset()         { *m = UnaryExpr{} }
 func (m *UnaryExpr) String() string { return proto.CompactTextString(m) }
 func (*UnaryExpr) ProtoMessage()    {}
 func (*UnaryExpr) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{17}
+	return fileDescriptor_ast_355744a0e72f954f, []int{18}
 }
 func (m *UnaryExpr) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UnaryExpr.Unmarshal(m, b)
@@ -1113,7 +1875,7 @@ func (m *UnaryExpr) GetOp() Token {
 	return Token_ILLEGAL
 }
 
-func (m *UnaryExpr) GetX() *any.Any {
+func (m *UnaryExpr) GetX() *Expr {
 	if m != nil {
 		return m.X
 	}
@@ -1128,10 +1890,10 @@ func (m *UnaryExpr) GetTypeInfo() *TypeInfo {
 }
 
 type BinaryExpr struct {
-	X                    *any.Any  `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
+	X                    *Expr     `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
 	OpPos                int32     `protobuf:"varint,2,opt,name=op_pos,json=opPos" json:"op_pos,omitempty"`
 	Op                   Token     `protobuf:"varint,3,opt,name=op,enum=pb.Token" json:"op,omitempty"`
-	Y                    *any.Any  `protobuf:"bytes,4,opt,name=y" json:"y,omitempty"`
+	Y                    *Expr     `protobuf:"bytes,4,opt,name=y" json:"y,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,5,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
@@ -1142,7 +1904,7 @@ func (m *BinaryExpr) Reset()         { *m = BinaryExpr{} }
 func (m *BinaryExpr) String() string { return proto.CompactTextString(m) }
 func (*BinaryExpr) ProtoMessage()    {}
 func (*BinaryExpr) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{18}
+	return fileDescriptor_ast_355744a0e72f954f, []int{19}
 }
 func (m *BinaryExpr) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BinaryExpr.Unmarshal(m, b)
@@ -1162,7 +1924,7 @@ func (m *BinaryExpr) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_BinaryExpr proto.InternalMessageInfo
 
-func (m *BinaryExpr) GetX() *any.Any {
+func (m *BinaryExpr) GetX() *Expr {
 	if m != nil {
 		return m.X
 	}
@@ -1183,7 +1945,7 @@ func (m *BinaryExpr) GetOp() Token {
 	return Token_ILLEGAL
 }
 
-func (m *BinaryExpr) GetY() *any.Any {
+func (m *BinaryExpr) GetY() *Expr {
 	if m != nil {
 		return m.Y
 	}
@@ -1198,9 +1960,9 @@ func (m *BinaryExpr) GetTypeInfo() *TypeInfo {
 }
 
 type KeyValueExpr struct {
-	Key                  *any.Any  `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
+	Key                  *Expr     `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
 	Colon                int32     `protobuf:"varint,2,opt,name=colon" json:"colon,omitempty"`
-	Value                *any.Any  `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
+	Value                *Expr     `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,4,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
@@ -1211,7 +1973,7 @@ func (m *KeyValueExpr) Reset()         { *m = KeyValueExpr{} }
 func (m *KeyValueExpr) String() string { return proto.CompactTextString(m) }
 func (*KeyValueExpr) ProtoMessage()    {}
 func (*KeyValueExpr) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{19}
+	return fileDescriptor_ast_355744a0e72f954f, []int{20}
 }
 func (m *KeyValueExpr) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_KeyValueExpr.Unmarshal(m, b)
@@ -1231,7 +1993,7 @@ func (m *KeyValueExpr) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_KeyValueExpr proto.InternalMessageInfo
 
-func (m *KeyValueExpr) GetKey() *any.Any {
+func (m *KeyValueExpr) GetKey() *Expr {
 	if m != nil {
 		return m.Key
 	}
@@ -1245,7 +2007,7 @@ func (m *KeyValueExpr) GetColon() int32 {
 	return 0
 }
 
-func (m *KeyValueExpr) GetValue() *any.Any {
+func (m *KeyValueExpr) GetValue() *Expr {
 	if m != nil {
 		return m.Value
 	}
@@ -1261,8 +2023,8 @@ func (m *KeyValueExpr) GetTypeInfo() *TypeInfo {
 
 type ArrayType struct {
 	Lbrack               int32     `protobuf:"varint,1,opt,name=lbrack" json:"lbrack,omitempty"`
-	Len                  *any.Any  `protobuf:"bytes,2,opt,name=len" json:"len,omitempty"`
-	Elt                  *any.Any  `protobuf:"bytes,3,opt,name=elt" json:"elt,omitempty"`
+	Len                  *Expr     `protobuf:"bytes,2,opt,name=len" json:"len,omitempty"`
+	Elt                  *Expr     `protobuf:"bytes,3,opt,name=elt" json:"elt,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,4,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
@@ -1273,7 +2035,7 @@ func (m *ArrayType) Reset()         { *m = ArrayType{} }
 func (m *ArrayType) String() string { return proto.CompactTextString(m) }
 func (*ArrayType) ProtoMessage()    {}
 func (*ArrayType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{20}
+	return fileDescriptor_ast_355744a0e72f954f, []int{21}
 }
 func (m *ArrayType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ArrayType.Unmarshal(m, b)
@@ -1300,14 +2062,14 @@ func (m *ArrayType) GetLbrack() int32 {
 	return 0
 }
 
-func (m *ArrayType) GetLen() *any.Any {
+func (m *ArrayType) GetLen() *Expr {
 	if m != nil {
 		return m.Len
 	}
 	return nil
 }
 
-func (m *ArrayType) GetElt() *any.Any {
+func (m *ArrayType) GetElt() *Expr {
 	if m != nil {
 		return m.Elt
 	}
@@ -1335,7 +2097,7 @@ func (m *StructType) Reset()         { *m = StructType{} }
 func (m *StructType) String() string { return proto.CompactTextString(m) }
 func (*StructType) ProtoMessage()    {}
 func (*StructType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{21}
+	return fileDescriptor_ast_355744a0e72f954f, []int{22}
 }
 func (m *StructType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_StructType.Unmarshal(m, b)
@@ -1397,7 +2159,7 @@ func (m *FuncType) Reset()         { *m = FuncType{} }
 func (m *FuncType) String() string { return proto.CompactTextString(m) }
 func (*FuncType) ProtoMessage()    {}
 func (*FuncType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{22}
+	return fileDescriptor_ast_355744a0e72f954f, []int{23}
 }
 func (m *FuncType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FuncType.Unmarshal(m, b)
@@ -1459,7 +2221,7 @@ func (m *InterfaceType) Reset()         { *m = InterfaceType{} }
 func (m *InterfaceType) String() string { return proto.CompactTextString(m) }
 func (*InterfaceType) ProtoMessage()    {}
 func (*InterfaceType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{23}
+	return fileDescriptor_ast_355744a0e72f954f, []int{24}
 }
 func (m *InterfaceType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_InterfaceType.Unmarshal(m, b)
@@ -1509,8 +2271,8 @@ func (m *InterfaceType) GetTypeInfo() *TypeInfo {
 
 type MapType struct {
 	Map                  int32     `protobuf:"varint,1,opt,name=map" json:"map,omitempty"`
-	Key                  *any.Any  `protobuf:"bytes,2,opt,name=key" json:"key,omitempty"`
-	Value                *any.Any  `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
+	Key                  *Expr     `protobuf:"bytes,2,opt,name=key" json:"key,omitempty"`
+	Value                *Expr     `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,4,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
@@ -1521,7 +2283,7 @@ func (m *MapType) Reset()         { *m = MapType{} }
 func (m *MapType) String() string { return proto.CompactTextString(m) }
 func (*MapType) ProtoMessage()    {}
 func (*MapType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{24}
+	return fileDescriptor_ast_355744a0e72f954f, []int{25}
 }
 func (m *MapType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_MapType.Unmarshal(m, b)
@@ -1548,14 +2310,14 @@ func (m *MapType) GetMap() int32 {
 	return 0
 }
 
-func (m *MapType) GetKey() *any.Any {
+func (m *MapType) GetKey() *Expr {
 	if m != nil {
 		return m.Key
 	}
 	return nil
 }
 
-func (m *MapType) GetValue() *any.Any {
+func (m *MapType) GetValue() *Expr {
 	if m != nil {
 		return m.Value
 	}
@@ -1574,7 +2336,7 @@ type ChanType struct {
 	Arrow                int32     `protobuf:"varint,2,opt,name=arrow" json:"arrow,omitempty"`
 	SendDir              bool      `protobuf:"varint,3,opt,name=send_dir,json=sendDir" json:"send_dir,omitempty"`
 	RecvDir              bool      `protobuf:"varint,4,opt,name=recv_dir,json=recvDir" json:"recv_dir,omitempty"`
-	Value                *any.Any  `protobuf:"bytes,5,opt,name=value" json:"value,omitempty"`
+	Value                *Expr     `protobuf:"bytes,5,opt,name=value" json:"value,omitempty"`
 	TypeInfo             *TypeInfo `protobuf:"bytes,6,opt,name=type_info,json=typeInfo" json:"type_info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
@@ -1585,7 +2347,7 @@ func (m *ChanType) Reset()         { *m = ChanType{} }
 func (m *ChanType) String() string { return proto.CompactTextString(m) }
 func (*ChanType) ProtoMessage()    {}
 func (*ChanType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{25}
+	return fileDescriptor_ast_355744a0e72f954f, []int{26}
 }
 func (m *ChanType) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ChanType.Unmarshal(m, b)
@@ -1633,7 +2395,7 @@ func (m *ChanType) GetRecvDir() bool {
 	return false
 }
 
-func (m *ChanType) GetValue() *any.Any {
+func (m *ChanType) GetValue() *Expr {
 	if m != nil {
 		return m.Value
 	}
@@ -1645,6 +2407,738 @@ func (m *ChanType) GetTypeInfo() *TypeInfo {
 		return m.TypeInfo
 	}
 	return nil
+}
+
+type Stmt struct {
+	// Types that are valid to be assigned to Stmt:
+	//	*Stmt_BadStmt
+	//	*Stmt_DeclStmt
+	//	*Stmt_EmptyStmt
+	//	*Stmt_LabeledStmt
+	//	*Stmt_ExprStmt
+	//	*Stmt_SendStmt
+	//	*Stmt_IncDecStmt
+	//	*Stmt_AssignStmt
+	//	*Stmt_GoStmt
+	//	*Stmt_DeferStmt
+	//	*Stmt_ReturnStmt
+	//	*Stmt_BranchStmt
+	//	*Stmt_BlockStmt
+	//	*Stmt_IfStmt
+	//	*Stmt_CaseClause
+	//	*Stmt_SwitchStmt
+	//	*Stmt_TypeSwitchStmt
+	//	*Stmt_CommClause
+	//	*Stmt_SelectStmt
+	//	*Stmt_ForStmt
+	//	*Stmt_RangeStmt
+	Stmt                 isStmt_Stmt `protobuf_oneof:"stmt"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *Stmt) Reset()         { *m = Stmt{} }
+func (m *Stmt) String() string { return proto.CompactTextString(m) }
+func (*Stmt) ProtoMessage()    {}
+func (*Stmt) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ast_355744a0e72f954f, []int{27}
+}
+func (m *Stmt) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Stmt.Unmarshal(m, b)
+}
+func (m *Stmt) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Stmt.Marshal(b, m, deterministic)
+}
+func (dst *Stmt) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Stmt.Merge(dst, src)
+}
+func (m *Stmt) XXX_Size() int {
+	return xxx_messageInfo_Stmt.Size(m)
+}
+func (m *Stmt) XXX_DiscardUnknown() {
+	xxx_messageInfo_Stmt.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Stmt proto.InternalMessageInfo
+
+type isStmt_Stmt interface {
+	isStmt_Stmt()
+}
+
+type Stmt_BadStmt struct {
+	BadStmt *BadStmt `protobuf:"bytes,1,opt,name=bad_stmt,json=badStmt,oneof"`
+}
+type Stmt_DeclStmt struct {
+	DeclStmt *DeclStmt `protobuf:"bytes,2,opt,name=decl_stmt,json=declStmt,oneof"`
+}
+type Stmt_EmptyStmt struct {
+	EmptyStmt *EmptyStmt `protobuf:"bytes,3,opt,name=empty_stmt,json=emptyStmt,oneof"`
+}
+type Stmt_LabeledStmt struct {
+	LabeledStmt *LabeledStmt `protobuf:"bytes,4,opt,name=labeled_stmt,json=labeledStmt,oneof"`
+}
+type Stmt_ExprStmt struct {
+	ExprStmt *ExprStmt `protobuf:"bytes,5,opt,name=expr_stmt,json=exprStmt,oneof"`
+}
+type Stmt_SendStmt struct {
+	SendStmt *SendStmt `protobuf:"bytes,6,opt,name=send_stmt,json=sendStmt,oneof"`
+}
+type Stmt_IncDecStmt struct {
+	IncDecStmt *IncDecStmt `protobuf:"bytes,7,opt,name=inc_dec_stmt,json=incDecStmt,oneof"`
+}
+type Stmt_AssignStmt struct {
+	AssignStmt *AssignStmt `protobuf:"bytes,8,opt,name=assign_stmt,json=assignStmt,oneof"`
+}
+type Stmt_GoStmt struct {
+	GoStmt *GoStmt `protobuf:"bytes,9,opt,name=go_stmt,json=goStmt,oneof"`
+}
+type Stmt_DeferStmt struct {
+	DeferStmt *DeferStmt `protobuf:"bytes,10,opt,name=defer_stmt,json=deferStmt,oneof"`
+}
+type Stmt_ReturnStmt struct {
+	ReturnStmt *ReturnStmt `protobuf:"bytes,11,opt,name=return_stmt,json=returnStmt,oneof"`
+}
+type Stmt_BranchStmt struct {
+	BranchStmt *BranchStmt `protobuf:"bytes,12,opt,name=branch_stmt,json=branchStmt,oneof"`
+}
+type Stmt_BlockStmt struct {
+	BlockStmt *BlockStmt `protobuf:"bytes,13,opt,name=block_stmt,json=blockStmt,oneof"`
+}
+type Stmt_IfStmt struct {
+	IfStmt *IfStmt `protobuf:"bytes,14,opt,name=if_stmt,json=ifStmt,oneof"`
+}
+type Stmt_CaseClause struct {
+	CaseClause *CaseClause `protobuf:"bytes,15,opt,name=case_clause,json=caseClause,oneof"`
+}
+type Stmt_SwitchStmt struct {
+	SwitchStmt *SwitchStmt `protobuf:"bytes,16,opt,name=switch_stmt,json=switchStmt,oneof"`
+}
+type Stmt_TypeSwitchStmt struct {
+	TypeSwitchStmt *TypeSwitchStmt `protobuf:"bytes,17,opt,name=type_switch_stmt,json=typeSwitchStmt,oneof"`
+}
+type Stmt_CommClause struct {
+	CommClause *CommClause `protobuf:"bytes,18,opt,name=comm_clause,json=commClause,oneof"`
+}
+type Stmt_SelectStmt struct {
+	SelectStmt *SelectStmt `protobuf:"bytes,19,opt,name=select_stmt,json=selectStmt,oneof"`
+}
+type Stmt_ForStmt struct {
+	ForStmt *ForStmt `protobuf:"bytes,20,opt,name=for_stmt,json=forStmt,oneof"`
+}
+type Stmt_RangeStmt struct {
+	RangeStmt *RangeStmt `protobuf:"bytes,21,opt,name=range_stmt,json=rangeStmt,oneof"`
+}
+
+func (*Stmt_BadStmt) isStmt_Stmt()        {}
+func (*Stmt_DeclStmt) isStmt_Stmt()       {}
+func (*Stmt_EmptyStmt) isStmt_Stmt()      {}
+func (*Stmt_LabeledStmt) isStmt_Stmt()    {}
+func (*Stmt_ExprStmt) isStmt_Stmt()       {}
+func (*Stmt_SendStmt) isStmt_Stmt()       {}
+func (*Stmt_IncDecStmt) isStmt_Stmt()     {}
+func (*Stmt_AssignStmt) isStmt_Stmt()     {}
+func (*Stmt_GoStmt) isStmt_Stmt()         {}
+func (*Stmt_DeferStmt) isStmt_Stmt()      {}
+func (*Stmt_ReturnStmt) isStmt_Stmt()     {}
+func (*Stmt_BranchStmt) isStmt_Stmt()     {}
+func (*Stmt_BlockStmt) isStmt_Stmt()      {}
+func (*Stmt_IfStmt) isStmt_Stmt()         {}
+func (*Stmt_CaseClause) isStmt_Stmt()     {}
+func (*Stmt_SwitchStmt) isStmt_Stmt()     {}
+func (*Stmt_TypeSwitchStmt) isStmt_Stmt() {}
+func (*Stmt_CommClause) isStmt_Stmt()     {}
+func (*Stmt_SelectStmt) isStmt_Stmt()     {}
+func (*Stmt_ForStmt) isStmt_Stmt()        {}
+func (*Stmt_RangeStmt) isStmt_Stmt()      {}
+
+func (m *Stmt) GetStmt() isStmt_Stmt {
+	if m != nil {
+		return m.Stmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetBadStmt() *BadStmt {
+	if x, ok := m.GetStmt().(*Stmt_BadStmt); ok {
+		return x.BadStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetDeclStmt() *DeclStmt {
+	if x, ok := m.GetStmt().(*Stmt_DeclStmt); ok {
+		return x.DeclStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetEmptyStmt() *EmptyStmt {
+	if x, ok := m.GetStmt().(*Stmt_EmptyStmt); ok {
+		return x.EmptyStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetLabeledStmt() *LabeledStmt {
+	if x, ok := m.GetStmt().(*Stmt_LabeledStmt); ok {
+		return x.LabeledStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetExprStmt() *ExprStmt {
+	if x, ok := m.GetStmt().(*Stmt_ExprStmt); ok {
+		return x.ExprStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetSendStmt() *SendStmt {
+	if x, ok := m.GetStmt().(*Stmt_SendStmt); ok {
+		return x.SendStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetIncDecStmt() *IncDecStmt {
+	if x, ok := m.GetStmt().(*Stmt_IncDecStmt); ok {
+		return x.IncDecStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetAssignStmt() *AssignStmt {
+	if x, ok := m.GetStmt().(*Stmt_AssignStmt); ok {
+		return x.AssignStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetGoStmt() *GoStmt {
+	if x, ok := m.GetStmt().(*Stmt_GoStmt); ok {
+		return x.GoStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetDeferStmt() *DeferStmt {
+	if x, ok := m.GetStmt().(*Stmt_DeferStmt); ok {
+		return x.DeferStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetReturnStmt() *ReturnStmt {
+	if x, ok := m.GetStmt().(*Stmt_ReturnStmt); ok {
+		return x.ReturnStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetBranchStmt() *BranchStmt {
+	if x, ok := m.GetStmt().(*Stmt_BranchStmt); ok {
+		return x.BranchStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetBlockStmt() *BlockStmt {
+	if x, ok := m.GetStmt().(*Stmt_BlockStmt); ok {
+		return x.BlockStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetIfStmt() *IfStmt {
+	if x, ok := m.GetStmt().(*Stmt_IfStmt); ok {
+		return x.IfStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetCaseClause() *CaseClause {
+	if x, ok := m.GetStmt().(*Stmt_CaseClause); ok {
+		return x.CaseClause
+	}
+	return nil
+}
+
+func (m *Stmt) GetSwitchStmt() *SwitchStmt {
+	if x, ok := m.GetStmt().(*Stmt_SwitchStmt); ok {
+		return x.SwitchStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetTypeSwitchStmt() *TypeSwitchStmt {
+	if x, ok := m.GetStmt().(*Stmt_TypeSwitchStmt); ok {
+		return x.TypeSwitchStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetCommClause() *CommClause {
+	if x, ok := m.GetStmt().(*Stmt_CommClause); ok {
+		return x.CommClause
+	}
+	return nil
+}
+
+func (m *Stmt) GetSelectStmt() *SelectStmt {
+	if x, ok := m.GetStmt().(*Stmt_SelectStmt); ok {
+		return x.SelectStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetForStmt() *ForStmt {
+	if x, ok := m.GetStmt().(*Stmt_ForStmt); ok {
+		return x.ForStmt
+	}
+	return nil
+}
+
+func (m *Stmt) GetRangeStmt() *RangeStmt {
+	if x, ok := m.GetStmt().(*Stmt_RangeStmt); ok {
+		return x.RangeStmt
+	}
+	return nil
+}
+
+// XXX_OneofFuncs is for the internal use of the proto package.
+func (*Stmt) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+	return _Stmt_OneofMarshaler, _Stmt_OneofUnmarshaler, _Stmt_OneofSizer, []interface{}{
+		(*Stmt_BadStmt)(nil),
+		(*Stmt_DeclStmt)(nil),
+		(*Stmt_EmptyStmt)(nil),
+		(*Stmt_LabeledStmt)(nil),
+		(*Stmt_ExprStmt)(nil),
+		(*Stmt_SendStmt)(nil),
+		(*Stmt_IncDecStmt)(nil),
+		(*Stmt_AssignStmt)(nil),
+		(*Stmt_GoStmt)(nil),
+		(*Stmt_DeferStmt)(nil),
+		(*Stmt_ReturnStmt)(nil),
+		(*Stmt_BranchStmt)(nil),
+		(*Stmt_BlockStmt)(nil),
+		(*Stmt_IfStmt)(nil),
+		(*Stmt_CaseClause)(nil),
+		(*Stmt_SwitchStmt)(nil),
+		(*Stmt_TypeSwitchStmt)(nil),
+		(*Stmt_CommClause)(nil),
+		(*Stmt_SelectStmt)(nil),
+		(*Stmt_ForStmt)(nil),
+		(*Stmt_RangeStmt)(nil),
+	}
+}
+
+func _Stmt_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+	m := msg.(*Stmt)
+	// stmt
+	switch x := m.Stmt.(type) {
+	case *Stmt_BadStmt:
+		b.EncodeVarint(1<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.BadStmt); err != nil {
+			return err
+		}
+	case *Stmt_DeclStmt:
+		b.EncodeVarint(2<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.DeclStmt); err != nil {
+			return err
+		}
+	case *Stmt_EmptyStmt:
+		b.EncodeVarint(3<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.EmptyStmt); err != nil {
+			return err
+		}
+	case *Stmt_LabeledStmt:
+		b.EncodeVarint(4<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.LabeledStmt); err != nil {
+			return err
+		}
+	case *Stmt_ExprStmt:
+		b.EncodeVarint(5<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.ExprStmt); err != nil {
+			return err
+		}
+	case *Stmt_SendStmt:
+		b.EncodeVarint(6<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.SendStmt); err != nil {
+			return err
+		}
+	case *Stmt_IncDecStmt:
+		b.EncodeVarint(7<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.IncDecStmt); err != nil {
+			return err
+		}
+	case *Stmt_AssignStmt:
+		b.EncodeVarint(8<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.AssignStmt); err != nil {
+			return err
+		}
+	case *Stmt_GoStmt:
+		b.EncodeVarint(9<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.GoStmt); err != nil {
+			return err
+		}
+	case *Stmt_DeferStmt:
+		b.EncodeVarint(10<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.DeferStmt); err != nil {
+			return err
+		}
+	case *Stmt_ReturnStmt:
+		b.EncodeVarint(11<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.ReturnStmt); err != nil {
+			return err
+		}
+	case *Stmt_BranchStmt:
+		b.EncodeVarint(12<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.BranchStmt); err != nil {
+			return err
+		}
+	case *Stmt_BlockStmt:
+		b.EncodeVarint(13<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.BlockStmt); err != nil {
+			return err
+		}
+	case *Stmt_IfStmt:
+		b.EncodeVarint(14<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.IfStmt); err != nil {
+			return err
+		}
+	case *Stmt_CaseClause:
+		b.EncodeVarint(15<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.CaseClause); err != nil {
+			return err
+		}
+	case *Stmt_SwitchStmt:
+		b.EncodeVarint(16<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.SwitchStmt); err != nil {
+			return err
+		}
+	case *Stmt_TypeSwitchStmt:
+		b.EncodeVarint(17<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.TypeSwitchStmt); err != nil {
+			return err
+		}
+	case *Stmt_CommClause:
+		b.EncodeVarint(18<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.CommClause); err != nil {
+			return err
+		}
+	case *Stmt_SelectStmt:
+		b.EncodeVarint(19<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.SelectStmt); err != nil {
+			return err
+		}
+	case *Stmt_ForStmt:
+		b.EncodeVarint(20<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.ForStmt); err != nil {
+			return err
+		}
+	case *Stmt_RangeStmt:
+		b.EncodeVarint(21<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.RangeStmt); err != nil {
+			return err
+		}
+	case nil:
+	default:
+		return fmt.Errorf("Stmt.Stmt has unexpected type %T", x)
+	}
+	return nil
+}
+
+func _Stmt_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+	m := msg.(*Stmt)
+	switch tag {
+	case 1: // stmt.bad_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(BadStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_BadStmt{msg}
+		return true, err
+	case 2: // stmt.decl_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(DeclStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_DeclStmt{msg}
+		return true, err
+	case 3: // stmt.empty_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(EmptyStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_EmptyStmt{msg}
+		return true, err
+	case 4: // stmt.labeled_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(LabeledStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_LabeledStmt{msg}
+		return true, err
+	case 5: // stmt.expr_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(ExprStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_ExprStmt{msg}
+		return true, err
+	case 6: // stmt.send_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(SendStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_SendStmt{msg}
+		return true, err
+	case 7: // stmt.inc_dec_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(IncDecStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_IncDecStmt{msg}
+		return true, err
+	case 8: // stmt.assign_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(AssignStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_AssignStmt{msg}
+		return true, err
+	case 9: // stmt.go_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(GoStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_GoStmt{msg}
+		return true, err
+	case 10: // stmt.defer_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(DeferStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_DeferStmt{msg}
+		return true, err
+	case 11: // stmt.return_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(ReturnStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_ReturnStmt{msg}
+		return true, err
+	case 12: // stmt.branch_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(BranchStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_BranchStmt{msg}
+		return true, err
+	case 13: // stmt.block_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(BlockStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_BlockStmt{msg}
+		return true, err
+	case 14: // stmt.if_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(IfStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_IfStmt{msg}
+		return true, err
+	case 15: // stmt.case_clause
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(CaseClause)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_CaseClause{msg}
+		return true, err
+	case 16: // stmt.switch_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(SwitchStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_SwitchStmt{msg}
+		return true, err
+	case 17: // stmt.type_switch_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(TypeSwitchStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_TypeSwitchStmt{msg}
+		return true, err
+	case 18: // stmt.comm_clause
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(CommClause)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_CommClause{msg}
+		return true, err
+	case 19: // stmt.select_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(SelectStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_SelectStmt{msg}
+		return true, err
+	case 20: // stmt.for_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(ForStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_ForStmt{msg}
+		return true, err
+	case 21: // stmt.range_stmt
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(RangeStmt)
+		err := b.DecodeMessage(msg)
+		m.Stmt = &Stmt_RangeStmt{msg}
+		return true, err
+	default:
+		return false, nil
+	}
+}
+
+func _Stmt_OneofSizer(msg proto.Message) (n int) {
+	m := msg.(*Stmt)
+	// stmt
+	switch x := m.Stmt.(type) {
+	case *Stmt_BadStmt:
+		s := proto.Size(x.BadStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_DeclStmt:
+		s := proto.Size(x.DeclStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_EmptyStmt:
+		s := proto.Size(x.EmptyStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_LabeledStmt:
+		s := proto.Size(x.LabeledStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_ExprStmt:
+		s := proto.Size(x.ExprStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_SendStmt:
+		s := proto.Size(x.SendStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_IncDecStmt:
+		s := proto.Size(x.IncDecStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_AssignStmt:
+		s := proto.Size(x.AssignStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_GoStmt:
+		s := proto.Size(x.GoStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_DeferStmt:
+		s := proto.Size(x.DeferStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_ReturnStmt:
+		s := proto.Size(x.ReturnStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_BranchStmt:
+		s := proto.Size(x.BranchStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_BlockStmt:
+		s := proto.Size(x.BlockStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_IfStmt:
+		s := proto.Size(x.IfStmt)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_CaseClause:
+		s := proto.Size(x.CaseClause)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_SwitchStmt:
+		s := proto.Size(x.SwitchStmt)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_TypeSwitchStmt:
+		s := proto.Size(x.TypeSwitchStmt)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_CommClause:
+		s := proto.Size(x.CommClause)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_SelectStmt:
+		s := proto.Size(x.SelectStmt)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_ForStmt:
+		s := proto.Size(x.ForStmt)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Stmt_RangeStmt:
+		s := proto.Size(x.RangeStmt)
+		n += 2 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	return n
 }
 
 type BadStmt struct {
@@ -1659,7 +3153,7 @@ func (m *BadStmt) Reset()         { *m = BadStmt{} }
 func (m *BadStmt) String() string { return proto.CompactTextString(m) }
 func (*BadStmt) ProtoMessage()    {}
 func (*BadStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{26}
+	return fileDescriptor_ast_355744a0e72f954f, []int{28}
 }
 func (m *BadStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BadStmt.Unmarshal(m, b)
@@ -1694,7 +3188,7 @@ func (m *BadStmt) GetTo() int32 {
 }
 
 type DeclStmt struct {
-	Decl                 *any.Any `protobuf:"bytes,1,opt,name=decl" json:"decl,omitempty"`
+	Decl                 *Decl    `protobuf:"bytes,1,opt,name=decl" json:"decl,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -1704,7 +3198,7 @@ func (m *DeclStmt) Reset()         { *m = DeclStmt{} }
 func (m *DeclStmt) String() string { return proto.CompactTextString(m) }
 func (*DeclStmt) ProtoMessage()    {}
 func (*DeclStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{27}
+	return fileDescriptor_ast_355744a0e72f954f, []int{29}
 }
 func (m *DeclStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeclStmt.Unmarshal(m, b)
@@ -1724,7 +3218,7 @@ func (m *DeclStmt) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_DeclStmt proto.InternalMessageInfo
 
-func (m *DeclStmt) GetDecl() *any.Any {
+func (m *DeclStmt) GetDecl() *Decl {
 	if m != nil {
 		return m.Decl
 	}
@@ -1743,7 +3237,7 @@ func (m *EmptyStmt) Reset()         { *m = EmptyStmt{} }
 func (m *EmptyStmt) String() string { return proto.CompactTextString(m) }
 func (*EmptyStmt) ProtoMessage()    {}
 func (*EmptyStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{28}
+	return fileDescriptor_ast_355744a0e72f954f, []int{30}
 }
 func (m *EmptyStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_EmptyStmt.Unmarshal(m, b)
@@ -1780,7 +3274,7 @@ func (m *EmptyStmt) GetImplicit() bool {
 type LabeledStmt struct {
 	Label                *Ident   `protobuf:"bytes,1,opt,name=label" json:"label,omitempty"`
 	Colon                int32    `protobuf:"varint,2,opt,name=colon" json:"colon,omitempty"`
-	Stmt                 *any.Any `protobuf:"bytes,3,opt,name=stmt" json:"stmt,omitempty"`
+	Stmt                 *Stmt    `protobuf:"bytes,3,opt,name=stmt" json:"stmt,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -1790,7 +3284,7 @@ func (m *LabeledStmt) Reset()         { *m = LabeledStmt{} }
 func (m *LabeledStmt) String() string { return proto.CompactTextString(m) }
 func (*LabeledStmt) ProtoMessage()    {}
 func (*LabeledStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{29}
+	return fileDescriptor_ast_355744a0e72f954f, []int{31}
 }
 func (m *LabeledStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LabeledStmt.Unmarshal(m, b)
@@ -1824,7 +3318,7 @@ func (m *LabeledStmt) GetColon() int32 {
 	return 0
 }
 
-func (m *LabeledStmt) GetStmt() *any.Any {
+func (m *LabeledStmt) GetStmt() *Stmt {
 	if m != nil {
 		return m.Stmt
 	}
@@ -1832,7 +3326,7 @@ func (m *LabeledStmt) GetStmt() *any.Any {
 }
 
 type ExprStmt struct {
-	X                    *any.Any `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
+	X                    *Expr    `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -1842,7 +3336,7 @@ func (m *ExprStmt) Reset()         { *m = ExprStmt{} }
 func (m *ExprStmt) String() string { return proto.CompactTextString(m) }
 func (*ExprStmt) ProtoMessage()    {}
 func (*ExprStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{30}
+	return fileDescriptor_ast_355744a0e72f954f, []int{32}
 }
 func (m *ExprStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ExprStmt.Unmarshal(m, b)
@@ -1862,7 +3356,7 @@ func (m *ExprStmt) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ExprStmt proto.InternalMessageInfo
 
-func (m *ExprStmt) GetX() *any.Any {
+func (m *ExprStmt) GetX() *Expr {
 	if m != nil {
 		return m.X
 	}
@@ -1870,9 +3364,9 @@ func (m *ExprStmt) GetX() *any.Any {
 }
 
 type SendStmt struct {
-	Chan                 *any.Any `protobuf:"bytes,1,opt,name=chan" json:"chan,omitempty"`
+	Chan                 *Expr    `protobuf:"bytes,1,opt,name=chan" json:"chan,omitempty"`
 	Arrow                int32    `protobuf:"varint,2,opt,name=arrow" json:"arrow,omitempty"`
-	Value                *any.Any `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
+	Value                *Expr    `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -1882,7 +3376,7 @@ func (m *SendStmt) Reset()         { *m = SendStmt{} }
 func (m *SendStmt) String() string { return proto.CompactTextString(m) }
 func (*SendStmt) ProtoMessage()    {}
 func (*SendStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{31}
+	return fileDescriptor_ast_355744a0e72f954f, []int{33}
 }
 func (m *SendStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SendStmt.Unmarshal(m, b)
@@ -1902,7 +3396,7 @@ func (m *SendStmt) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_SendStmt proto.InternalMessageInfo
 
-func (m *SendStmt) GetChan() *any.Any {
+func (m *SendStmt) GetChan() *Expr {
 	if m != nil {
 		return m.Chan
 	}
@@ -1916,7 +3410,7 @@ func (m *SendStmt) GetArrow() int32 {
 	return 0
 }
 
-func (m *SendStmt) GetValue() *any.Any {
+func (m *SendStmt) GetValue() *Expr {
 	if m != nil {
 		return m.Value
 	}
@@ -1924,7 +3418,7 @@ func (m *SendStmt) GetValue() *any.Any {
 }
 
 type IncDecStmt struct {
-	X                    *any.Any `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
+	X                    *Expr    `protobuf:"bytes,1,opt,name=x" json:"x,omitempty"`
 	TokPos               int32    `protobuf:"varint,2,opt,name=tok_pos,json=tokPos" json:"tok_pos,omitempty"`
 	Tok                  Token    `protobuf:"varint,3,opt,name=tok,enum=pb.Token" json:"tok,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -1936,7 +3430,7 @@ func (m *IncDecStmt) Reset()         { *m = IncDecStmt{} }
 func (m *IncDecStmt) String() string { return proto.CompactTextString(m) }
 func (*IncDecStmt) ProtoMessage()    {}
 func (*IncDecStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{32}
+	return fileDescriptor_ast_355744a0e72f954f, []int{34}
 }
 func (m *IncDecStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IncDecStmt.Unmarshal(m, b)
@@ -1956,7 +3450,7 @@ func (m *IncDecStmt) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_IncDecStmt proto.InternalMessageInfo
 
-func (m *IncDecStmt) GetX() *any.Any {
+func (m *IncDecStmt) GetX() *Expr {
 	if m != nil {
 		return m.X
 	}
@@ -1978,20 +3472,20 @@ func (m *IncDecStmt) GetTok() Token {
 }
 
 type AssignStmt struct {
-	Lhs                  []*any.Any `protobuf:"bytes,1,rep,name=lhs" json:"lhs,omitempty"`
-	TokPos               int32      `protobuf:"varint,2,opt,name=tok_pos,json=tokPos" json:"tok_pos,omitempty"`
-	Tok                  Token      `protobuf:"varint,3,opt,name=tok,enum=pb.Token" json:"tok,omitempty"`
-	Rhs                  []*any.Any `protobuf:"bytes,4,rep,name=rhs" json:"rhs,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
+	Lhs                  []*Expr  `protobuf:"bytes,1,rep,name=lhs" json:"lhs,omitempty"`
+	TokPos               int32    `protobuf:"varint,2,opt,name=tok_pos,json=tokPos" json:"tok_pos,omitempty"`
+	Tok                  Token    `protobuf:"varint,3,opt,name=tok,enum=pb.Token" json:"tok,omitempty"`
+	Rhs                  []*Expr  `protobuf:"bytes,4,rep,name=rhs" json:"rhs,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *AssignStmt) Reset()         { *m = AssignStmt{} }
 func (m *AssignStmt) String() string { return proto.CompactTextString(m) }
 func (*AssignStmt) ProtoMessage()    {}
 func (*AssignStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{33}
+	return fileDescriptor_ast_355744a0e72f954f, []int{35}
 }
 func (m *AssignStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_AssignStmt.Unmarshal(m, b)
@@ -2011,7 +3505,7 @@ func (m *AssignStmt) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_AssignStmt proto.InternalMessageInfo
 
-func (m *AssignStmt) GetLhs() []*any.Any {
+func (m *AssignStmt) GetLhs() []*Expr {
 	if m != nil {
 		return m.Lhs
 	}
@@ -2032,7 +3526,7 @@ func (m *AssignStmt) GetTok() Token {
 	return Token_ILLEGAL
 }
 
-func (m *AssignStmt) GetRhs() []*any.Any {
+func (m *AssignStmt) GetRhs() []*Expr {
 	if m != nil {
 		return m.Rhs
 	}
@@ -2051,7 +3545,7 @@ func (m *GoStmt) Reset()         { *m = GoStmt{} }
 func (m *GoStmt) String() string { return proto.CompactTextString(m) }
 func (*GoStmt) ProtoMessage()    {}
 func (*GoStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{34}
+	return fileDescriptor_ast_355744a0e72f954f, []int{36}
 }
 func (m *GoStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GoStmt.Unmarshal(m, b)
@@ -2097,7 +3591,7 @@ func (m *DeferStmt) Reset()         { *m = DeferStmt{} }
 func (m *DeferStmt) String() string { return proto.CompactTextString(m) }
 func (*DeferStmt) ProtoMessage()    {}
 func (*DeferStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{35}
+	return fileDescriptor_ast_355744a0e72f954f, []int{37}
 }
 func (m *DeferStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeferStmt.Unmarshal(m, b)
@@ -2132,18 +3626,18 @@ func (m *DeferStmt) GetCall() *CallExpr {
 }
 
 type ReturnStmt struct {
-	Return               int32      `protobuf:"varint,1,opt,name=return" json:"return,omitempty"`
-	Results              []*any.Any `protobuf:"bytes,2,rep,name=results" json:"results,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
+	Return               int32    `protobuf:"varint,1,opt,name=return" json:"return,omitempty"`
+	Results              []*Expr  `protobuf:"bytes,2,rep,name=results" json:"results,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ReturnStmt) Reset()         { *m = ReturnStmt{} }
 func (m *ReturnStmt) String() string { return proto.CompactTextString(m) }
 func (*ReturnStmt) ProtoMessage()    {}
 func (*ReturnStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{36}
+	return fileDescriptor_ast_355744a0e72f954f, []int{38}
 }
 func (m *ReturnStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ReturnStmt.Unmarshal(m, b)
@@ -2170,7 +3664,7 @@ func (m *ReturnStmt) GetReturn() int32 {
 	return 0
 }
 
-func (m *ReturnStmt) GetResults() []*any.Any {
+func (m *ReturnStmt) GetResults() []*Expr {
 	if m != nil {
 		return m.Results
 	}
@@ -2190,7 +3684,7 @@ func (m *BranchStmt) Reset()         { *m = BranchStmt{} }
 func (m *BranchStmt) String() string { return proto.CompactTextString(m) }
 func (*BranchStmt) ProtoMessage()    {}
 func (*BranchStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{37}
+	return fileDescriptor_ast_355744a0e72f954f, []int{39}
 }
 func (m *BranchStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BranchStmt.Unmarshal(m, b)
@@ -2232,19 +3726,19 @@ func (m *BranchStmt) GetLabel() *Ident {
 }
 
 type BlockStmt struct {
-	Lbrace               int32      `protobuf:"varint,1,opt,name=lbrace" json:"lbrace,omitempty"`
-	List                 []*any.Any `protobuf:"bytes,2,rep,name=list" json:"list,omitempty"`
-	Rbrace               int32      `protobuf:"varint,3,opt,name=rbrace" json:"rbrace,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
+	Lbrace               int32    `protobuf:"varint,1,opt,name=lbrace" json:"lbrace,omitempty"`
+	List                 []*Stmt  `protobuf:"bytes,2,rep,name=list" json:"list,omitempty"`
+	Rbrace               int32    `protobuf:"varint,3,opt,name=rbrace" json:"rbrace,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *BlockStmt) Reset()         { *m = BlockStmt{} }
 func (m *BlockStmt) String() string { return proto.CompactTextString(m) }
 func (*BlockStmt) ProtoMessage()    {}
 func (*BlockStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{38}
+	return fileDescriptor_ast_355744a0e72f954f, []int{40}
 }
 func (m *BlockStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BlockStmt.Unmarshal(m, b)
@@ -2271,7 +3765,7 @@ func (m *BlockStmt) GetLbrace() int32 {
 	return 0
 }
 
-func (m *BlockStmt) GetList() []*any.Any {
+func (m *BlockStmt) GetList() []*Stmt {
 	if m != nil {
 		return m.List
 	}
@@ -2287,10 +3781,10 @@ func (m *BlockStmt) GetRbrace() int32 {
 
 type IfStmt struct {
 	If                   int32      `protobuf:"varint,1,opt,name=if" json:"if,omitempty"`
-	Init                 *any.Any   `protobuf:"bytes,2,opt,name=init" json:"init,omitempty"`
-	Cond                 *any.Any   `protobuf:"bytes,3,opt,name=cond" json:"cond,omitempty"`
+	Init                 *Stmt      `protobuf:"bytes,2,opt,name=init" json:"init,omitempty"`
+	Cond                 *Expr      `protobuf:"bytes,3,opt,name=cond" json:"cond,omitempty"`
 	Body                 *BlockStmt `protobuf:"bytes,4,opt,name=body" json:"body,omitempty"`
-	Else                 *any.Any   `protobuf:"bytes,5,opt,name=else" json:"else,omitempty"`
+	Else                 *Stmt      `protobuf:"bytes,5,opt,name=else" json:"else,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -2300,7 +3794,7 @@ func (m *IfStmt) Reset()         { *m = IfStmt{} }
 func (m *IfStmt) String() string { return proto.CompactTextString(m) }
 func (*IfStmt) ProtoMessage()    {}
 func (*IfStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{39}
+	return fileDescriptor_ast_355744a0e72f954f, []int{41}
 }
 func (m *IfStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IfStmt.Unmarshal(m, b)
@@ -2327,14 +3821,14 @@ func (m *IfStmt) GetIf() int32 {
 	return 0
 }
 
-func (m *IfStmt) GetInit() *any.Any {
+func (m *IfStmt) GetInit() *Stmt {
 	if m != nil {
 		return m.Init
 	}
 	return nil
 }
 
-func (m *IfStmt) GetCond() *any.Any {
+func (m *IfStmt) GetCond() *Expr {
 	if m != nil {
 		return m.Cond
 	}
@@ -2348,7 +3842,7 @@ func (m *IfStmt) GetBody() *BlockStmt {
 	return nil
 }
 
-func (m *IfStmt) GetElse() *any.Any {
+func (m *IfStmt) GetElse() *Stmt {
 	if m != nil {
 		return m.Else
 	}
@@ -2356,20 +3850,20 @@ func (m *IfStmt) GetElse() *any.Any {
 }
 
 type CaseClause struct {
-	Case                 int32      `protobuf:"varint,1,opt,name=case" json:"case,omitempty"`
-	List                 []*any.Any `protobuf:"bytes,2,rep,name=list" json:"list,omitempty"`
-	Colon                int32      `protobuf:"varint,3,opt,name=colon" json:"colon,omitempty"`
-	Body                 []*any.Any `protobuf:"bytes,4,rep,name=body" json:"body,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
+	Case                 int32    `protobuf:"varint,1,opt,name=case" json:"case,omitempty"`
+	List                 []*Expr  `protobuf:"bytes,2,rep,name=list" json:"list,omitempty"`
+	Colon                int32    `protobuf:"varint,3,opt,name=colon" json:"colon,omitempty"`
+	Body                 []*Stmt  `protobuf:"bytes,4,rep,name=body" json:"body,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CaseClause) Reset()         { *m = CaseClause{} }
 func (m *CaseClause) String() string { return proto.CompactTextString(m) }
 func (*CaseClause) ProtoMessage()    {}
 func (*CaseClause) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{40}
+	return fileDescriptor_ast_355744a0e72f954f, []int{42}
 }
 func (m *CaseClause) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CaseClause.Unmarshal(m, b)
@@ -2396,7 +3890,7 @@ func (m *CaseClause) GetCase() int32 {
 	return 0
 }
 
-func (m *CaseClause) GetList() []*any.Any {
+func (m *CaseClause) GetList() []*Expr {
 	if m != nil {
 		return m.List
 	}
@@ -2410,7 +3904,7 @@ func (m *CaseClause) GetColon() int32 {
 	return 0
 }
 
-func (m *CaseClause) GetBody() []*any.Any {
+func (m *CaseClause) GetBody() []*Stmt {
 	if m != nil {
 		return m.Body
 	}
@@ -2419,8 +3913,8 @@ func (m *CaseClause) GetBody() []*any.Any {
 
 type SwitchStmt struct {
 	Switch               int32      `protobuf:"varint,1,opt,name=switch" json:"switch,omitempty"`
-	Init                 *any.Any   `protobuf:"bytes,2,opt,name=init" json:"init,omitempty"`
-	Tag                  *any.Any   `protobuf:"bytes,3,opt,name=tag" json:"tag,omitempty"`
+	Init                 *Stmt      `protobuf:"bytes,2,opt,name=init" json:"init,omitempty"`
+	Tag                  *Expr      `protobuf:"bytes,3,opt,name=tag" json:"tag,omitempty"`
 	Body                 *BlockStmt `protobuf:"bytes,4,opt,name=body" json:"body,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
@@ -2431,7 +3925,7 @@ func (m *SwitchStmt) Reset()         { *m = SwitchStmt{} }
 func (m *SwitchStmt) String() string { return proto.CompactTextString(m) }
 func (*SwitchStmt) ProtoMessage()    {}
 func (*SwitchStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{41}
+	return fileDescriptor_ast_355744a0e72f954f, []int{43}
 }
 func (m *SwitchStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SwitchStmt.Unmarshal(m, b)
@@ -2458,14 +3952,14 @@ func (m *SwitchStmt) GetSwitch() int32 {
 	return 0
 }
 
-func (m *SwitchStmt) GetInit() *any.Any {
+func (m *SwitchStmt) GetInit() *Stmt {
 	if m != nil {
 		return m.Init
 	}
 	return nil
 }
 
-func (m *SwitchStmt) GetTag() *any.Any {
+func (m *SwitchStmt) GetTag() *Expr {
 	if m != nil {
 		return m.Tag
 	}
@@ -2481,8 +3975,8 @@ func (m *SwitchStmt) GetBody() *BlockStmt {
 
 type TypeSwitchStmt struct {
 	Switch               int32      `protobuf:"varint,1,opt,name=switch" json:"switch,omitempty"`
-	Init                 *any.Any   `protobuf:"bytes,2,opt,name=init" json:"init,omitempty"`
-	Assign               *any.Any   `protobuf:"bytes,3,opt,name=assign" json:"assign,omitempty"`
+	Init                 *Stmt      `protobuf:"bytes,2,opt,name=init" json:"init,omitempty"`
+	Assign               *Stmt      `protobuf:"bytes,3,opt,name=assign" json:"assign,omitempty"`
 	Body                 *BlockStmt `protobuf:"bytes,4,opt,name=body" json:"body,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
@@ -2493,7 +3987,7 @@ func (m *TypeSwitchStmt) Reset()         { *m = TypeSwitchStmt{} }
 func (m *TypeSwitchStmt) String() string { return proto.CompactTextString(m) }
 func (*TypeSwitchStmt) ProtoMessage()    {}
 func (*TypeSwitchStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{42}
+	return fileDescriptor_ast_355744a0e72f954f, []int{44}
 }
 func (m *TypeSwitchStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeSwitchStmt.Unmarshal(m, b)
@@ -2520,14 +4014,14 @@ func (m *TypeSwitchStmt) GetSwitch() int32 {
 	return 0
 }
 
-func (m *TypeSwitchStmt) GetInit() *any.Any {
+func (m *TypeSwitchStmt) GetInit() *Stmt {
 	if m != nil {
 		return m.Init
 	}
 	return nil
 }
 
-func (m *TypeSwitchStmt) GetAssign() *any.Any {
+func (m *TypeSwitchStmt) GetAssign() *Stmt {
 	if m != nil {
 		return m.Assign
 	}
@@ -2542,20 +4036,20 @@ func (m *TypeSwitchStmt) GetBody() *BlockStmt {
 }
 
 type CommClause struct {
-	Case                 int32      `protobuf:"varint,1,opt,name=case" json:"case,omitempty"`
-	Comm                 *any.Any   `protobuf:"bytes,2,opt,name=comm" json:"comm,omitempty"`
-	Colon                int32      `protobuf:"varint,3,opt,name=colon" json:"colon,omitempty"`
-	Body                 []*any.Any `protobuf:"bytes,4,rep,name=body" json:"body,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
-	XXX_unrecognized     []byte     `json:"-"`
-	XXX_sizecache        int32      `json:"-"`
+	Case                 int32    `protobuf:"varint,1,opt,name=case" json:"case,omitempty"`
+	Comm                 *Stmt    `protobuf:"bytes,2,opt,name=comm" json:"comm,omitempty"`
+	Colon                int32    `protobuf:"varint,3,opt,name=colon" json:"colon,omitempty"`
+	Body                 []*Stmt  `protobuf:"bytes,4,rep,name=body" json:"body,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *CommClause) Reset()         { *m = CommClause{} }
 func (m *CommClause) String() string { return proto.CompactTextString(m) }
 func (*CommClause) ProtoMessage()    {}
 func (*CommClause) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{43}
+	return fileDescriptor_ast_355744a0e72f954f, []int{45}
 }
 func (m *CommClause) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CommClause.Unmarshal(m, b)
@@ -2582,7 +4076,7 @@ func (m *CommClause) GetCase() int32 {
 	return 0
 }
 
-func (m *CommClause) GetComm() *any.Any {
+func (m *CommClause) GetComm() *Stmt {
 	if m != nil {
 		return m.Comm
 	}
@@ -2596,7 +4090,7 @@ func (m *CommClause) GetColon() int32 {
 	return 0
 }
 
-func (m *CommClause) GetBody() []*any.Any {
+func (m *CommClause) GetBody() []*Stmt {
 	if m != nil {
 		return m.Body
 	}
@@ -2615,7 +4109,7 @@ func (m *SelectStmt) Reset()         { *m = SelectStmt{} }
 func (m *SelectStmt) String() string { return proto.CompactTextString(m) }
 func (*SelectStmt) ProtoMessage()    {}
 func (*SelectStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{44}
+	return fileDescriptor_ast_355744a0e72f954f, []int{46}
 }
 func (m *SelectStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SelectStmt.Unmarshal(m, b)
@@ -2651,9 +4145,9 @@ func (m *SelectStmt) GetBody() *BlockStmt {
 
 type ForStmt struct {
 	For                  int32      `protobuf:"varint,1,opt,name=for" json:"for,omitempty"`
-	Init                 *any.Any   `protobuf:"bytes,2,opt,name=init" json:"init,omitempty"`
-	Cond                 *any.Any   `protobuf:"bytes,3,opt,name=cond" json:"cond,omitempty"`
-	Post                 *any.Any   `protobuf:"bytes,4,opt,name=post" json:"post,omitempty"`
+	Init                 *Stmt      `protobuf:"bytes,2,opt,name=init" json:"init,omitempty"`
+	Cond                 *Expr      `protobuf:"bytes,3,opt,name=cond" json:"cond,omitempty"`
+	Post                 *Stmt      `protobuf:"bytes,4,opt,name=post" json:"post,omitempty"`
 	Body                 *BlockStmt `protobuf:"bytes,5,opt,name=body" json:"body,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
@@ -2664,7 +4158,7 @@ func (m *ForStmt) Reset()         { *m = ForStmt{} }
 func (m *ForStmt) String() string { return proto.CompactTextString(m) }
 func (*ForStmt) ProtoMessage()    {}
 func (*ForStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{45}
+	return fileDescriptor_ast_355744a0e72f954f, []int{47}
 }
 func (m *ForStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ForStmt.Unmarshal(m, b)
@@ -2691,21 +4185,21 @@ func (m *ForStmt) GetFor() int32 {
 	return 0
 }
 
-func (m *ForStmt) GetInit() *any.Any {
+func (m *ForStmt) GetInit() *Stmt {
 	if m != nil {
 		return m.Init
 	}
 	return nil
 }
 
-func (m *ForStmt) GetCond() *any.Any {
+func (m *ForStmt) GetCond() *Expr {
 	if m != nil {
 		return m.Cond
 	}
 	return nil
 }
 
-func (m *ForStmt) GetPost() *any.Any {
+func (m *ForStmt) GetPost() *Stmt {
 	if m != nil {
 		return m.Post
 	}
@@ -2721,11 +4215,11 @@ func (m *ForStmt) GetBody() *BlockStmt {
 
 type RangeStmt struct {
 	For                  int32      `protobuf:"varint,1,opt,name=for" json:"for,omitempty"`
-	Key                  *any.Any   `protobuf:"bytes,2,opt,name=key" json:"key,omitempty"`
-	Value                *any.Any   `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
+	Key                  *Expr      `protobuf:"bytes,2,opt,name=key" json:"key,omitempty"`
+	Value                *Expr      `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
 	TokPos               int32      `protobuf:"varint,4,opt,name=tok_pos,json=tokPos" json:"tok_pos,omitempty"`
 	Tok                  Token      `protobuf:"varint,5,opt,name=tok,enum=pb.Token" json:"tok,omitempty"`
-	X                    *any.Any   `protobuf:"bytes,6,opt,name=x" json:"x,omitempty"`
+	X                    *Expr      `protobuf:"bytes,6,opt,name=x" json:"x,omitempty"`
 	Body                 *BlockStmt `protobuf:"bytes,7,opt,name=body" json:"body,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
@@ -2736,7 +4230,7 @@ func (m *RangeStmt) Reset()         { *m = RangeStmt{} }
 func (m *RangeStmt) String() string { return proto.CompactTextString(m) }
 func (*RangeStmt) ProtoMessage()    {}
 func (*RangeStmt) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{46}
+	return fileDescriptor_ast_355744a0e72f954f, []int{48}
 }
 func (m *RangeStmt) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RangeStmt.Unmarshal(m, b)
@@ -2763,14 +4257,14 @@ func (m *RangeStmt) GetFor() int32 {
 	return 0
 }
 
-func (m *RangeStmt) GetKey() *any.Any {
+func (m *RangeStmt) GetKey() *Expr {
 	if m != nil {
 		return m.Key
 	}
 	return nil
 }
 
-func (m *RangeStmt) GetValue() *any.Any {
+func (m *RangeStmt) GetValue() *Expr {
 	if m != nil {
 		return m.Value
 	}
@@ -2791,7 +4285,7 @@ func (m *RangeStmt) GetTok() Token {
 	return Token_ILLEGAL
 }
 
-func (m *RangeStmt) GetX() *any.Any {
+func (m *RangeStmt) GetX() *Expr {
 	if m != nil {
 		return m.X
 	}
@@ -2803,6 +4297,180 @@ func (m *RangeStmt) GetBody() *BlockStmt {
 		return m.Body
 	}
 	return nil
+}
+
+type Spec struct {
+	// Types that are valid to be assigned to Spec:
+	//	*Spec_ImportSpec
+	//	*Spec_ValueSpec
+	//	*Spec_TypeSpec
+	Spec                 isSpec_Spec `protobuf_oneof:"spec"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *Spec) Reset()         { *m = Spec{} }
+func (m *Spec) String() string { return proto.CompactTextString(m) }
+func (*Spec) ProtoMessage()    {}
+func (*Spec) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ast_355744a0e72f954f, []int{49}
+}
+func (m *Spec) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Spec.Unmarshal(m, b)
+}
+func (m *Spec) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Spec.Marshal(b, m, deterministic)
+}
+func (dst *Spec) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Spec.Merge(dst, src)
+}
+func (m *Spec) XXX_Size() int {
+	return xxx_messageInfo_Spec.Size(m)
+}
+func (m *Spec) XXX_DiscardUnknown() {
+	xxx_messageInfo_Spec.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Spec proto.InternalMessageInfo
+
+type isSpec_Spec interface {
+	isSpec_Spec()
+}
+
+type Spec_ImportSpec struct {
+	ImportSpec *ImportSpec `protobuf:"bytes,1,opt,name=import_spec,json=importSpec,oneof"`
+}
+type Spec_ValueSpec struct {
+	ValueSpec *ValueSpec `protobuf:"bytes,2,opt,name=value_spec,json=valueSpec,oneof"`
+}
+type Spec_TypeSpec struct {
+	TypeSpec *TypeSpec `protobuf:"bytes,3,opt,name=type_spec,json=typeSpec,oneof"`
+}
+
+func (*Spec_ImportSpec) isSpec_Spec() {}
+func (*Spec_ValueSpec) isSpec_Spec()  {}
+func (*Spec_TypeSpec) isSpec_Spec()   {}
+
+func (m *Spec) GetSpec() isSpec_Spec {
+	if m != nil {
+		return m.Spec
+	}
+	return nil
+}
+
+func (m *Spec) GetImportSpec() *ImportSpec {
+	if x, ok := m.GetSpec().(*Spec_ImportSpec); ok {
+		return x.ImportSpec
+	}
+	return nil
+}
+
+func (m *Spec) GetValueSpec() *ValueSpec {
+	if x, ok := m.GetSpec().(*Spec_ValueSpec); ok {
+		return x.ValueSpec
+	}
+	return nil
+}
+
+func (m *Spec) GetTypeSpec() *TypeSpec {
+	if x, ok := m.GetSpec().(*Spec_TypeSpec); ok {
+		return x.TypeSpec
+	}
+	return nil
+}
+
+// XXX_OneofFuncs is for the internal use of the proto package.
+func (*Spec) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+	return _Spec_OneofMarshaler, _Spec_OneofUnmarshaler, _Spec_OneofSizer, []interface{}{
+		(*Spec_ImportSpec)(nil),
+		(*Spec_ValueSpec)(nil),
+		(*Spec_TypeSpec)(nil),
+	}
+}
+
+func _Spec_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+	m := msg.(*Spec)
+	// spec
+	switch x := m.Spec.(type) {
+	case *Spec_ImportSpec:
+		b.EncodeVarint(1<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.ImportSpec); err != nil {
+			return err
+		}
+	case *Spec_ValueSpec:
+		b.EncodeVarint(2<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.ValueSpec); err != nil {
+			return err
+		}
+	case *Spec_TypeSpec:
+		b.EncodeVarint(3<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.TypeSpec); err != nil {
+			return err
+		}
+	case nil:
+	default:
+		return fmt.Errorf("Spec.Spec has unexpected type %T", x)
+	}
+	return nil
+}
+
+func _Spec_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+	m := msg.(*Spec)
+	switch tag {
+	case 1: // spec.import_spec
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(ImportSpec)
+		err := b.DecodeMessage(msg)
+		m.Spec = &Spec_ImportSpec{msg}
+		return true, err
+	case 2: // spec.value_spec
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(ValueSpec)
+		err := b.DecodeMessage(msg)
+		m.Spec = &Spec_ValueSpec{msg}
+		return true, err
+	case 3: // spec.type_spec
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(TypeSpec)
+		err := b.DecodeMessage(msg)
+		m.Spec = &Spec_TypeSpec{msg}
+		return true, err
+	default:
+		return false, nil
+	}
+}
+
+func _Spec_OneofSizer(msg proto.Message) (n int) {
+	m := msg.(*Spec)
+	// spec
+	switch x := m.Spec.(type) {
+	case *Spec_ImportSpec:
+		s := proto.Size(x.ImportSpec)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Spec_ValueSpec:
+		s := proto.Size(x.ValueSpec)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Spec_TypeSpec:
+		s := proto.Size(x.TypeSpec)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	return n
 }
 
 type ImportSpec struct {
@@ -2820,7 +4488,7 @@ func (m *ImportSpec) Reset()         { *m = ImportSpec{} }
 func (m *ImportSpec) String() string { return proto.CompactTextString(m) }
 func (*ImportSpec) ProtoMessage()    {}
 func (*ImportSpec) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{47}
+	return fileDescriptor_ast_355744a0e72f954f, []int{50}
 }
 func (m *ImportSpec) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ImportSpec.Unmarshal(m, b)
@@ -2878,8 +4546,8 @@ func (m *ImportSpec) GetEndPos() int32 {
 type ValueSpec struct {
 	Doc                  *CommentGroup `protobuf:"bytes,1,opt,name=doc" json:"doc,omitempty"`
 	Names                []*Ident      `protobuf:"bytes,2,rep,name=names" json:"names,omitempty"`
-	Type                 *any.Any      `protobuf:"bytes,3,opt,name=type" json:"type,omitempty"`
-	Values               []*any.Any    `protobuf:"bytes,4,rep,name=values" json:"values,omitempty"`
+	Type                 *Expr         `protobuf:"bytes,3,opt,name=type" json:"type,omitempty"`
+	Values               []*Expr       `protobuf:"bytes,4,rep,name=values" json:"values,omitempty"`
 	Comment              *CommentGroup `protobuf:"bytes,5,opt,name=comment" json:"comment,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`
@@ -2890,7 +4558,7 @@ func (m *ValueSpec) Reset()         { *m = ValueSpec{} }
 func (m *ValueSpec) String() string { return proto.CompactTextString(m) }
 func (*ValueSpec) ProtoMessage()    {}
 func (*ValueSpec) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{48}
+	return fileDescriptor_ast_355744a0e72f954f, []int{51}
 }
 func (m *ValueSpec) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ValueSpec.Unmarshal(m, b)
@@ -2924,14 +4592,14 @@ func (m *ValueSpec) GetNames() []*Ident {
 	return nil
 }
 
-func (m *ValueSpec) GetType() *any.Any {
+func (m *ValueSpec) GetType() *Expr {
 	if m != nil {
 		return m.Type
 	}
 	return nil
 }
 
-func (m *ValueSpec) GetValues() []*any.Any {
+func (m *ValueSpec) GetValues() []*Expr {
 	if m != nil {
 		return m.Values
 	}
@@ -2949,7 +4617,7 @@ type TypeSpec struct {
 	Doc                  *CommentGroup `protobuf:"bytes,1,opt,name=doc" json:"doc,omitempty"`
 	Name                 *Ident        `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
 	Assign               int32         `protobuf:"varint,3,opt,name=assign" json:"assign,omitempty"`
-	Type                 *any.Any      `protobuf:"bytes,4,opt,name=type" json:"type,omitempty"`
+	Type                 *Expr         `protobuf:"bytes,4,opt,name=type" json:"type,omitempty"`
 	Comment              *CommentGroup `protobuf:"bytes,5,opt,name=comment" json:"comment,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`
@@ -2960,7 +4628,7 @@ func (m *TypeSpec) Reset()         { *m = TypeSpec{} }
 func (m *TypeSpec) String() string { return proto.CompactTextString(m) }
 func (*TypeSpec) ProtoMessage()    {}
 func (*TypeSpec) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{49}
+	return fileDescriptor_ast_355744a0e72f954f, []int{52}
 }
 func (m *TypeSpec) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeSpec.Unmarshal(m, b)
@@ -3001,7 +4669,7 @@ func (m *TypeSpec) GetAssign() int32 {
 	return 0
 }
 
-func (m *TypeSpec) GetType() *any.Any {
+func (m *TypeSpec) GetType() *Expr {
 	if m != nil {
 		return m.Type
 	}
@@ -3013,6 +4681,180 @@ func (m *TypeSpec) GetComment() *CommentGroup {
 		return m.Comment
 	}
 	return nil
+}
+
+type Decl struct {
+	// Types that are valid to be assigned to Decl:
+	//	*Decl_BadDecl
+	//	*Decl_GenDecl
+	//	*Decl_FuncDecl
+	Decl                 isDecl_Decl `protobuf_oneof:"decl"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
+}
+
+func (m *Decl) Reset()         { *m = Decl{} }
+func (m *Decl) String() string { return proto.CompactTextString(m) }
+func (*Decl) ProtoMessage()    {}
+func (*Decl) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ast_355744a0e72f954f, []int{53}
+}
+func (m *Decl) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Decl.Unmarshal(m, b)
+}
+func (m *Decl) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Decl.Marshal(b, m, deterministic)
+}
+func (dst *Decl) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Decl.Merge(dst, src)
+}
+func (m *Decl) XXX_Size() int {
+	return xxx_messageInfo_Decl.Size(m)
+}
+func (m *Decl) XXX_DiscardUnknown() {
+	xxx_messageInfo_Decl.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Decl proto.InternalMessageInfo
+
+type isDecl_Decl interface {
+	isDecl_Decl()
+}
+
+type Decl_BadDecl struct {
+	BadDecl *BadDecl `protobuf:"bytes,1,opt,name=bad_decl,json=badDecl,oneof"`
+}
+type Decl_GenDecl struct {
+	GenDecl *GenDecl `protobuf:"bytes,2,opt,name=gen_decl,json=genDecl,oneof"`
+}
+type Decl_FuncDecl struct {
+	FuncDecl *FuncDecl `protobuf:"bytes,3,opt,name=func_decl,json=funcDecl,oneof"`
+}
+
+func (*Decl_BadDecl) isDecl_Decl()  {}
+func (*Decl_GenDecl) isDecl_Decl()  {}
+func (*Decl_FuncDecl) isDecl_Decl() {}
+
+func (m *Decl) GetDecl() isDecl_Decl {
+	if m != nil {
+		return m.Decl
+	}
+	return nil
+}
+
+func (m *Decl) GetBadDecl() *BadDecl {
+	if x, ok := m.GetDecl().(*Decl_BadDecl); ok {
+		return x.BadDecl
+	}
+	return nil
+}
+
+func (m *Decl) GetGenDecl() *GenDecl {
+	if x, ok := m.GetDecl().(*Decl_GenDecl); ok {
+		return x.GenDecl
+	}
+	return nil
+}
+
+func (m *Decl) GetFuncDecl() *FuncDecl {
+	if x, ok := m.GetDecl().(*Decl_FuncDecl); ok {
+		return x.FuncDecl
+	}
+	return nil
+}
+
+// XXX_OneofFuncs is for the internal use of the proto package.
+func (*Decl) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+	return _Decl_OneofMarshaler, _Decl_OneofUnmarshaler, _Decl_OneofSizer, []interface{}{
+		(*Decl_BadDecl)(nil),
+		(*Decl_GenDecl)(nil),
+		(*Decl_FuncDecl)(nil),
+	}
+}
+
+func _Decl_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+	m := msg.(*Decl)
+	// decl
+	switch x := m.Decl.(type) {
+	case *Decl_BadDecl:
+		b.EncodeVarint(1<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.BadDecl); err != nil {
+			return err
+		}
+	case *Decl_GenDecl:
+		b.EncodeVarint(2<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.GenDecl); err != nil {
+			return err
+		}
+	case *Decl_FuncDecl:
+		b.EncodeVarint(3<<3 | proto.WireBytes)
+		if err := b.EncodeMessage(x.FuncDecl); err != nil {
+			return err
+		}
+	case nil:
+	default:
+		return fmt.Errorf("Decl.Decl has unexpected type %T", x)
+	}
+	return nil
+}
+
+func _Decl_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+	m := msg.(*Decl)
+	switch tag {
+	case 1: // decl.bad_decl
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(BadDecl)
+		err := b.DecodeMessage(msg)
+		m.Decl = &Decl_BadDecl{msg}
+		return true, err
+	case 2: // decl.gen_decl
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(GenDecl)
+		err := b.DecodeMessage(msg)
+		m.Decl = &Decl_GenDecl{msg}
+		return true, err
+	case 3: // decl.func_decl
+		if wire != proto.WireBytes {
+			return true, proto.ErrInternalBadWireType
+		}
+		msg := new(FuncDecl)
+		err := b.DecodeMessage(msg)
+		m.Decl = &Decl_FuncDecl{msg}
+		return true, err
+	default:
+		return false, nil
+	}
+}
+
+func _Decl_OneofSizer(msg proto.Message) (n int) {
+	m := msg.(*Decl)
+	// decl
+	switch x := m.Decl.(type) {
+	case *Decl_BadDecl:
+		s := proto.Size(x.BadDecl)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Decl_GenDecl:
+		s := proto.Size(x.GenDecl)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case *Decl_FuncDecl:
+		s := proto.Size(x.FuncDecl)
+		n += 1 // tag and wire
+		n += proto.SizeVarint(uint64(s))
+		n += s
+	case nil:
+	default:
+		panic(fmt.Sprintf("proto: unexpected type %T in oneof", x))
+	}
+	return n
 }
 
 type BadDecl struct {
@@ -3027,7 +4869,7 @@ func (m *BadDecl) Reset()         { *m = BadDecl{} }
 func (m *BadDecl) String() string { return proto.CompactTextString(m) }
 func (*BadDecl) ProtoMessage()    {}
 func (*BadDecl) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{50}
+	return fileDescriptor_ast_355744a0e72f954f, []int{54}
 }
 func (m *BadDecl) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_BadDecl.Unmarshal(m, b)
@@ -3066,7 +4908,7 @@ type GenDecl struct {
 	TokPos               int32         `protobuf:"varint,2,opt,name=tok_pos,json=tokPos" json:"tok_pos,omitempty"`
 	Tok                  Token         `protobuf:"varint,3,opt,name=tok,enum=pb.Token" json:"tok,omitempty"`
 	Lparen               int32         `protobuf:"varint,4,opt,name=lparen" json:"lparen,omitempty"`
-	Specs                []*any.Any    `protobuf:"bytes,5,rep,name=specs" json:"specs,omitempty"`
+	Specs                []*Spec       `protobuf:"bytes,5,rep,name=specs" json:"specs,omitempty"`
 	Rparen               int32         `protobuf:"varint,6,opt,name=rparen" json:"rparen,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`
@@ -3077,7 +4919,7 @@ func (m *GenDecl) Reset()         { *m = GenDecl{} }
 func (m *GenDecl) String() string { return proto.CompactTextString(m) }
 func (*GenDecl) ProtoMessage()    {}
 func (*GenDecl) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{51}
+	return fileDescriptor_ast_355744a0e72f954f, []int{55}
 }
 func (m *GenDecl) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GenDecl.Unmarshal(m, b)
@@ -3125,7 +4967,7 @@ func (m *GenDecl) GetLparen() int32 {
 	return 0
 }
 
-func (m *GenDecl) GetSpecs() []*any.Any {
+func (m *GenDecl) GetSpecs() []*Spec {
 	if m != nil {
 		return m.Specs
 	}
@@ -3154,7 +4996,7 @@ func (m *FuncDecl) Reset()         { *m = FuncDecl{} }
 func (m *FuncDecl) String() string { return proto.CompactTextString(m) }
 func (*FuncDecl) ProtoMessage()    {}
 func (*FuncDecl) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{52}
+	return fileDescriptor_ast_355744a0e72f954f, []int{56}
 }
 func (m *FuncDecl) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FuncDecl.Unmarshal(m, b)
@@ -3214,7 +5056,7 @@ type File struct {
 	Doc                  *CommentGroup   `protobuf:"bytes,2,opt,name=doc" json:"doc,omitempty"`
 	Package              int32           `protobuf:"varint,3,opt,name=package" json:"package,omitempty"`
 	Name                 *Ident          `protobuf:"bytes,4,opt,name=name" json:"name,omitempty"`
-	Decls                []*any.Any      `protobuf:"bytes,5,rep,name=decls" json:"decls,omitempty"`
+	Decls                []*Decl         `protobuf:"bytes,5,rep,name=decls" json:"decls,omitempty"`
 	Imports              []*ImportSpec   `protobuf:"bytes,6,rep,name=imports" json:"imports,omitempty"`
 	Unresolved           []*Ident        `protobuf:"bytes,7,rep,name=unresolved" json:"unresolved,omitempty"`
 	Comments             []*CommentGroup `protobuf:"bytes,8,rep,name=comments" json:"comments,omitempty"`
@@ -3227,7 +5069,7 @@ func (m *File) Reset()         { *m = File{} }
 func (m *File) String() string { return proto.CompactTextString(m) }
 func (*File) ProtoMessage()    {}
 func (*File) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{53}
+	return fileDescriptor_ast_355744a0e72f954f, []int{57}
 }
 func (m *File) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_File.Unmarshal(m, b)
@@ -3275,7 +5117,7 @@ func (m *File) GetName() *Ident {
 	return nil
 }
 
-func (m *File) GetDecls() []*any.Any {
+func (m *File) GetDecls() []*Decl {
 	if m != nil {
 		return m.Decls
 	}
@@ -3317,7 +5159,7 @@ func (m *Package) Reset()         { *m = Package{} }
 func (m *Package) String() string { return proto.CompactTextString(m) }
 func (*Package) ProtoMessage()    {}
 func (*Package) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{54}
+	return fileDescriptor_ast_355744a0e72f954f, []int{58}
 }
 func (m *Package) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Package.Unmarshal(m, b)
@@ -3376,7 +5218,7 @@ func (m *Packages) Reset()         { *m = Packages{} }
 func (m *Packages) String() string { return proto.CompactTextString(m) }
 func (*Packages) ProtoMessage()    {}
 func (*Packages) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ast_dda2bfdbb2dde0fa, []int{55}
+	return fileDescriptor_ast_355744a0e72f954f, []int{59}
 }
 func (m *Packages) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Packages.Unmarshal(m, b)
@@ -3408,6 +5250,7 @@ func init() {
 	proto.RegisterType((*CommentGroup)(nil), "pb.CommentGroup")
 	proto.RegisterType((*Field)(nil), "pb.Field")
 	proto.RegisterType((*FieldList)(nil), "pb.FieldList")
+	proto.RegisterType((*Expr)(nil), "pb.Expr")
 	proto.RegisterType((*BadExpr)(nil), "pb.BadExpr")
 	proto.RegisterType((*Ident)(nil), "pb.Ident")
 	proto.RegisterType((*Ellipsis)(nil), "pb.Ellipsis")
@@ -3430,6 +5273,7 @@ func init() {
 	proto.RegisterType((*InterfaceType)(nil), "pb.InterfaceType")
 	proto.RegisterType((*MapType)(nil), "pb.MapType")
 	proto.RegisterType((*ChanType)(nil), "pb.ChanType")
+	proto.RegisterType((*Stmt)(nil), "pb.Stmt")
 	proto.RegisterType((*BadStmt)(nil), "pb.BadStmt")
 	proto.RegisterType((*DeclStmt)(nil), "pb.DeclStmt")
 	proto.RegisterType((*EmptyStmt)(nil), "pb.EmptyStmt")
@@ -3451,9 +5295,11 @@ func init() {
 	proto.RegisterType((*SelectStmt)(nil), "pb.SelectStmt")
 	proto.RegisterType((*ForStmt)(nil), "pb.ForStmt")
 	proto.RegisterType((*RangeStmt)(nil), "pb.RangeStmt")
+	proto.RegisterType((*Spec)(nil), "pb.Spec")
 	proto.RegisterType((*ImportSpec)(nil), "pb.ImportSpec")
 	proto.RegisterType((*ValueSpec)(nil), "pb.ValueSpec")
 	proto.RegisterType((*TypeSpec)(nil), "pb.TypeSpec")
+	proto.RegisterType((*Decl)(nil), "pb.Decl")
 	proto.RegisterType((*BadDecl)(nil), "pb.BadDecl")
 	proto.RegisterType((*GenDecl)(nil), "pb.GenDecl")
 	proto.RegisterType((*FuncDecl)(nil), "pb.FuncDecl")
@@ -3462,140 +5308,188 @@ func init() {
 	proto.RegisterType((*Packages)(nil), "pb.Packages")
 }
 
-func init() { proto.RegisterFile("ast.proto", fileDescriptor_ast_dda2bfdbb2dde0fa) }
+func init() { proto.RegisterFile("ast.proto", fileDescriptor_ast_355744a0e72f954f) }
 
-var fileDescriptor_ast_dda2bfdbb2dde0fa = []byte{
-	// 2097 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x59, 0xdd, 0x8e, 0xdc, 0x48,
-	0xf5, 0x97, 0xdb, 0x76, 0xb7, 0x7d, 0x26, 0x19, 0x45, 0x56, 0xfe, 0xfb, 0xef, 0x24, 0x9b, 0x64,
-	0xd6, 0x82, 0x6c, 0x6f, 0x14, 0x26, 0x68, 0xc3, 0x15, 0x77, 0xf9, 0xd6, 0x88, 0x00, 0x91, 0x27,
-	0x20, 0xae, 0x18, 0xd5, 0xb8, 0xab, 0xbb, 0xad, 0xb6, 0x5d, 0x96, 0xcb, 0x3d, 0x99, 0xe6, 0x05,
-	0x90, 0x10, 0x57, 0x20, 0x21, 0x81, 0x10, 0x12, 0xe2, 0x01, 0x10, 0x17, 0xac, 0x84, 0x00, 0x21,
-	0xc1, 0x23, 0xc0, 0x73, 0xf0, 0x0c, 0xe8, 0x9c, 0xaa, 0x72, 0xbb, 0x93, 0xb1, 0xd3, 0xde, 0x4d,
-	0xee, 0x7c, 0xaa, 0x8e, 0xab, 0x7e, 0xe7, 0xfb, 0x54, 0x15, 0xf8, 0x4c, 0x56, 0x87, 0x45, 0x29,
-	0x2a, 0x11, 0x0c, 0x8a, 0xd3, 0xeb, 0x7b, 0x95, 0x58, 0xf2, 0x5c, 0x0d, 0x5c, 0x87, 0x6a, 0x5d,
-	0x70, 0xfd, 0x7d, 0x6d, 0x2e, 0xc4, 0x3c, 0xe5, 0xf7, 0x89, 0x3a, 0x5d, 0xcd, 0xee, 0xb3, 0x7c,
-	0xad, 0xa6, 0xc2, 0x07, 0x30, 0x7a, 0x2c, 0xb2, 0x8c, 0xe7, 0x55, 0x70, 0x15, 0x5c, 0x99, 0x32,
-	0xb9, 0x18, 0x5b, 0x07, 0xd6, 0xc4, 0x8d, 0x14, 0x11, 0x04, 0xe0, 0x54, 0xfc, 0xbc, 0x1a, 0x0f,
-	0x0e, 0xac, 0x89, 0x1f, 0xd1, 0x77, 0x78, 0x1f, 0x2e, 0xe9, 0x9f, 0x9e, 0x97, 0x62, 0x55, 0x04,
-	0xb7, 0xc1, 0x49, 0x13, 0x59, 0x8d, 0xad, 0x03, 0x7b, 0xb2, 0xf7, 0xf9, 0xde, 0x61, 0x71, 0x7a,
-	0xa8, 0xe7, 0x23, 0x9a, 0x08, 0xff, 0x69, 0x81, 0xfb, 0x2c, 0xe1, 0xe9, 0x34, 0x08, 0xc1, 0x9e,
-	0x8a, 0x98, 0xb6, 0xd8, 0xfb, 0xfc, 0x4a, 0x83, 0x93, 0x56, 0x8a, 0x70, 0x32, 0xb8, 0x0d, 0x6e,
-	0xce, 0x32, 0x2e, 0xc7, 0x03, 0x5a, 0xcf, 0x47, 0xae, 0xa3, 0x29, 0xae, 0xa6, 0xc6, 0x83, 0x09,
-	0x38, 0x28, 0xdd, 0xd8, 0xa6, 0x55, 0xae, 0x1e, 0x2a, 0xf1, 0x0e, 0x8d, 0x78, 0x87, 0x0f, 0xf3,
-	0x75, 0x44, 0x1c, 0xc1, 0x2d, 0xb0, 0x2b, 0x36, 0x1f, 0x3b, 0xc4, 0x78, 0x09, 0x17, 0x7a, 0xc4,
-	0x64, 0x12, 0xbf, 0x48, 0xaa, 0x08, 0x27, 0x82, 0xbb, 0x30, 0x8a, 0xd5, 0xfe, 0x63, 0xb7, 0x05,
-	0x92, 0x61, 0x08, 0x7f, 0x0c, 0x3e, 0xc9, 0xf0, 0x22, 0x91, 0x55, 0x30, 0x86, 0x91, 0x28, 0x78,
-	0x9e, 0xe4, 0x73, 0xad, 0x2e, 0x43, 0x06, 0x37, 0xb5, 0x32, 0x1a, 0xe0, 0xe9, 0x37, 0xa5, 0x0a,
-	0xfc, 0x31, 0x4e, 0x85, 0xc4, 0x1f, 0x6d, 0xf5, 0xa3, 0x26, 0xc3, 0x1f, 0xc1, 0xe8, 0x11, 0x9b,
-	0x3e, 0x3d, 0x2f, 0x4a, 0x54, 0xfa, 0xac, 0x14, 0x99, 0x5e, 0x9a, 0xbe, 0x83, 0x7d, 0x18, 0x54,
-	0x82, 0xcc, 0xe0, 0x46, 0x83, 0x4a, 0x04, 0x9f, 0x81, 0x8f, 0x22, 0x9e, 0x24, 0xf9, 0x4c, 0x68,
-	0x4d, 0x90, 0x80, 0xaf, 0xd6, 0x05, 0x3f, 0xca, 0x67, 0x22, 0xf2, 0x2a, 0xfd, 0x15, 0xfe, 0xd2,
-	0x02, 0x97, 0x14, 0x18, 0x5c, 0x03, 0x0f, 0x55, 0x78, 0x52, 0x08, 0x69, 0x70, 0x23, 0xfd, 0x52,
-	0x48, 0xdc, 0x13, 0x3f, 0x8d, 0xa1, 0xf1, 0xbb, 0xc7, 0x1e, 0xc1, 0x37, 0xe1, 0xf2, 0x94, 0xcf,
-	0x4e, 0x36, 0xec, 0xce, 0x05, 0xec, 0x7b, 0x53, 0x3e, 0x33, 0x44, 0xb8, 0x06, 0xef, 0x69, 0x9a,
-	0x26, 0x85, 0x4c, 0x64, 0x70, 0x1d, 0x3c, 0xae, 0xbf, 0x35, 0xae, 0x9a, 0x0e, 0xee, 0x80, 0xcd,
-	0x53, 0xe5, 0x80, 0x6d, 0xc6, 0x46, 0x86, 0x3e, 0x0a, 0xf9, 0xa9, 0x05, 0x9e, 0x71, 0x84, 0xe0,
-	0x06, 0xf8, 0x67, 0x2c, 0x5d, 0x35, 0x95, 0xe2, 0xd1, 0x00, 0x6a, 0xe5, 0x26, 0x38, 0xcb, 0x24,
-	0x9f, 0xd2, 0xee, 0xfb, 0xca, 0x9a, 0xaf, 0x30, 0xca, 0x22, 0x1a, 0xc6, 0x98, 0x21, 0x56, 0xda,
-	0xcf, 0x8f, 0x14, 0xb1, 0x8d, 0xc4, 0xe9, 0x44, 0xb2, 0x86, 0xd1, 0xb3, 0x55, 0x4e, 0x38, 0x0e,
-	0xb4, 0x57, 0x5b, 0x9b, 0x1f, 0x70, 0x0a, 0x7f, 0xd2, 0xde, 0xfc, 0x09, 0x38, 0xa7, 0x62, 0xba,
-	0xd6, 0xaa, 0xb8, 0x4c, 0xee, 0x9c, 0x8a, 0x78, 0x79, 0x5c, 0x65, 0x55, 0x44, 0x53, 0x7d, 0x94,
-	0xf0, 0x77, 0x8b, 0xc2, 0xb8, 0x10, 0x32, 0xa9, 0x38, 0x02, 0x98, 0x6c, 0x01, 0xe8, 0x0a, 0xab,
-	0x8f, 0x60, 0x98, 0x9e, 0x96, 0x2c, 0xe6, 0xda, 0x1f, 0x35, 0x85, 0x2b, 0xf0, 0xb4, 0x92, 0x63,
-	0x9b, 0x7c, 0xbf, 0x65, 0x05, 0xe4, 0xc0, 0x15, 0x4a, 0xb5, 0x82, 0xa3, 0x56, 0x50, 0xd4, 0x36,
-	0x7e, 0xb7, 0x13, 0xff, 0xcf, 0x2c, 0xf0, 0x5f, 0xb2, 0x92, 0xe7, 0x14, 0x32, 0x08, 0xa9, 0x40,
-	0x4a, 0x9b, 0x50, 0x53, 0x41, 0x08, 0xd6, 0x79, 0xa7, 0xef, 0x58, 0xe7, 0x04, 0x46, 0xfd, 0x6b,
-	0x6b, 0x30, 0xea, 0xdf, 0x1e, 0x76, 0xfc, 0x09, 0x5c, 0x3a, 0xe6, 0x29, 0x8f, 0x2b, 0x51, 0x12,
-	0x1c, 0xda, 0xd6, 0xea, 0xde, 0xf6, 0x06, 0xd8, 0x92, 0xa7, 0x1a, 0x5c, 0x23, 0xcb, 0xe1, 0x68,
-	0x1f, 0x43, 0x7e, 0x61, 0x81, 0x7f, 0x94, 0x4f, 0xf9, 0xf9, 0xce, 0x3b, 0x1b, 0xfb, 0x2d, 0xb7,
-	0xec, 0xb7, 0x0c, 0xee, 0x82, 0x9b, 0xe0, 0x42, 0x9d, 0x99, 0x55, 0xb1, 0xd4, 0x16, 0x5c, 0x6e,
-	0x59, 0x70, 0xd9, 0xc7, 0x82, 0xbf, 0x1d, 0x80, 0x7f, 0x9c, 0x26, 0x31, 0xff, 0xca, 0xc0, 0xef,
-	0x80, 0x9d, 0x8a, 0xd7, 0x9d, 0xb0, 0x91, 0x01, 0x1d, 0x74, 0x91, 0xcc, 0x17, 0xda, 0x98, 0x2d,
-	0x0e, 0x8a, 0x1c, 0xb8, 0x62, 0xc6, 0xce, 0xb5, 0x00, 0x2d, 0x2b, 0x66, 0x8c, 0x10, 0x49, 0x14,
-	0xe1, 0xc1, 0x78, 0x78, 0x60, 0x4d, 0xbc, 0x48, 0x53, 0x0d, 0xf5, 0x8c, 0xda, 0xd5, 0xe3, 0x75,
-	0xaa, 0xe7, 0x2f, 0x16, 0xec, 0xe3, 0xf0, 0x43, 0x29, 0x79, 0x59, 0xf5, 0xd2, 0x91, 0xf2, 0xe6,
-	0xc1, 0x56, 0x24, 0xec, 0x5e, 0x35, 0x37, 0xf1, 0xe0, 0xb4, 0xc7, 0x43, 0xb7, 0x69, 0xff, 0x6d,
-	0x81, 0xf7, 0x98, 0xa5, 0x29, 0xa1, 0xbe, 0x03, 0xf6, 0x6c, 0x95, 0x77, 0xe2, 0x46, 0x86, 0x2e,
-	0xe4, 0xac, 0x9c, 0xbf, 0x23, 0xad, 0x20, 0xc7, 0x56, 0x1d, 0x71, 0xde, 0xa8, 0x23, 0x1b, 0xa9,
-	0xdc, 0x76, 0xa9, 0x86, 0x9d, 0x52, 0x65, 0xe0, 0x1d, 0x57, 0xac, 0x34, 0x35, 0x5a, 0x56, 0xac,
-	0x34, 0x35, 0x1a, 0xbf, 0x77, 0x4a, 0x36, 0x3d, 0x02, 0xfb, 0xe7, 0x16, 0xf8, 0x3f, 0xc8, 0x59,
-	0xb9, 0xa6, 0x0d, 0xff, 0x0f, 0x86, 0xa2, 0x68, 0x14, 0x29, 0x57, 0x14, 0x58, 0xa1, 0xae, 0xc1,
-	0x40, 0x14, 0x6f, 0xd7, 0xa7, 0x81, 0x28, 0x14, 0x1c, 0xbb, 0x07, 0x9c, 0xee, 0x1c, 0xf7, 0x27,
-	0x0b, 0xe0, 0x51, 0x52, 0xe3, 0xd9, 0xc5, 0x17, 0x37, 0x98, 0x07, 0x6f, 0x63, 0xb6, 0x5b, 0x30,
-	0xaf, 0x3b, 0xc3, 0xd3, 0x5a, 0xf7, 0xf1, 0xc3, 0x3f, 0x58, 0x70, 0xe9, 0x3b, 0x7c, 0xfd, 0x43,
-	0xac, 0xcb, 0xc6, 0x17, 0x97, 0x7c, 0xdd, 0xed, 0x8b, 0x4b, 0xbe, 0xc6, 0xca, 0x1e, 0x8b, 0x54,
-	0x18, 0x57, 0x54, 0x04, 0x26, 0xc8, 0x4d, 0xbd, 0x6f, 0x4d, 0x90, 0xbd, 0xbb, 0x80, 0xdf, 0x59,
-	0xe0, 0x3f, 0x2c, 0x4b, 0xb6, 0x7e, 0xd5, 0xac, 0xae, 0xcb, 0xba, 0x94, 0x6d, 0x92, 0x9c, 0x8e,
-	0x8d, 0xf6, 0x24, 0xc7, 0x73, 0xd3, 0x30, 0xd9, 0xbd, 0x1a, 0xa6, 0x6e, 0x80, 0xbf, 0xb2, 0x00,
-	0x8e, 0xab, 0x72, 0x15, 0x57, 0x06, 0xa1, 0x24, 0xca, 0x20, 0x54, 0x54, 0xf0, 0x75, 0x18, 0xce,
-	0xb0, 0xd7, 0x95, 0xcd, 0x16, 0xa5, 0x6e, 0x9a, 0x23, 0x3d, 0x19, 0xdc, 0x02, 0x48, 0xf2, 0x58,
-	0x64, 0x45, 0xca, 0x2b, 0xa5, 0x4a, 0x2f, 0x6a, 0x8c, 0xf4, 0x01, 0xf6, 0x6b, 0x0b, 0x3c, 0xd3,
-	0x25, 0x51, 0xdb, 0xbc, 0xca, 0xe3, 0xba, 0x6d, 0x5e, 0xe5, 0x31, 0x42, 0x2a, 0x58, 0xc9, 0xb2,
-	0x36, 0x48, 0x6a, 0x32, 0xf8, 0x14, 0x46, 0x25, 0x97, 0x2b, 0xd5, 0xbc, 0x5c, 0xc0, 0x67, 0x66,
-	0xfb, 0x60, 0xfb, 0xbd, 0x05, 0x97, 0x8f, 0xf2, 0x8a, 0x97, 0x33, 0x16, 0x73, 0x02, 0xf8, 0x31,
-	0xf8, 0x89, 0x19, 0xd0, 0x28, 0x37, 0x03, 0x88, 0x21, 0xe3, 0xd5, 0x42, 0xb4, 0xa9, 0xcf, 0xcc,
-	0xbe, 0x4f, 0xfd, 0xfd, 0xc6, 0x82, 0xd1, 0x77, 0x59, 0x41, 0xe8, 0xae, 0x60, 0xc9, 0x2b, 0x34,
-	0x2e, 0xfc, 0x34, 0xc1, 0x32, 0x78, 0x57, 0xb0, 0x7c, 0xa0, 0xb0, 0xf8, 0x17, 0x16, 0x91, 0x05,
-	0xcb, 0x09, 0xdd, 0x55, 0x70, 0x4f, 0xf9, 0x3c, 0x31, 0xfd, 0x9d, 0x22, 0x70, 0x94, 0x95, 0xa5,
-	0x78, 0x6d, 0xc2, 0x94, 0x08, 0x3c, 0xe6, 0x48, 0x9e, 0x4f, 0x4f, 0xa6, 0x49, 0xa9, 0xd5, 0x33,
-	0x42, 0xfa, 0x49, 0x52, 0xe2, 0x54, 0xc9, 0xe3, 0x33, 0x9a, 0x72, 0xd4, 0x14, 0xd2, 0x38, 0x55,
-	0x4b, 0xe1, 0xf6, 0x94, 0xa2, 0xbb, 0x68, 0x7c, 0x83, 0xce, 0x75, 0xd8, 0xa3, 0xef, 0x72, 0xae,
-	0x0b, 0xbf, 0x05, 0xde, 0x13, 0x1e, 0xa7, 0xc4, 0x3f, 0x01, 0x67, 0xca, 0xe3, 0xb4, 0xbb, 0x23,
-	0x47, 0x8e, 0xf0, 0x29, 0xf8, 0x4f, 0xb3, 0xa2, 0x5a, 0xd3, 0x6f, 0x1f, 0x83, 0x2f, 0x79, 0x96,
-	0xa8, 0xfc, 0xa5, 0xdd, 0xac, 0x1e, 0xc0, 0x1a, 0x99, 0x64, 0x45, 0x9a, 0xc4, 0x89, 0x3a, 0x54,
-	0x79, 0x51, 0x4d, 0x87, 0x39, 0xec, 0xbd, 0x60, 0xa7, 0x3c, 0xe5, 0x0a, 0xef, 0x6d, 0x70, 0x53,
-	0x24, 0x35, 0x80, 0xe6, 0x49, 0x9c, 0xc6, 0x5b, 0xb2, 0xe4, 0x04, 0x4b, 0x63, 0xd6, 0x9d, 0x81,
-	0x88, 0x23, 0x3c, 0x04, 0x0f, 0xb3, 0x32, 0x6d, 0xb6, 0x43, 0x3d, 0x09, 0xcf, 0xc0, 0x3b, 0xe6,
-	0xf9, 0xd4, 0x28, 0x27, 0x5e, 0xb0, 0xee, 0xb6, 0x82, 0x38, 0x5a, 0x9c, 0xa4, 0x87, 0xd3, 0x86,
-	0x33, 0x80, 0xa3, 0x3c, 0x7e, 0xc2, 0xe3, 0x5d, 0x91, 0x06, 0xff, 0x0f, 0xa3, 0x4a, 0x2c, 0x1b,
-	0xa5, 0x6f, 0x58, 0x89, 0x25, 0xd6, 0xbe, 0x1b, 0x60, 0x57, 0x62, 0xf9, 0x76, 0xf1, 0xc3, 0xd1,
-	0xf0, 0x17, 0x16, 0xc0, 0x43, 0x29, 0x93, 0x79, 0x4e, 0x1b, 0x61, 0xc6, 0x5f, 0x48, 0x7d, 0xaf,
-	0xd2, 0x96, 0xf1, 0x17, 0xf2, 0xcb, 0x6d, 0x86, 0xab, 0x97, 0x0b, 0xec, 0x93, 0x3a, 0x56, 0x2f,
-	0x17, 0x32, 0xfc, 0x36, 0x0c, 0x9f, 0x0b, 0xc2, 0xb3, 0x0f, 0x83, 0xb9, 0xd0, 0x1e, 0x35, 0x98,
-	0x0b, 0x3c, 0xb2, 0xc6, 0x2c, 0x35, 0x47, 0x18, 0x0a, 0x00, 0xd3, 0xf4, 0x45, 0x34, 0x13, 0x3e,
-	0x06, 0xff, 0x09, 0x9f, 0x71, 0x65, 0xe1, 0xab, 0xe0, 0x4e, 0x91, 0x30, 0x21, 0x4c, 0xc4, 0x0e,
-	0x8b, 0xbc, 0x02, 0x88, 0x78, 0xb5, 0x2a, 0x95, 0x52, 0xb0, 0x8f, 0x23, 0xca, 0x14, 0x1f, 0x45,
-	0x05, 0x87, 0x9b, 0x14, 0x3e, 0xe8, 0x10, 0xc9, 0x30, 0x85, 0x31, 0xc0, 0xa3, 0x92, 0xe5, 0xf1,
-	0x82, 0x56, 0x6d, 0xa8, 0xd0, 0xba, 0x48, 0x85, 0x83, 0x0b, 0x55, 0x58, 0x07, 0x88, 0x7d, 0x71,
-	0x80, 0x84, 0x1c, 0xfc, 0xfa, 0x88, 0xde, 0x38, 0x36, 0x5b, 0x6f, 0x1e, 0x9b, 0x1b, 0x57, 0x46,
-	0x2d, 0x9e, 0x4c, 0xb7, 0x47, 0x9b, 0x63, 0xb3, 0xdd, 0x3c, 0x36, 0xe3, 0x51, 0x61, 0x78, 0x34,
-	0x33, 0x36, 0x4a, 0x66, 0xc6, 0x46, 0xc9, 0x0c, 0x17, 0x4f, 0xf2, 0xa4, 0xfb, 0xfe, 0x84, 0x38,
-	0x28, 0xa0, 0x44, 0x3e, 0xed, 0x0e, 0x5b, 0xe4, 0xa8, 0x2f, 0x22, 0x9c, 0xf6, 0x8b, 0x08, 0xba,
-	0x0a, 0x90, 0xdd, 0xb9, 0x94, 0x38, 0xf0, 0x1c, 0x0f, 0x8f, 0x99, 0xe4, 0x8f, 0x53, 0xb6, 0x92,
-	0x54, 0xc4, 0x63, 0x26, 0x8d, 0x8a, 0xe8, 0xbb, 0x87, 0x82, 0xea, 0x84, 0x64, 0xbf, 0x91, 0x90,
-	0x34, 0xde, 0x8e, 0xff, 0x91, 0x03, 0xfb, 0x09, 0x38, 0x7e, 0x9d, 0x54, 0xda, 0x2b, 0xb0, 0xd1,
-	0x21, 0xaa, 0x6e, 0x74, 0x88, 0xea, 0xa1, 0xd4, 0x3b, 0xea, 0x06, 0xb2, 0xb3, 0x19, 0xab, 0xd8,
-	0x7c, 0x07, 0x95, 0x62, 0x2f, 0x4b, 0xe7, 0xc1, 0xf7, 0x8a, 0xef, 0x1e, 0x0c, 0x19, 0x25, 0x9c,
-	0x4e, 0x88, 0x9a, 0x67, 0x17, 0x94, 0x64, 0x4e, 0x91, 0x65, 0xdd, 0xe6, 0x8c, 0x45, 0x96, 0x75,
-	0xa3, 0x43, 0x8e, 0xaf, 0x6c, 0xce, 0xe7, 0x00, 0xea, 0x5a, 0xa6, 0xd6, 0x16, 0x51, 0xb5, 0xb6,
-	0x88, 0xda, 0xe1, 0x5e, 0x2d, 0xfc, 0x9b, 0x05, 0xa3, 0x67, 0x42, 0xa5, 0xb1, 0x2b, 0x60, 0xcf,
-	0x84, 0x49, 0x62, 0xf8, 0xf9, 0x41, 0x62, 0x6c, 0x02, 0x4e, 0x21, 0x64, 0xd5, 0x7d, 0x55, 0x81,
-	0x1c, 0x35, 0x7c, 0xb7, 0x1d, 0xfe, 0x7f, 0x2d, 0xf0, 0x23, 0x96, 0xcf, 0x79, 0x8b, 0x00, 0x1f,
-	0xa2, 0xd1, 0x6b, 0x64, 0x54, 0xe7, 0xa2, 0x8c, 0xea, 0x5e, 0x98, 0x51, 0xa9, 0xb6, 0x0e, 0xbb,
-	0x6b, 0xab, 0x11, 0x78, 0xd4, 0x2e, 0xf0, 0x17, 0x16, 0xc0, 0x51, 0x56, 0x88, 0xb2, 0x3a, 0x2e,
-	0x78, 0xbc, 0xd3, 0xb3, 0xc3, 0xcd, 0xc6, 0x05, 0xf8, 0x56, 0x2a, 0x57, 0x77, 0xe1, 0x07, 0xe0,
-	0x14, 0xac, 0x5a, 0x34, 0x8f, 0xec, 0xf5, 0x5b, 0x02, 0xcd, 0x34, 0x1f, 0x13, 0x9c, 0x77, 0x3c,
-	0x26, 0xa0, 0x72, 0xb0, 0x41, 0x45, 0xe5, 0xe8, 0xdb, 0x08, 0x9e, 0x4f, 0x5f, 0x0a, 0x19, 0xfe,
-	0xc7, 0x02, 0x9f, 0x4e, 0xab, 0x3b, 0xe3, 0x7e, 0x8f, 0xcf, 0x25, 0xf7, 0x60, 0x48, 0xb6, 0xeb,
-	0x6e, 0x0a, 0x34, 0x4f, 0xaf, 0xc7, 0x93, 0xbf, 0x5a, 0xe0, 0x51, 0xee, 0x7a, 0x4f, 0xd6, 0xf8,
-	0x68, 0x2b, 0x6d, 0xb9, 0x75, 0x82, 0x32, 0xb2, 0x3a, 0xef, 0x94, 0xb5, 0x0f, 0x7a, 0xd5, 0xc2,
-	0x63, 0x5b, 0xbe, 0x53, 0x0b, 0xff, 0x0f, 0x0b, 0x46, 0xcf, 0x79, 0x4e, 0xfc, 0xbb, 0xc8, 0xfa,
-	0xe5, 0xda, 0xb7, 0xcd, 0x6d, 0x99, 0xb3, 0x75, 0x5b, 0x76, 0x17, 0x5c, 0x59, 0xf0, 0x18, 0x1d,
-	0xab, 0xdd, 0x86, 0x8a, 0xa5, 0x71, 0x27, 0x36, 0x6c, 0xde, 0x89, 0x85, 0x7f, 0xd6, 0xc7, 0xea,
-	0x9d, 0x45, 0xf8, 0x04, 0x1c, 0x3c, 0x46, 0x5d, 0x7c, 0x70, 0xa5, 0xa9, 0xda, 0xa2, 0x76, 0x6b,
-	0x7c, 0x35, 0x2c, 0xd7, 0xf5, 0xfc, 0xd1, 0x91, 0xe7, 0xfe, 0x38, 0x00, 0xe7, 0x59, 0x92, 0xf2,
-	0xe0, 0x06, 0xf8, 0xb3, 0x24, 0xe5, 0x27, 0xb4, 0xa3, 0x45, 0x8f, 0x33, 0x1e, 0x0e, 0x7c, 0x0f,
-	0xb7, 0xd2, 0x02, 0x0d, 0xba, 0x04, 0x1a, 0xc3, 0xa8, 0x60, 0xf1, 0x92, 0xcd, 0x4d, 0xab, 0x65,
-	0xc8, 0x5a, 0x0e, 0xe7, 0x62, 0x39, 0xee, 0x62, 0x93, 0x1b, 0xa7, 0xef, 0x50, 0x3f, 0xb1, 0x04,
-	0x13, 0x18, 0x25, 0x94, 0xa4, 0xe4, 0x78, 0x48, 0xdc, 0xfb, 0xb4, 0x5a, 0x9d, 0xb7, 0x22, 0x33,
-	0x1d, 0x7c, 0x06, 0xb0, 0xca, 0x4b, 0x2e, 0x45, 0x7a, 0xc6, 0xa7, 0xe3, 0xd1, 0x9b, 0x91, 0xde,
-	0x98, 0x0c, 0xee, 0x81, 0xa7, 0xfd, 0x56, 0x8e, 0x3d, 0x62, 0x7c, 0x5b, 0xc4, 0x9a, 0x23, 0x7c,
-	0x0d, 0xa3, 0x97, 0x5a, 0x30, 0xf3, 0x02, 0x68, 0x35, 0x5e, 0x00, 0x03, 0x9d, 0xf5, 0xf4, 0xab,
-	0x20, 0xe5, 0xb9, 0x5b, 0xe0, 0xa2, 0x2a, 0xcd, 0x7d, 0xac, 0xa7, 0x8c, 0x9d, 0xf2, 0x48, 0x0d,
-	0x07, 0x5f, 0x83, 0xfd, 0x33, 0x56, 0x9e, 0x60, 0xbd, 0x3b, 0x11, 0xe5, 0x94, 0x97, 0x94, 0x4d,
-	0xfc, 0xe8, 0xd2, 0x19, 0x2b, 0x8f, 0xf2, 0xa4, 0xfa, 0x3e, 0x8e, 0x85, 0x0f, 0xc0, 0xd3, 0x1b,
-	0xcb, 0xe0, 0x53, 0xf0, 0xb4, 0x76, 0x65, 0xf3, 0x11, 0x59, 0xcf, 0x47, 0xf5, 0xe4, 0xe9, 0x90,
-	0xb4, 0xf8, 0xe0, 0x7f, 0x01, 0x00, 0x00, 0xff, 0xff, 0x12, 0x4e, 0x8b, 0xd1, 0xfa, 0x1e, 0x00,
-	0x00,
+var fileDescriptor_ast_355744a0e72f954f = []byte{
+	// 2871 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x5a, 0x5f, 0x8f, 0xe4, 0x46,
+	0x11, 0x8f, 0x67, 0x3c, 0x63, 0xbb, 0xf6, 0x4f, 0x2e, 0x9d, 0xe4, 0x98, 0xec, 0x5d, 0x36, 0x1b,
+	0x8b, 0x28, 0x9b, 0x04, 0x0e, 0xc8, 0x21, 0x81, 0xf2, 0x80, 0x94, 0xdb, 0xfb, 0xb7, 0xe2, 0x80,
+	0x93, 0x37, 0x20, 0xe0, 0x21, 0x23, 0x8f, 0xa7, 0x67, 0xc6, 0x1a, 0x8f, 0xdb, 0xb2, 0x3d, 0x7b,
+	0x3b, 0x3c, 0x20, 0xe0, 0x21, 0x3c, 0xf0, 0xc0, 0x03, 0x02, 0xc1, 0x4b, 0xa4, 0x08, 0xf1, 0xcc,
+	0x03, 0x22, 0x48, 0xc0, 0x27, 0xe0, 0xb3, 0xf0, 0x21, 0x50, 0x55, 0x77, 0xdb, 0xed, 0x9d, 0x3f,
+	0xb7, 0x73, 0x39, 0xf1, 0xd6, 0x55, 0x5d, 0x35, 0xfd, 0xeb, 0xea, 0x72, 0x55, 0x75, 0xf5, 0x80,
+	0x17, 0x16, 0xe5, 0xad, 0x2c, 0x17, 0xa5, 0x60, 0xad, 0x6c, 0x70, 0xb0, 0x53, 0x8a, 0x29, 0x4f,
+	0x25, 0xe3, 0x00, 0xca, 0x45, 0xc6, 0xe5, 0xd8, 0xbf, 0x0d, 0xce, 0x89, 0x98, 0xcd, 0x78, 0x5a,
+	0xb2, 0x57, 0xa0, 0x53, 0x24, 0x61, 0x31, 0xe9, 0x59, 0x47, 0xd6, 0x71, 0x27, 0x90, 0x04, 0x63,
+	0x60, 0x97, 0xfc, 0xa2, 0xec, 0xb5, 0x8e, 0xac, 0x63, 0x2f, 0xa0, 0xb1, 0xff, 0x35, 0xd8, 0x55,
+	0x4a, 0x0f, 0x72, 0x31, 0xcf, 0xd8, 0x1b, 0x60, 0x27, 0x71, 0x51, 0xf6, 0xac, 0xa3, 0xf6, 0xf1,
+	0xce, 0xfb, 0x3b, 0xb7, 0xb2, 0xc1, 0x2d, 0x35, 0x1f, 0xd0, 0x84, 0xff, 0xb9, 0x05, 0x9d, 0xfb,
+	0x31, 0x4f, 0x86, 0xcc, 0x87, 0xf6, 0x50, 0x44, 0xb4, 0xc4, 0xce, 0xfb, 0xd7, 0x0c, 0x49, 0xfa,
+	0xa5, 0x00, 0x27, 0xd9, 0x1b, 0xd0, 0x49, 0xc3, 0x19, 0x2f, 0x7a, 0x2d, 0xfa, 0x3d, 0x0f, 0xa5,
+	0x4e, 0x87, 0xf8, 0x6b, 0x92, 0xcf, 0x6e, 0x82, 0x8d, 0x5b, 0xe8, 0xb5, 0xe9, 0x57, 0x5c, 0x9c,
+	0xbf, 0x77, 0x91, 0xe5, 0x01, 0x71, 0xd9, 0x21, 0xb4, 0xcb, 0x70, 0xdc, 0xb3, 0x69, 0x72, 0x17,
+	0x27, 0xef, 0x84, 0x45, 0x1c, 0x3d, 0x8a, 0xcb, 0x00, 0x27, 0xd8, 0xbb, 0xe0, 0x44, 0x72, 0xcd,
+	0x5e, 0x67, 0x0d, 0x0c, 0x2d, 0xe0, 0x7f, 0x0c, 0x1e, 0xe1, 0x7e, 0x14, 0x17, 0x25, 0xeb, 0x81,
+	0x23, 0x32, 0x9e, 0xc6, 0xe9, 0x58, 0x99, 0x48, 0x93, 0xec, 0x75, 0x65, 0x00, 0x03, 0x30, 0xa9,
+	0xc9, 0xed, 0xa3, 0x62, 0x94, 0x88, 0x02, 0x15, 0xdb, 0x52, 0x51, 0x91, 0xfe, 0x3f, 0x5d, 0xb0,
+	0x11, 0x3a, 0x3b, 0x06, 0x77, 0x10, 0x0e, 0xfb, 0xfc, 0x22, 0xcb, 0x95, 0x71, 0x76, 0x24, 0xf2,
+	0x21, 0x4e, 0x3f, 0x7c, 0x21, 0x70, 0x06, 0x72, 0xc8, 0xde, 0x84, 0x4e, 0x8c, 0xc6, 0xa0, 0x13,
+	0x31, 0xad, 0xf3, 0xf0, 0x85, 0x40, 0xce, 0xb0, 0x77, 0xc1, 0xe5, 0x49, 0x12, 0x67, 0x45, 0x5c,
+	0x28, 0x1b, 0x91, 0x19, 0xee, 0x29, 0xde, 0xc3, 0x17, 0x82, 0x6a, 0x9e, 0xbd, 0x07, 0xde, 0x00,
+	0xcd, 0xd3, 0x4f, 0xe2, 0x72, 0x95, 0xcd, 0x50, 0x78, 0xa0, 0xc6, 0x88, 0x72, 0x34, 0x4f, 0xa5,
+	0x6c, 0xa7, 0x46, 0x79, 0x7f, 0x9e, 0x2a, 0x51, 0x67, 0x24, 0x87, 0xec, 0x5b, 0xb0, 0x17, 0x89,
+	0x59, 0x26, 0x8a, 0xb8, 0xe4, 0x24, 0xde, 0x6d, 0x98, 0x5a, 0x4e, 0x48, 0x9d, 0xdd, 0xc8, 0xa0,
+	0xd9, 0x2d, 0x80, 0x2c, 0xcc, 0x79, 0x2a, 0x4d, 0xe1, 0x90, 0xd6, 0x1e, 0x6a, 0x3d, 0x46, 0xae,
+	0x32, 0x86, 0x97, 0x69, 0x02, 0x17, 0x2a, 0x78, 0xc2, 0xa3, 0x52, 0xe4, 0x52, 0xc5, 0xad, 0x17,
+	0x3a, 0x53, 0x13, 0x4a, 0x6b, 0xb7, 0x30, 0x68, 0x5c, 0x28, 0x4e, 0x87, 0xfc, 0x42, 0x6a, 0x79,
+	0xf5, 0x42, 0xa7, 0xc8, 0xd5, 0x0b, 0xc5, 0x9a, 0x40, 0xf9, 0x22, 0x89, 0x23, 0x2e, 0xe5, 0xa1,
+	0x96, 0x3f, 0x43, 0xae, 0x96, 0x2f, 0x34, 0xc1, 0xbe, 0x03, 0xd7, 0xd0, 0x1d, 0xfb, 0x61, 0x51,
+	0xf0, 0xbc, 0x94, 0x5a, 0x3b, 0xa4, 0xc5, 0x50, 0xeb, 0xa3, 0x45, 0xc6, 0x3f, 0xa4, 0x29, 0xa5,
+	0xba, 0x5f, 0x36, 0x38, 0x78, 0x30, 0x51, 0x98, 0x24, 0x52, 0x71, 0xb7, 0x3e, 0x98, 0x93, 0x30,
+	0x49, 0x94, 0x8a, 0x1b, 0xa9, 0x31, 0x0a, 0x17, 0x65, 0xa8, 0x2c, 0xb0, 0x57, 0x0b, 0x9f, 0x95,
+	0xa1, 0xde, 0xbd, 0x5b, 0xa8, 0x31, 0xee, 0x64, 0x9e, 0x86, 0xf9, 0x42, 0x4a, 0xef, 0xd7, 0x3b,
+	0xf9, 0x21, 0x72, 0xf5, 0x4e, 0xe6, 0x9a, 0x60, 0xdf, 0x80, 0x9d, 0x41, 0x5c, 0x2b, 0xbc, 0x48,
+	0x0a, 0xfb, 0xe4, 0x24, 0xb1, 0xa1, 0x01, 0x83, 0x8a, 0x62, 0xdf, 0x86, 0xfd, 0x29, 0x5f, 0xf4,
+	0xcf, 0xc3, 0x64, 0xae, 0x0c, 0x76, 0xad, 0x3e, 0x96, 0xef, 0xf2, 0xc5, 0x8f, 0x70, 0x42, 0x1f,
+	0xcb, 0xd4, 0xa0, 0x11, 0x5c, 0x98, 0xe7, 0xe1, 0xa2, 0x4f, 0x5f, 0xf8, 0x4b, 0x35, 0xb8, 0x0f,
+	0x91, 0x8b, 0x56, 0x43, 0x70, 0xa1, 0x26, 0x10, 0x5c, 0x51, 0xe6, 0xf3, 0xa8, 0x94, 0x0a, 0xac,
+	0x06, 0x77, 0x46, 0x6c, 0xa5, 0x01, 0x45, 0x45, 0xa1, 0xb1, 0xc8, 0x8b, 0x49, 0xe1, 0xe5, 0xda,
+	0x58, 0xe8, 0xc6, 0x4a, 0x9c, 0xdc, 0x9c, 0x84, 0x3f, 0x80, 0xfd, 0x38, 0x2d, 0x79, 0x3e, 0x0a,
+	0x23, 0x2e, 0x35, 0x5e, 0x21, 0x8d, 0x97, 0xa4, 0xab, 0xa8, 0x19, 0xa5, 0xb6, 0x17, 0x9b, 0x0c,
+	0xfc, 0x5c, 0x66, 0x61, 0x26, 0xb5, 0x5e, 0xad, 0x3f, 0x97, 0xef, 0x85, 0x99, 0x92, 0x77, 0x66,
+	0x72, 0x48, 0x87, 0x3d, 0x09, 0x53, 0x29, 0x7a, 0xdd, 0x38, 0xec, 0x49, 0x98, 0x6a, 0x48, 0x91,
+	0x1a, 0xdf, 0xe9, 0x82, 0x8d, 0x26, 0xf5, 0x7f, 0x0c, 0x8e, 0x8a, 0x0f, 0x18, 0xa5, 0x47, 0xb9,
+	0x98, 0xa9, 0xb8, 0x44, 0x63, 0xb6, 0x0f, 0xad, 0x52, 0x50, 0x94, 0xe8, 0x04, 0xad, 0x52, 0xb0,
+	0x77, 0xc0, 0x23, 0x87, 0x8c, 0xd3, 0x91, 0x30, 0xc3, 0x02, 0xfe, 0xe6, 0x69, 0x3a, 0x12, 0x81,
+	0x5b, 0xaa, 0x91, 0xff, 0x3b, 0x0b, 0x3a, 0x14, 0x53, 0xd8, 0x6b, 0xe0, 0x62, 0xcc, 0xed, 0x67,
+	0xa2, 0xd0, 0x41, 0x0f, 0xe9, 0xc7, 0xa2, 0xc0, 0x35, 0x71, 0xa8, 0x33, 0x03, 0x8e, 0xb7, 0x58,
+	0x83, 0x7d, 0x1d, 0xf6, 0x86, 0x7c, 0xd4, 0xaf, 0xc5, 0xed, 0x15, 0xe2, 0x3b, 0x43, 0x3e, 0xd2,
+	0x84, 0x3f, 0x03, 0x57, 0x87, 0x30, 0x76, 0x60, 0x84, 0x38, 0x89, 0xab, 0x0e, 0x69, 0x07, 0xd0,
+	0xe6, 0x89, 0x8e, 0x8f, 0x75, 0x76, 0x40, 0xe6, 0x36, 0x46, 0xf8, 0xb5, 0x05, 0xae, 0x8e, 0x82,
+	0xec, 0x06, 0x78, 0xd2, 0x99, 0x6b, 0x43, 0xb8, 0xc4, 0x40, 0x4b, 0xbc, 0x0e, 0xf6, 0x34, 0x4e,
+	0x87, 0xb4, 0xe2, 0xbe, 0x8c, 0xc8, 0x1f, 0x61, 0xbe, 0x0d, 0x88, 0x8d, 0x89, 0x95, 0x44, 0x69,
+	0x3d, 0x2f, 0x90, 0x44, 0x13, 0x89, 0xbd, 0x11, 0xc9, 0x02, 0x1c, 0x15, 0x62, 0xd9, 0x91, 0x4a,
+	0x7d, 0xd6, 0xb2, 0xdb, 0xaa, 0xf4, 0xf7, 0x26, 0xd8, 0x03, 0x31, 0x5c, 0xa8, 0xed, 0xd3, 0xa7,
+	0x73, 0x27, 0x11, 0xd1, 0xf4, 0xac, 0x9c, 0x95, 0x01, 0x4d, 0x6d, 0x63, 0x84, 0xbf, 0x58, 0x94,
+	0xeb, 0xeb, 0xf8, 0x7c, 0xb3, 0x01, 0xe0, 0x72, 0xee, 0xbd, 0x0e, 0xdd, 0x64, 0x90, 0x87, 0x11,
+	0x57, 0x7e, 0xa7, 0x28, 0xd4, 0xe2, 0x49, 0x89, 0xd9, 0xa8, 0xdd, 0xd4, 0x42, 0x2e, 0x6a, 0xe5,
+	0x52, 0xcb, 0x96, 0x5a, 0x92, 0x6a, 0xe2, 0xec, 0x6c, 0xc4, 0xf9, 0x73, 0xf0, 0xaa, 0x04, 0x41,
+	0x28, 0x28, 0x43, 0xa8, 0x93, 0x52, 0x14, 0xbb, 0x0e, 0xd6, 0xc5, 0x92, 0x5b, 0x58, 0x17, 0xb4,
+	0xbe, 0x94, 0x6f, 0xab, 0xf5, 0xa5, 0xfc, 0x16, 0x47, 0x94, 0xc2, 0xae, 0x99, 0x6d, 0xe4, 0x52,
+	0xd6, 0xf2, 0x52, 0x37, 0xa0, 0x5d, 0xf0, 0x64, 0x29, 0x77, 0x07, 0xc8, 0xdd, 0xe6, 0x5c, 0x3e,
+	0xb5, 0xc0, 0xab, 0x12, 0xd5, 0xda, 0xd5, 0xf4, 0x71, 0x4c, 0x1b, 0xc7, 0x31, 0x65, 0x87, 0xd0,
+	0xa1, 0xc4, 0xb6, 0x54, 0x41, 0x49, 0x76, 0x75, 0x20, 0xd3, 0xc6, 0x81, 0x4c, 0xb7, 0x39, 0x90,
+	0xff, 0x5a, 0xe0, 0x55, 0x99, 0x71, 0x6b, 0x80, 0x07, 0xd0, 0x4e, 0xc4, 0x93, 0x25, 0x78, 0xc8,
+	0x44, 0x5f, 0x9a, 0xc4, 0xe3, 0x89, 0x3a, 0x10, 0xc3, 0x97, 0x90, 0x8b, 0x9a, 0xb3, 0xf0, 0x42,
+	0x81, 0x33, 0x34, 0x67, 0x21, 0xad, 0x46, 0xf9, 0xf9, 0x36, 0x55, 0x23, 0x6e, 0xa0, 0x28, 0x63,
+	0xbb, 0xce, 0xfa, 0xed, 0xba, 0x1b, 0xb7, 0xfb, 0x99, 0x05, 0xfb, 0xcd, 0x94, 0xbe, 0x71, 0xcf,
+	0xd2, 0xdb, 0x5a, 0x0d, 0xef, 0xdc, 0x5c, 0xd5, 0xd6, 0x3e, 0x6a, 0xaf, 0xf7, 0xd1, 0xcd, 0x47,
+	0xf2, 0x2f, 0x0b, 0x5c, 0x5d, 0x3d, 0xa0, 0x9d, 0x46, 0xf3, 0x74, 0x09, 0x1f, 0x32, 0x37, 0x21,
+	0x0c, 0xf3, 0xf1, 0x8a, 0xaf, 0x18, 0xb9, 0x8d, 0x90, 0x6c, 0x5f, 0x0a, 0xc9, 0x35, 0xfa, 0xce,
+	0x7a, 0xf4, 0xdd, 0x8d, 0xe8, 0x43, 0x70, 0x75, 0x35, 0x83, 0xa9, 0x07, 0xab, 0x19, 0x9d, 0xee,
+	0x70, 0xbc, 0xf6, 0xe3, 0xde, 0xe2, 0xa3, 0xfa, 0x85, 0x05, 0x5e, 0x55, 0x03, 0xb1, 0x57, 0xa1,
+	0x2b, 0x32, 0x23, 0xde, 0x77, 0x44, 0x86, 0xc1, 0xfe, 0x35, 0x68, 0x89, 0x6c, 0x39, 0xd4, 0xb7,
+	0x44, 0x26, 0x21, 0xb4, 0x9f, 0x02, 0x61, 0x73, 0x1c, 0xf9, 0x93, 0x05, 0x50, 0x57, 0x55, 0x6b,
+	0x7d, 0xa8, 0xc6, 0xd6, 0x5a, 0xc6, 0xd6, 0x5e, 0x83, 0x6d, 0xb1, 0xf4, 0xc9, 0x58, 0x8b, 0x6d,
+	0xfc, 0xe7, 0x37, 0x16, 0xec, 0x9a, 0xb5, 0x1b, 0xfa, 0xd0, 0x94, 0x2f, 0x96, 0x7d, 0x68, 0xca,
+	0x17, 0x98, 0xf4, 0x22, 0x91, 0x08, 0xed, 0x42, 0x92, 0xc0, 0xc0, 0x53, 0xa7, 0xc2, 0x46, 0xe0,
+	0xd9, 0x3a, 0x29, 0x7e, 0x62, 0x81, 0x57, 0xd5, 0x84, 0x46, 0x20, 0xb1, 0x96, 0x02, 0x89, 0xf2,
+	0xe3, 0x66, 0x20, 0xe1, 0xa9, 0xae, 0x13, 0xda, 0x4f, 0xad, 0x13, 0x36, 0x03, 0xf9, 0x83, 0x05,
+	0x50, 0xd7, 0x9a, 0x14, 0x64, 0x88, 0xd2, 0x48, 0x24, 0xc5, 0xde, 0x82, 0xee, 0x08, 0xef, 0x84,
+	0x85, 0x99, 0x99, 0xab, 0xcb, 0x65, 0xa0, 0x26, 0xd9, 0x21, 0x5e, 0x4b, 0xf0, 0x46, 0x94, 0xf0,
+	0x52, 0x9a, 0xc9, 0x0d, 0x0c, 0xce, 0x96, 0xbe, 0xe4, 0xea, 0xe2, 0x80, 0x2a, 0xc4, 0x79, 0x1a,
+	0x55, 0x15, 0xe2, 0x3c, 0x8d, 0x10, 0x52, 0x16, 0xe6, 0xe1, 0x6c, 0x1d, 0x24, 0x39, 0xc9, 0xde,
+	0x06, 0x27, 0xe7, 0xc5, 0x5c, 0xe6, 0xef, 0x15, 0x72, 0x7a, 0x76, 0x1b, 0x6c, 0x9f, 0x59, 0xb0,
+	0xd7, 0xa8, 0x9e, 0xd9, 0x4d, 0xf0, 0xaa, 0xea, 0x59, 0xa1, 0xac, 0x19, 0x88, 0x61, 0xc6, 0xcb,
+	0x89, 0x58, 0x67, 0x3e, 0x3d, 0xfb, 0x3c, 0xed, 0xf7, 0x2b, 0x0b, 0x1c, 0x55, 0xab, 0xb3, 0x6b,
+	0x98, 0x56, 0x32, 0x85, 0x0b, 0x87, 0xda, 0xf9, 0x5b, 0xab, 0x9c, 0xff, 0x39, 0xba, 0xf9, 0x3f,
+	0x30, 0x68, 0xab, 0xca, 0x1f, 0x3f, 0xaa, 0x01, 0x1f, 0xc7, 0xba, 0xae, 0x91, 0x04, 0x72, 0xc3,
+	0x3c, 0x17, 0x4f, 0xf4, 0xa7, 0x46, 0x04, 0x56, 0xee, 0x05, 0x4f, 0x87, 0xfd, 0x61, 0x9c, 0x2b,
+	0x33, 0x38, 0x48, 0xdf, 0x8d, 0x73, 0x9c, 0xca, 0x79, 0x74, 0x4e, 0x53, 0xb6, 0x9c, 0x42, 0x1a,
+	0xa7, 0x2a, 0xe4, 0x9d, 0x2b, 0x20, 0xdf, 0x1c, 0xb0, 0x3f, 0x71, 0xc1, 0xc6, 0xa2, 0x53, 0xf7,
+	0x36, 0x8a, 0x72, 0x56, 0x5e, 0xea, 0x6d, 0xe0, 0xb4, 0xea, 0x6d, 0x90, 0xe4, 0x7b, 0xe0, 0x0d,
+	0x79, 0x94, 0x48, 0xd1, 0x56, 0xfd, 0xeb, 0x77, 0x79, 0x94, 0x28, 0x59, 0x77, 0xa8, 0xc6, 0x78,
+	0x53, 0xe4, 0xb3, 0xac, 0x5c, 0x48, 0x69, 0xc3, 0x33, 0xef, 0x21, 0x57, 0x89, 0x7b, 0x5c, 0x13,
+	0xec, 0x9b, 0xb0, 0x9b, 0x84, 0x03, 0x9e, 0x70, 0x05, 0x45, 0xda, 0xfd, 0x45, 0xd4, 0x78, 0x24,
+	0xf9, 0x4a, 0x67, 0x27, 0xa9, 0x49, 0x84, 0x84, 0x97, 0x2d, 0xa9, 0x62, 0xc4, 0x47, 0x34, 0x8a,
+	0x86, 0xc4, 0xd5, 0x98, 0xae, 0xe1, 0x68, 0x73, 0x12, 0x36, 0xac, 0x73, 0xc6, 0x53, 0xfd, 0xe3,
+	0x74, 0x28, 0x24, 0xfc, 0x3e, 0xec, 0xc6, 0x69, 0xd4, 0x1f, 0xf2, 0x48, 0xca, 0x3b, 0xf5, 0xd5,
+	0xf5, 0x34, 0x8d, 0xee, 0xf2, 0x48, 0x69, 0xa0, 0xf7, 0x2a, 0x0a, 0x6f, 0xbb, 0x61, 0x51, 0xc4,
+	0xe3, 0x54, 0xaa, 0xb8, 0xb5, 0xca, 0x87, 0xc4, 0xd6, 0x2a, 0x61, 0x45, 0xb1, 0xb7, 0xc0, 0x19,
+	0x0b, 0x29, 0x2e, 0x9b, 0x1c, 0x80, 0xe2, 0x0f, 0x84, 0x12, 0xed, 0x8e, 0x85, 0xb6, 0xe6, 0x90,
+	0x8f, 0xb8, 0xda, 0xa8, 0xd1, 0xde, 0xb8, 0x8b, 0x5c, 0x6d, 0xcd, 0xa1, 0x26, 0x10, 0x49, 0xce,
+	0xcb, 0x79, 0xae, 0x90, 0xec, 0xd4, 0x48, 0x02, 0x62, 0x6b, 0x24, 0x79, 0x45, 0x51, 0x1f, 0x21,
+	0x0f, 0xd3, 0x68, 0x22, 0x55, 0x76, 0x8d, 0x3e, 0x02, 0xb1, 0xb5, 0xca, 0xa0, 0xa2, 0x10, 0xd5,
+	0x00, 0x2f, 0x2f, 0x52, 0x63, 0x6f, 0xc5, 0x95, 0x06, 0x51, 0x0d, 0x34, 0x81, 0x9b, 0x8d, 0x47,
+	0x52, 0x78, 0xbf, 0xde, 0xec, 0xe9, 0x48, 0x6f, 0x36, 0x1e, 0x69, 0x24, 0x51, 0x58, 0xf0, 0x7e,
+	0x94, 0x84, 0xf3, 0x82, 0x9b, 0x1d, 0x8d, 0x93, 0xb0, 0xe0, 0x27, 0xc4, 0x45, 0x24, 0x51, 0x45,
+	0x51, 0x9f, 0xe1, 0x49, 0x5c, 0x6a, 0xf0, 0xd7, 0x8c, 0x3e, 0x03, 0xb1, 0x35, 0xf8, 0xa2, 0xa2,
+	0xaa, 0x0e, 0x90, 0xa9, 0xf7, 0x52, 0xb3, 0x03, 0xd4, 0xd0, 0xa5, 0x0e, 0x50, 0xcd, 0x21, 0x94,
+	0x62, 0x36, 0xd3, 0x28, 0x8d, 0xd6, 0xc6, 0x89, 0x98, 0xcd, 0x0c, 0x94, 0x15, 0x45, 0x28, 0xe9,
+	0x1a, 0x22, 0x57, 0x7b, 0xd9, 0x40, 0x49, 0xec, 0x0a, 0x65, 0x45, 0x51, 0x4f, 0x4f, 0xa8, 0x63,
+	0x7f, 0xc5, 0xe8, 0xe9, 0x09, 0x7d, 0xe8, 0xce, 0x48, 0x0e, 0xf1, 0x30, 0xf2, 0x30, 0x1d, 0x73,
+	0x29, 0xfb, 0x6a, 0x7d, 0x18, 0x01, 0x72, 0xf5, 0x61, 0xe4, 0x9a, 0xb8, 0xd3, 0xc5, 0x2a, 0x6d,
+	0x56, 0xfa, 0x5f, 0xa5, 0x3e, 0x05, 0xfd, 0xc4, 0x15, 0xfa, 0x14, 0xfe, 0x31, 0xb8, 0xfa, 0x7b,
+	0xc7, 0x8a, 0x13, 0xbf, 0x77, 0xb3, 0xc4, 0xc0, 0xb9, 0x80, 0xb8, 0xfe, 0x3d, 0xf0, 0xaa, 0x6f,
+	0x1d, 0xf3, 0x47, 0xc1, 0x67, 0xb1, 0x2c, 0x3a, 0x54, 0xfe, 0xa8, 0x18, 0x58, 0x9c, 0xc6, 0xb3,
+	0x2c, 0x89, 0xa3, 0x58, 0x06, 0x16, 0x37, 0xa8, 0x68, 0x7f, 0x00, 0x3b, 0x46, 0x00, 0x60, 0x6f,
+	0x40, 0x87, 0x02, 0x80, 0x5a, 0xd4, 0x6c, 0x3f, 0x13, 0x7f, 0x4d, 0x69, 0x73, 0x53, 0xee, 0xd6,
+	0x0c, 0xf9, 0xf2, 0xca, 0x4d, 0x36, 0xf0, 0xc1, 0xd5, 0x11, 0x63, 0x5d, 0x51, 0xe7, 0x7f, 0x0c,
+	0xae, 0x0e, 0x14, 0xf8, 0x6b, 0xd1, 0x24, 0x5c, 0xae, 0xcf, 0x89, 0xbb, 0x26, 0xe2, 0x3f, 0x25,
+	0xeb, 0xf8, 0x3f, 0x05, 0xa8, 0x03, 0xcb, 0xda, 0xd2, 0xf2, 0x4b, 0xe0, 0x94, 0x62, 0x6a, 0xd4,
+	0x96, 0xdd, 0x52, 0x4c, 0xb1, 0xb8, 0xbc, 0x01, 0xed, 0x52, 0x4c, 0x97, 0xab, 0x4b, 0xe4, 0xfa,
+	0x3f, 0x03, 0xa8, 0x23, 0x10, 0x55, 0x5d, 0x93, 0x42, 0xbd, 0x07, 0x98, 0x55, 0xd7, 0xa4, 0x78,
+	0xb6, 0xdf, 0xc7, 0x5f, 0xcc, 0x27, 0x78, 0xaf, 0xb8, 0xf4, 0x8b, 0xf9, 0xa4, 0xf0, 0x3f, 0x80,
+	0xae, 0x0c, 0x67, 0xe8, 0x4a, 0x63, 0xa1, 0x0e, 0xbf, 0x35, 0x16, 0xec, 0x08, 0xec, 0x28, 0x4c,
+	0x12, 0x33, 0x95, 0xe8, 0x0b, 0x50, 0x40, 0x33, 0xfe, 0x09, 0x78, 0x55, 0x80, 0x43, 0xb3, 0x52,
+	0x80, 0xd3, 0xe9, 0x95, 0x88, 0x2b, 0xfc, 0xc8, 0x43, 0x80, 0x3a, 0xe8, 0xd1, 0x5d, 0x87, 0x28,
+	0x5d, 0x00, 0x4a, 0x8a, 0xf9, 0x75, 0x19, 0xd5, 0xba, 0xb4, 0x0d, 0x3d, 0xe1, 0x47, 0x00, 0x75,
+	0x2c, 0x34, 0x4d, 0x65, 0xad, 0x32, 0x55, 0x6b, 0xa5, 0xa9, 0x2a, 0xff, 0x6d, 0xaf, 0xf6, 0x5f,
+	0xff, 0x27, 0xe0, 0x55, 0xe1, 0xd3, 0xe8, 0xd8, 0x58, 0x97, 0x3b, 0x36, 0xc6, 0x93, 0x86, 0xe1,
+	0xce, 0xf4, 0xa2, 0x51, 0x77, 0x6c, 0xda, 0x66, 0xc7, 0xc6, 0xff, 0xbd, 0x05, 0x5d, 0x19, 0x6d,
+	0xf1, 0x2c, 0xe2, 0x91, 0x3e, 0x8b, 0x78, 0x84, 0x3f, 0x18, 0xa7, 0x71, 0xa3, 0x2d, 0x27, 0x7f,
+	0x10, 0xb9, 0xe4, 0xef, 0x22, 0x1d, 0x2e, 0x5f, 0x7e, 0x91, 0x5b, 0xf5, 0xb4, 0xec, 0xf5, 0x3d,
+	0x2d, 0xea, 0x30, 0x15, 0x8d, 0xba, 0x45, 0xce, 0x22, 0xd7, 0xcf, 0x01, 0xea, 0xc8, 0x8e, 0x51,
+	0x08, 0x23, 0xbb, 0x8e, 0x42, 0x38, 0x5e, 0xb5, 0x5f, 0x09, 0x80, 0xf6, 0x5b, 0x7d, 0xf2, 0xed,
+	0x4b, 0x9f, 0xbc, 0x82, 0x75, 0xc9, 0x46, 0xc8, 0xf5, 0x7f, 0x89, 0xf7, 0x82, 0x3a, 0x9a, 0xe3,
+	0xbd, 0x80, 0xa8, 0xea, 0x5e, 0x40, 0xd4, 0x53, 0xec, 0x72, 0x20, 0x1f, 0xb3, 0x96, 0xee, 0x28,
+	0x65, 0x38, 0xbe, 0x82, 0x55, 0xf0, 0xca, 0xb6, 0xdf, 0xcc, 0x33, 0xcf, 0x88, 0xe3, 0x08, 0xba,
+	0xb2, 0xa6, 0x58, 0x8a, 0x6f, 0x8a, 0x7f, 0x15, 0x34, 0x78, 0x0a, 0x75, 0xae, 0x5a, 0x73, 0x0a,
+	0x98, 0xcd, 0x96, 0x41, 0x20, 0xf7, 0x99, 0x4e, 0xe1, 0x01, 0x40, 0x9d, 0xfa, 0x68, 0xf3, 0x44,
+	0x55, 0x9b, 0x27, 0xea, 0x0a, 0x4d, 0x53, 0xff, 0x8f, 0x16, 0x38, 0x2a, 0x29, 0xe2, 0x6d, 0x60,
+	0x24, 0x74, 0x98, 0xc0, 0xe1, 0x17, 0xf2, 0xee, 0x9b, 0x60, 0x67, 0xa2, 0x28, 0xcd, 0xdb, 0xb9,
+	0xd4, 0x45, 0x6e, 0x05, 0xad, 0xb3, 0x1e, 0xda, 0x7f, 0x2c, 0xf0, 0xaa, 0x1c, 0xbc, 0x02, 0xdc,
+	0x17, 0xb9, 0xaa, 0x18, 0x31, 0xc8, 0x5e, 0x15, 0x83, 0x3a, 0x2b, 0x63, 0x10, 0x25, 0x97, 0xee,
+	0x72, 0x72, 0xd1, 0x9b, 0x71, 0xd6, 0x6f, 0xe6, 0x53, 0x0b, 0xec, 0xb3, 0x8c, 0x47, 0x58, 0xcb,
+	0xc4, 0xb3, 0x4c, 0xe4, 0x65, 0xbf, 0xc8, 0xb8, 0x7e, 0x32, 0x96, 0xe5, 0x31, 0xb1, 0x51, 0x88,
+	0xca, 0xe3, 0x8a, 0xc2, 0x0a, 0x45, 0x76, 0xe9, 0x49, 0xc3, 0x38, 0x4c, 0xea, 0x59, 0x28, 0x05,
+	0xd9, 0xc8, 0x27, 0xf9, 0xf7, 0xd4, 0x6d, 0x86, 0xc4, 0x2f, 0xf5, 0x86, 0x94, 0x34, 0xdd, 0x67,
+	0x70, 0x4c, 0xe5, 0x4c, 0xc6, 0x23, 0xff, 0x73, 0x0b, 0xa0, 0x46, 0x70, 0xa5, 0x17, 0xed, 0xd7,
+	0x8d, 0xa7, 0x92, 0x46, 0x44, 0x96, 0xaf, 0x26, 0x47, 0x60, 0x67, 0x61, 0x39, 0x31, 0x11, 0x54,
+	0x4f, 0xd6, 0x34, 0x63, 0xbe, 0x59, 0xdb, 0x4f, 0x79, 0xb3, 0xc6, 0x13, 0xc3, 0x3b, 0x08, 0x9e,
+	0x98, 0x6a, 0xb6, 0xf1, 0x74, 0xf8, 0x58, 0x14, 0xfe, 0xbf, 0x2d, 0xf0, 0x2a, 0x43, 0xfc, 0x3f,
+	0x5e, 0xe2, 0x8f, 0xa0, 0x4b, 0xb6, 0x5e, 0xce, 0xdb, 0x8a, 0xbf, 0xd5, 0x5b, 0xfc, 0x5f, 0x2d,
+	0x70, 0xf5, 0xc1, 0x3c, 0x0f, 0xab, 0x5f, 0x6f, 0x84, 0xb4, 0x4e, 0x15, 0xc8, 0xf4, 0x9e, 0xec,
+	0x95, 0x7b, 0xda, 0x06, 0xf1, 0x6f, 0x2d, 0xb0, 0xb1, 0x5c, 0xd5, 0x37, 0x60, 0xa3, 0x94, 0xd5,
+	0x37, 0x60, 0x9c, 0x56, 0x37, 0x60, 0x2d, 0x39, 0xe6, 0xa9, 0x94, 0x6c, 0xd5, 0x92, 0x0f, 0x78,
+	0xaa, 0x25, 0xc7, 0x72, 0x58, 0xbd, 0x62, 0x92, 0x68, 0xbb, 0xf9, 0x1c, 0xa4, 0x64, 0xe9, 0x15,
+	0x13, 0xc7, 0xe8, 0xbb, 0x54, 0x31, 0xcb, 0x52, 0x9c, 0xf4, 0xaf, 0x52, 0x8a, 0xff, 0xcd, 0x02,
+	0x47, 0x2d, 0x7d, 0x25, 0x8b, 0x3f, 0x5b, 0x6d, 0x57, 0xb7, 0x9b, 0xed, 0x46, 0xbb, 0xf9, 0x10,
+	0x3a, 0xf8, 0xc1, 0xa1, 0x1b, 0xd7, 0x91, 0x3d, 0xe3, 0x51, 0x20, 0xd9, 0x46, 0x53, 0xb9, 0x6b,
+	0x36, 0x95, 0xfd, 0xbf, 0xab, 0xbe, 0xd7, 0x95, 0x61, 0xbf, 0x09, 0x76, 0xce, 0xa3, 0xf3, 0xd5,
+	0x9d, 0x25, 0x9a, 0xaa, 0x7c, 0xa9, 0xbd, 0xf6, 0x0b, 0x36, 0x7c, 0x66, 0xd3, 0xb3, 0xdc, 0x86,
+	0x30, 0xfe, 0xe7, 0x16, 0xd8, 0xf7, 0xe3, 0x84, 0xb3, 0x1b, 0xe0, 0x8d, 0xe2, 0x84, 0xf7, 0x69,
+	0x45, 0x8b, 0x1e, 0x0d, 0x5d, 0x64, 0x7c, 0x1f, 0x97, 0x52, 0x1b, 0x6a, 0x6d, 0xda, 0x50, 0x0f,
+	0x9c, 0x2c, 0x8c, 0xa6, 0xe1, 0x58, 0xd7, 0x67, 0x9a, 0xac, 0xf6, 0x61, 0xaf, 0xde, 0xc7, 0x21,
+	0x56, 0xc0, 0x51, 0xd2, 0x30, 0x39, 0x5d, 0xb8, 0x24, 0x9b, 0x1d, 0x83, 0x23, 0xc3, 0x6d, 0xd1,
+	0xeb, 0x92, 0xc4, 0xa5, 0x78, 0x1c, 0xe8, 0x69, 0xf6, 0x0e, 0xc0, 0x3c, 0xcd, 0x79, 0x21, 0x92,
+	0x73, 0x3e, 0xec, 0x39, 0x97, 0xe3, 0x87, 0x31, 0xc9, 0xbe, 0x02, 0xae, 0xfa, 0x62, 0x8a, 0x9e,
+	0x4b, 0x82, 0xcb, 0xdb, 0xaa, 0x24, 0xfc, 0x27, 0xe0, 0x3c, 0x56, 0x9b, 0xd1, 0x2f, 0xd0, 0x96,
+	0xf1, 0x02, 0xcd, 0x54, 0x2c, 0x55, 0xaf, 0xd2, 0x14, 0x3d, 0x0f, 0xa1, 0x83, 0xe6, 0x6b, 0x3c,
+	0x5c, 0xa0, 0xa1, 0x03, 0xc9, 0x66, 0x5f, 0x86, 0xfd, 0xf3, 0x30, 0xef, 0x63, 0xaa, 0xee, 0x8b,
+	0x7c, 0xc8, 0x73, 0x8a, 0x57, 0x5e, 0xb0, 0x7b, 0x1e, 0xe6, 0xa7, 0x69, 0x5c, 0xfe, 0x00, 0x79,
+	0xfe, 0x6d, 0x70, 0xd5, 0xc2, 0x05, 0x7b, 0x1b, 0x5c, 0x65, 0xd1, 0xc2, 0xfc, 0xd7, 0x93, 0x9a,
+	0x0f, 0xaa, 0xc9, 0x41, 0x97, 0xfe, 0x66, 0x75, 0xfb, 0x7f, 0x01, 0x00, 0x00, 0xff, 0xff, 0xae,
+	0x8c, 0xfc, 0x76, 0x90, 0x25, 0x00, 0x00,
 }

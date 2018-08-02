@@ -20,7 +20,8 @@ func FromArgs(args []string, includeTests bool) (*pb.Packages, error) {
 		return nil, fmt.Errorf("Failed loading: %v", err)
 	}
 	ret := &pb.Packages{}
-	for _, pkg := range prog.Imported {
+	// TODO: options to choose to ignore imports, stdlib, etc
+	for _, pkg := range prog.AllPackages {
 		convCtx := &ConversionContext{
 			FileSet: prog.Fset,
 			Pkg:     pkg,
