@@ -9,18 +9,31 @@ import (
 	"github.com/cretz/go-dump/pb"
 )
 
-func (c *ConversionContext) ConvertTypeInfo(expr ast.Expr, def bool) *pb.TypeInfo {
+func (c *ConversionContext) ConvertExprTypeRef(expr ast.Expr, def bool) *pb.TypeRef {
 	if ident, ok := expr.(*ast.Ident); ok {
 		obj := c.Pkg.Info.Uses[ident]
 		if def {
 			obj = c.Pkg.Info.Defs[ident]
 		}
-		return c.ConvertTypeObject(obj)
+		return c.ConvertTypeRef(obj)
 	}
-	return c.ConvertTypeAndValue(c.Pkg.Info.Types[expr])
+	return c.ConvertTypeRef(c.Pkg.Info.Types[expr])
 }
 
-func (c *ConversionContext) ConvertType(t types.Type) *pb.TypeInfo {
+func (c *ConversionContext) ConvertTypeRef(t interface{}) *pb.TypeRef {
+	if t == nil {
+		return nil
+	}
+	for i, seen := range c.Types {
+		if seen == t {
+			return &pb.TypeRef{Id: uint32(i)}
+		}
+	}
+	c.Types = append(c.Types, t)
+	return &pb.TypeRef{Id: uint32(len(c.Types) - 1)}
+}
+
+func (c *ConversionContext) ConvertType(t types.Type) *pb.Type {
 	if t == nil {
 		return nil
 	}
@@ -28,136 +41,135 @@ func (c *ConversionContext) ConvertType(t types.Type) *pb.TypeInfo {
 	case types.Object:
 		return c.ConvertTypeObject(v)
 	case *types.Array:
-		return &pb.TypeInfo{Type: &pb.TypeInfo_TypeArray{
-			TypeArray: &pb.TypeArray{Elem: c.ConvertType(v.Elem()), Len: v.Len()},
+		return &pb.Type{Type: &pb.Type_TypeArray{
+			TypeArray: &pb.TypeArray{Elem: c.ConvertTypeRef(v.Elem()), Len: v.Len()},
 		}}
 	case *types.Basic:
-		return &pb.TypeInfo{
+		return &pb.Type{
 			Name: v.Name(),
-			Type: &pb.TypeInfo_TypeBasic{TypeBasic: &pb.TypeBasic{
+			Type: &pb.Type_TypeBasic{TypeBasic: &pb.TypeBasic{
 				Flags: int32(v.Info()),
 				Kind:  pb.TypeBasic_Kind(v.Kind()),
 			}},
 		}
 	case *types.Chan:
-		return &pb.TypeInfo{Type: &pb.TypeInfo_TypeChan{TypeChan: &pb.TypeChan{
-			Elem:    c.ConvertType(v.Elem()),
+		return &pb.Type{Type: &pb.Type_TypeChan{TypeChan: &pb.TypeChan{
+			Elem:    c.ConvertTypeRef(v.Elem()),
 			SendDir: v.Dir() != types.RecvOnly,
 			RecvDir: v.Dir() != types.SendOnly,
 		}}}
 	case *types.Interface:
 		iface := &pb.TypeInterface{
-			ExplicitMethods: make([]*pb.TypeInfo, v.NumExplicitMethods()),
-			Embedded:        make([]*pb.TypeInfo, v.NumEmbeddeds()),
+			ExplicitMethods: make([]*pb.TypeRef, v.NumExplicitMethods()),
+			Embedded:        make([]*pb.TypeRef, v.NumEmbeddeds()),
 		}
 		for i := 0; i < v.NumExplicitMethods(); i++ {
-			iface.ExplicitMethods[i] = c.ConvertTypeObject(v.ExplicitMethod(i))
+			iface.ExplicitMethods[i] = c.ConvertTypeRef(v.ExplicitMethod(i))
 		}
 		for i := 0; i < v.NumEmbeddeds(); i++ {
-			iface.Embedded[i] = c.ConvertType(v.Embedded(i))
+			iface.Embedded[i] = c.ConvertTypeRef(v.Embedded(i))
 		}
-		return &pb.TypeInfo{Type: &pb.TypeInfo_TypeInterface{TypeInterface: iface}}
+		return &pb.Type{Type: &pb.Type_TypeInterface{TypeInterface: iface}}
 	case *types.Map:
-		return &pb.TypeInfo{Type: &pb.TypeInfo_TypeMap{TypeMap: &pb.TypeMap{
-			Elem: c.ConvertType(v.Elem()),
-			Key:  c.ConvertType(v.Key()),
+		return &pb.Type{Type: &pb.Type_TypeMap{TypeMap: &pb.TypeMap{
+			Elem: c.ConvertTypeRef(v.Elem()),
+			Key:  c.ConvertTypeRef(v.Key()),
 		}}}
 	case *types.Named:
 		named := &pb.TypeNamed{
-			Type:    c.ConvertType(v.Underlying()),
-			Methods: make([]*pb.TypeInfo, v.NumMethods()),
+			Type:    c.ConvertTypeRef(v.Underlying()),
+			Methods: make([]*pb.TypeRef, v.NumMethods()),
 		}
-		if v.Obj().Type() == v {
-			named.TypeName = c.ConvertTypeObjectNameOnly(v.Obj())
-		} else {
-			named.TypeName = c.ConvertTypeObject(v.Obj())
-		}
+		named.TypeName = c.ConvertTypeRef(v.Obj())
 		for i := 0; i < v.NumMethods(); i++ {
-			named.Methods[i] = c.ConvertTypeObject(v.Method(i))
+			named.Methods[i] = c.ConvertTypeRef(v.Method(i))
 		}
-		ret := &pb.TypeInfo{Name: v.Obj().Name(), Type: &pb.TypeInfo_TypeNamed{TypeNamed: named}}
+		ret := &pb.Type{Name: v.Obj().Name(), Type: &pb.Type_TypeNamed{TypeNamed: named}}
 		if pkg := v.Obj().Pkg(); pkg != nil {
 			ret.Package = pkg.Name()
 		}
 		return ret
 	case *types.Pointer:
-		return &pb.TypeInfo{Type: &pb.TypeInfo_TypePointer{TypePointer: &pb.TypePointer{Elem: c.ConvertType(v.Elem())}}}
+		return &pb.Type{Type: &pb.Type_TypePointer{TypePointer: &pb.TypePointer{Elem: c.ConvertTypeRef(v.Elem())}}}
 	case *types.Slice:
-		return &pb.TypeInfo{Type: &pb.TypeInfo_TypeSlice{TypeSlice: &pb.TypeSlice{Elem: c.ConvertType(v.Elem())}}}
+		return &pb.Type{Type: &pb.Type_TypeSlice{TypeSlice: &pb.TypeSlice{Elem: c.ConvertTypeRef(v.Elem())}}}
 	case *types.Struct:
-		st := &pb.TypeStruct{Fields: make([]*pb.TypeInfo, v.NumFields())}
+		st := &pb.TypeStruct{Fields: make([]*pb.TypeRef, v.NumFields())}
 		for i := 0; i < v.NumFields(); i++ {
-			st.Fields[i] = c.ConvertTypeObject(v.Field(i))
+			st.Fields[i] = c.ConvertTypeRef(v.Field(i))
 		}
-		return &pb.TypeInfo{Type: &pb.TypeInfo_TypeStruct{TypeStruct: st}}
+		return &pb.Type{Type: &pb.Type_TypeStruct{TypeStruct: st}}
 	case *types.Signature:
 		sig := &pb.TypeSignature{}
 		if recv := v.Recv(); recv != nil {
-			sig.Recv = c.ConvertTypeObjectNameOnly(recv)
+			sig.Recv = c.ConvertTypeRef(recv)
 		}
 		if params := v.Params(); params != nil {
-			sig.Params = c.ConvertType(params).Type.(*pb.TypeInfo_TypeTuple).TypeTuple.Vars
+			for i := 0; i < params.Len(); i++ {
+				sig.Params = append(sig.Params, c.ConvertTypeRef(params.At(i)))
+			}
 		}
 		if results := v.Results(); results != nil {
-			sig.Results = c.ConvertType(results).Type.(*pb.TypeInfo_TypeTuple).TypeTuple.Vars
+			for i := 0; i < results.Len(); i++ {
+				sig.Results = append(sig.Results, c.ConvertTypeRef(results.At(i)))
+			}
 		}
-		return &pb.TypeInfo{Type: &pb.TypeInfo_TypeSignature{TypeSignature: sig}}
+		return &pb.Type{Type: &pb.Type_TypeSignature{TypeSignature: sig}}
 
 	case *types.Tuple:
-		tup := &pb.TypeTuple{Vars: make([]*pb.TypeInfo, v.Len())}
+		tup := &pb.TypeTuple{Vars: make([]*pb.TypeRef, v.Len())}
 		for i := 0; i < v.Len(); i++ {
-			tup.Vars[i] = c.ConvertTypeObjectNameOnly(v.At(i))
+			tup.Vars[i] = c.ConvertTypeRef(v.At(i))
 		}
-		return &pb.TypeInfo{Type: &pb.TypeInfo_TypeTuple{TypeTuple: tup}}
+		return &pb.Type{Type: &pb.Type_TypeTuple{TypeTuple: tup}}
 	default:
 		panic(fmt.Sprintf("Unknown type: %T", t))
 	}
 }
 
-func (c *ConversionContext) ConvertTypeObjectNameOnly(t types.Object) *pb.TypeInfo {
+func (c *ConversionContext) ConvertTypeObjectNameOnly(t types.Object) *pb.Type {
 	if t == nil {
 		return nil
 	}
-	ret := &pb.TypeInfo{Name: t.Name()}
+	ret := &pb.Type{Name: t.Name()}
 	if pkg := t.Pkg(); pkg != nil {
 		ret.Package = pkg.Name()
 	}
 	return ret
 }
 
-func (c *ConversionContext) ConvertTypeObject(t types.Object) *pb.TypeInfo {
+func (c *ConversionContext) ConvertTypeObject(t types.Object) *pb.Type {
 	if t == nil {
 		return nil
 	}
 	ret := c.ConvertTypeObjectNameOnly(t)
-	typ := c.ConvertType(t.Type())
 	switch v := t.(type) {
 	case *types.Builtin:
-		ret.Type = &pb.TypeInfo_TypeBuiltin{TypeBuiltin: true}
+		ret.Type = &pb.Type_TypeBuiltin{TypeBuiltin: true}
 	case *types.Const:
-		if typ != nil {
-			ret.Type = &pb.TypeInfo_TypeConst{TypeConst: &pb.TypeConst{
-				Type:  typ,
+		if t.Type() != nil {
+			ret.Type = &pb.Type_TypeConst{TypeConst: &pb.TypeConst{
+				Type:  c.ConvertTypeRef(t.Type()),
 				Value: c.ConvertTypeConstantValue(v.Val()),
 			}}
 		}
 	case *types.Func:
-		if typ != nil {
-			ret.Type = &pb.TypeInfo_TypeFunc{TypeFunc: typ.GetTypeSignature()}
+		if t.Type() != nil {
+			ret.Type = &pb.Type_TypeFunc{TypeFunc: c.ConvertType(t.Type()).GetTypeSignature()}
 		}
 	case *types.Label:
-		ret.Type = &pb.TypeInfo_TypeLabel{TypeLabel: typ}
+		ret.Type = &pb.Type_TypeLabel{TypeLabel: c.ConvertTypeRef(t.Type())}
 	case *types.TypeName:
-		if typ != nil {
-			ret.Type = &pb.TypeInfo_TypeName{TypeName: typ}
+		if t.Type() != nil {
+			ret.Type = &pb.Type_TypeName{TypeName: c.ConvertTypeRef(t.Type())}
 		}
 	case *types.Nil:
-		ret.Type = &pb.TypeInfo_TypeNil{TypeNil: typ}
+		ret.Type = &pb.Type_TypeNil{TypeNil: c.ConvertTypeRef(t.Type())}
 	case *types.PkgName:
-		ret.Type = &pb.TypeInfo_TypePackage{TypePackage: true}
+		ret.Type = &pb.Type_TypePackage{TypePackage: true}
 	case *types.Var:
-		if typ != nil {
-			ret.Type = &pb.TypeInfo_TypeVar{TypeVar: typ}
+		if t.Type() != nil {
+			ret.Type = &pb.Type_TypeVar{TypeVar: c.ConvertTypeRef(t.Type())}
 		}
 	default:
 		panic(fmt.Sprintf("Unknown type: %T", t))
@@ -165,12 +177,9 @@ func (c *ConversionContext) ConvertTypeObject(t types.Object) *pb.TypeInfo {
 	return ret
 }
 
-func (c *ConversionContext) ConvertTypeAndValue(t types.TypeAndValue) *pb.TypeInfo {
-	if t.Type == nil {
-		return nil
-	}
-	return &pb.TypeInfo{Type: &pb.TypeInfo_TypeConst{TypeConst: &pb.TypeConst{
-		Type:  c.ConvertType(t.Type),
+func (c *ConversionContext) ConvertTypeAndValue(t types.TypeAndValue) *pb.Type {
+	return &pb.Type{Type: &pb.Type_TypeConst{TypeConst: &pb.TypeConst{
+		Type:  c.ConvertTypeRef(t.Type),
 		Value: c.ConvertTypeConstantValue(t.Value),
 	}}}
 }

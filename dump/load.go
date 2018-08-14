@@ -21,7 +21,7 @@ func FromArgs(args []string, includeTests bool) (*pb.Packages, error) {
 	}
 	ret := &pb.Packages{}
 	// TODO: options to choose to ignore imports, stdlib, etc
-	for _, pkg := range prog.AllPackages {
+	for _, pkg := range prog.Created {
 		convCtx := &ConversionContext{
 			FileSet: prog.Fset,
 			Pkg:     pkg,

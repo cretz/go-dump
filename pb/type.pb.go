@@ -110,7 +110,7 @@ func (x TypeBasic_Kind) String() string {
 	return proto.EnumName(TypeBasic_Kind_name, int32(x))
 }
 func (TypeBasic_Kind) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{3, 0}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{4, 0}
 }
 
 type ConstantValue struct {
@@ -131,7 +131,7 @@ func (m *ConstantValue) Reset()         { *m = ConstantValue{} }
 func (m *ConstantValue) String() string { return proto.CompactTextString(m) }
 func (*ConstantValue) ProtoMessage()    {}
 func (*ConstantValue) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{0}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{0}
 }
 func (m *ConstantValue) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ConstantValue.Unmarshal(m, b)
@@ -358,432 +358,470 @@ func _ConstantValue_OneofSizer(msg proto.Message) (n int) {
 	return n
 }
 
-type TypeInfo struct {
+type TypeRef struct {
+	Id                   uint32   `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *TypeRef) Reset()         { *m = TypeRef{} }
+func (m *TypeRef) String() string { return proto.CompactTextString(m) }
+func (*TypeRef) ProtoMessage()    {}
+func (*TypeRef) Descriptor() ([]byte, []int) {
+	return fileDescriptor_type_9840b0e3b8798b78, []int{1}
+}
+func (m *TypeRef) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_TypeRef.Unmarshal(m, b)
+}
+func (m *TypeRef) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_TypeRef.Marshal(b, m, deterministic)
+}
+func (dst *TypeRef) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TypeRef.Merge(dst, src)
+}
+func (m *TypeRef) XXX_Size() int {
+	return xxx_messageInfo_TypeRef.Size(m)
+}
+func (m *TypeRef) XXX_DiscardUnknown() {
+	xxx_messageInfo_TypeRef.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TypeRef proto.InternalMessageInfo
+
+func (m *TypeRef) GetId() uint32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type Type struct {
 	Package string `protobuf:"bytes,1,opt,name=package" json:"package,omitempty"`
 	Name    string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
 	// Types that are valid to be assigned to Type:
-	//	*TypeInfo_TypeArray
-	//	*TypeInfo_TypeBasic
-	//	*TypeInfo_TypeBuiltin
-	//	*TypeInfo_TypeChan
-	//	*TypeInfo_TypeConst
-	//	*TypeInfo_TypeFunc
-	//	*TypeInfo_TypeInterface
-	//	*TypeInfo_TypeLabel
-	//	*TypeInfo_TypeMap
-	//	*TypeInfo_TypeName
-	//	*TypeInfo_TypeNamed
-	//	*TypeInfo_TypeNil
-	//	*TypeInfo_TypePackage
-	//	*TypeInfo_TypePointer
-	//	*TypeInfo_TypeSignature
-	//	*TypeInfo_TypeSlice
-	//	*TypeInfo_TypeStruct
-	//	*TypeInfo_TypeTuple
-	//	*TypeInfo_TypeVar
-	Type                 isTypeInfo_Type `protobuf_oneof:"type"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
+	//	*Type_TypeArray
+	//	*Type_TypeBasic
+	//	*Type_TypeBuiltin
+	//	*Type_TypeChan
+	//	*Type_TypeConst
+	//	*Type_TypeFunc
+	//	*Type_TypeInterface
+	//	*Type_TypeLabel
+	//	*Type_TypeMap
+	//	*Type_TypeName
+	//	*Type_TypeNamed
+	//	*Type_TypeNil
+	//	*Type_TypePackage
+	//	*Type_TypePointer
+	//	*Type_TypeSignature
+	//	*Type_TypeSlice
+	//	*Type_TypeStruct
+	//	*Type_TypeTuple
+	//	*Type_TypeVar
+	Type                 isType_Type `protobuf_oneof:"type"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *TypeInfo) Reset()         { *m = TypeInfo{} }
-func (m *TypeInfo) String() string { return proto.CompactTextString(m) }
-func (*TypeInfo) ProtoMessage()    {}
-func (*TypeInfo) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{1}
+func (m *Type) Reset()         { *m = Type{} }
+func (m *Type) String() string { return proto.CompactTextString(m) }
+func (*Type) ProtoMessage()    {}
+func (*Type) Descriptor() ([]byte, []int) {
+	return fileDescriptor_type_9840b0e3b8798b78, []int{2}
 }
-func (m *TypeInfo) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_TypeInfo.Unmarshal(m, b)
+func (m *Type) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Type.Unmarshal(m, b)
 }
-func (m *TypeInfo) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_TypeInfo.Marshal(b, m, deterministic)
+func (m *Type) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Type.Marshal(b, m, deterministic)
 }
-func (dst *TypeInfo) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TypeInfo.Merge(dst, src)
+func (dst *Type) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Type.Merge(dst, src)
 }
-func (m *TypeInfo) XXX_Size() int {
-	return xxx_messageInfo_TypeInfo.Size(m)
+func (m *Type) XXX_Size() int {
+	return xxx_messageInfo_Type.Size(m)
 }
-func (m *TypeInfo) XXX_DiscardUnknown() {
-	xxx_messageInfo_TypeInfo.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_TypeInfo proto.InternalMessageInfo
-
-type isTypeInfo_Type interface {
-	isTypeInfo_Type()
+func (m *Type) XXX_DiscardUnknown() {
+	xxx_messageInfo_Type.DiscardUnknown(m)
 }
 
-type TypeInfo_TypeArray struct {
+var xxx_messageInfo_Type proto.InternalMessageInfo
+
+type isType_Type interface {
+	isType_Type()
+}
+
+type Type_TypeArray struct {
 	TypeArray *TypeArray `protobuf:"bytes,3,opt,name=type_array,json=typeArray,oneof"`
 }
-type TypeInfo_TypeBasic struct {
+type Type_TypeBasic struct {
 	TypeBasic *TypeBasic `protobuf:"bytes,4,opt,name=type_basic,json=typeBasic,oneof"`
 }
-type TypeInfo_TypeBuiltin struct {
+type Type_TypeBuiltin struct {
 	TypeBuiltin bool `protobuf:"varint,5,opt,name=type_builtin,json=typeBuiltin,oneof"`
 }
-type TypeInfo_TypeChan struct {
+type Type_TypeChan struct {
 	TypeChan *TypeChan `protobuf:"bytes,6,opt,name=type_chan,json=typeChan,oneof"`
 }
-type TypeInfo_TypeConst struct {
+type Type_TypeConst struct {
 	TypeConst *TypeConst `protobuf:"bytes,7,opt,name=type_const,json=typeConst,oneof"`
 }
-type TypeInfo_TypeFunc struct {
+type Type_TypeFunc struct {
 	TypeFunc *TypeSignature `protobuf:"bytes,8,opt,name=type_func,json=typeFunc,oneof"`
 }
-type TypeInfo_TypeInterface struct {
+type Type_TypeInterface struct {
 	TypeInterface *TypeInterface `protobuf:"bytes,9,opt,name=type_interface,json=typeInterface,oneof"`
 }
-type TypeInfo_TypeLabel struct {
-	TypeLabel *TypeInfo `protobuf:"bytes,10,opt,name=type_label,json=typeLabel,oneof"`
+type Type_TypeLabel struct {
+	TypeLabel *TypeRef `protobuf:"bytes,10,opt,name=type_label,json=typeLabel,oneof"`
 }
-type TypeInfo_TypeMap struct {
+type Type_TypeMap struct {
 	TypeMap *TypeMap `protobuf:"bytes,11,opt,name=type_map,json=typeMap,oneof"`
 }
-type TypeInfo_TypeName struct {
-	TypeName *TypeInfo `protobuf:"bytes,12,opt,name=type_name,json=typeName,oneof"`
+type Type_TypeName struct {
+	TypeName *TypeRef `protobuf:"bytes,12,opt,name=type_name,json=typeName,oneof"`
 }
-type TypeInfo_TypeNamed struct {
+type Type_TypeNamed struct {
 	TypeNamed *TypeNamed `protobuf:"bytes,13,opt,name=type_named,json=typeNamed,oneof"`
 }
-type TypeInfo_TypeNil struct {
-	TypeNil *TypeInfo `protobuf:"bytes,14,opt,name=type_nil,json=typeNil,oneof"`
+type Type_TypeNil struct {
+	TypeNil *TypeRef `protobuf:"bytes,14,opt,name=type_nil,json=typeNil,oneof"`
 }
-type TypeInfo_TypePackage struct {
+type Type_TypePackage struct {
 	TypePackage bool `protobuf:"varint,15,opt,name=type_package,json=typePackage,oneof"`
 }
-type TypeInfo_TypePointer struct {
+type Type_TypePointer struct {
 	TypePointer *TypePointer `protobuf:"bytes,16,opt,name=type_pointer,json=typePointer,oneof"`
 }
-type TypeInfo_TypeSignature struct {
+type Type_TypeSignature struct {
 	TypeSignature *TypeSignature `protobuf:"bytes,17,opt,name=type_signature,json=typeSignature,oneof"`
 }
-type TypeInfo_TypeSlice struct {
+type Type_TypeSlice struct {
 	TypeSlice *TypeSlice `protobuf:"bytes,18,opt,name=type_slice,json=typeSlice,oneof"`
 }
-type TypeInfo_TypeStruct struct {
+type Type_TypeStruct struct {
 	TypeStruct *TypeStruct `protobuf:"bytes,19,opt,name=type_struct,json=typeStruct,oneof"`
 }
-type TypeInfo_TypeTuple struct {
+type Type_TypeTuple struct {
 	TypeTuple *TypeTuple `protobuf:"bytes,20,opt,name=type_tuple,json=typeTuple,oneof"`
 }
-type TypeInfo_TypeVar struct {
-	TypeVar *TypeInfo `protobuf:"bytes,21,opt,name=type_var,json=typeVar,oneof"`
+type Type_TypeVar struct {
+	TypeVar *TypeRef `protobuf:"bytes,21,opt,name=type_var,json=typeVar,oneof"`
 }
 
-func (*TypeInfo_TypeArray) isTypeInfo_Type()     {}
-func (*TypeInfo_TypeBasic) isTypeInfo_Type()     {}
-func (*TypeInfo_TypeBuiltin) isTypeInfo_Type()   {}
-func (*TypeInfo_TypeChan) isTypeInfo_Type()      {}
-func (*TypeInfo_TypeConst) isTypeInfo_Type()     {}
-func (*TypeInfo_TypeFunc) isTypeInfo_Type()      {}
-func (*TypeInfo_TypeInterface) isTypeInfo_Type() {}
-func (*TypeInfo_TypeLabel) isTypeInfo_Type()     {}
-func (*TypeInfo_TypeMap) isTypeInfo_Type()       {}
-func (*TypeInfo_TypeName) isTypeInfo_Type()      {}
-func (*TypeInfo_TypeNamed) isTypeInfo_Type()     {}
-func (*TypeInfo_TypeNil) isTypeInfo_Type()       {}
-func (*TypeInfo_TypePackage) isTypeInfo_Type()   {}
-func (*TypeInfo_TypePointer) isTypeInfo_Type()   {}
-func (*TypeInfo_TypeSignature) isTypeInfo_Type() {}
-func (*TypeInfo_TypeSlice) isTypeInfo_Type()     {}
-func (*TypeInfo_TypeStruct) isTypeInfo_Type()    {}
-func (*TypeInfo_TypeTuple) isTypeInfo_Type()     {}
-func (*TypeInfo_TypeVar) isTypeInfo_Type()       {}
+func (*Type_TypeArray) isType_Type()     {}
+func (*Type_TypeBasic) isType_Type()     {}
+func (*Type_TypeBuiltin) isType_Type()   {}
+func (*Type_TypeChan) isType_Type()      {}
+func (*Type_TypeConst) isType_Type()     {}
+func (*Type_TypeFunc) isType_Type()      {}
+func (*Type_TypeInterface) isType_Type() {}
+func (*Type_TypeLabel) isType_Type()     {}
+func (*Type_TypeMap) isType_Type()       {}
+func (*Type_TypeName) isType_Type()      {}
+func (*Type_TypeNamed) isType_Type()     {}
+func (*Type_TypeNil) isType_Type()       {}
+func (*Type_TypePackage) isType_Type()   {}
+func (*Type_TypePointer) isType_Type()   {}
+func (*Type_TypeSignature) isType_Type() {}
+func (*Type_TypeSlice) isType_Type()     {}
+func (*Type_TypeStruct) isType_Type()    {}
+func (*Type_TypeTuple) isType_Type()     {}
+func (*Type_TypeVar) isType_Type()       {}
 
-func (m *TypeInfo) GetType() isTypeInfo_Type {
+func (m *Type) GetType() isType_Type {
 	if m != nil {
 		return m.Type
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetPackage() string {
+func (m *Type) GetPackage() string {
 	if m != nil {
 		return m.Package
 	}
 	return ""
 }
 
-func (m *TypeInfo) GetName() string {
+func (m *Type) GetName() string {
 	if m != nil {
 		return m.Name
 	}
 	return ""
 }
 
-func (m *TypeInfo) GetTypeArray() *TypeArray {
-	if x, ok := m.GetType().(*TypeInfo_TypeArray); ok {
+func (m *Type) GetTypeArray() *TypeArray {
+	if x, ok := m.GetType().(*Type_TypeArray); ok {
 		return x.TypeArray
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeBasic() *TypeBasic {
-	if x, ok := m.GetType().(*TypeInfo_TypeBasic); ok {
+func (m *Type) GetTypeBasic() *TypeBasic {
+	if x, ok := m.GetType().(*Type_TypeBasic); ok {
 		return x.TypeBasic
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeBuiltin() bool {
-	if x, ok := m.GetType().(*TypeInfo_TypeBuiltin); ok {
+func (m *Type) GetTypeBuiltin() bool {
+	if x, ok := m.GetType().(*Type_TypeBuiltin); ok {
 		return x.TypeBuiltin
 	}
 	return false
 }
 
-func (m *TypeInfo) GetTypeChan() *TypeChan {
-	if x, ok := m.GetType().(*TypeInfo_TypeChan); ok {
+func (m *Type) GetTypeChan() *TypeChan {
+	if x, ok := m.GetType().(*Type_TypeChan); ok {
 		return x.TypeChan
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeConst() *TypeConst {
-	if x, ok := m.GetType().(*TypeInfo_TypeConst); ok {
+func (m *Type) GetTypeConst() *TypeConst {
+	if x, ok := m.GetType().(*Type_TypeConst); ok {
 		return x.TypeConst
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeFunc() *TypeSignature {
-	if x, ok := m.GetType().(*TypeInfo_TypeFunc); ok {
+func (m *Type) GetTypeFunc() *TypeSignature {
+	if x, ok := m.GetType().(*Type_TypeFunc); ok {
 		return x.TypeFunc
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeInterface() *TypeInterface {
-	if x, ok := m.GetType().(*TypeInfo_TypeInterface); ok {
+func (m *Type) GetTypeInterface() *TypeInterface {
+	if x, ok := m.GetType().(*Type_TypeInterface); ok {
 		return x.TypeInterface
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeLabel() *TypeInfo {
-	if x, ok := m.GetType().(*TypeInfo_TypeLabel); ok {
+func (m *Type) GetTypeLabel() *TypeRef {
+	if x, ok := m.GetType().(*Type_TypeLabel); ok {
 		return x.TypeLabel
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeMap() *TypeMap {
-	if x, ok := m.GetType().(*TypeInfo_TypeMap); ok {
+func (m *Type) GetTypeMap() *TypeMap {
+	if x, ok := m.GetType().(*Type_TypeMap); ok {
 		return x.TypeMap
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeName() *TypeInfo {
-	if x, ok := m.GetType().(*TypeInfo_TypeName); ok {
+func (m *Type) GetTypeName() *TypeRef {
+	if x, ok := m.GetType().(*Type_TypeName); ok {
 		return x.TypeName
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeNamed() *TypeNamed {
-	if x, ok := m.GetType().(*TypeInfo_TypeNamed); ok {
+func (m *Type) GetTypeNamed() *TypeNamed {
+	if x, ok := m.GetType().(*Type_TypeNamed); ok {
 		return x.TypeNamed
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeNil() *TypeInfo {
-	if x, ok := m.GetType().(*TypeInfo_TypeNil); ok {
+func (m *Type) GetTypeNil() *TypeRef {
+	if x, ok := m.GetType().(*Type_TypeNil); ok {
 		return x.TypeNil
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypePackage() bool {
-	if x, ok := m.GetType().(*TypeInfo_TypePackage); ok {
+func (m *Type) GetTypePackage() bool {
+	if x, ok := m.GetType().(*Type_TypePackage); ok {
 		return x.TypePackage
 	}
 	return false
 }
 
-func (m *TypeInfo) GetTypePointer() *TypePointer {
-	if x, ok := m.GetType().(*TypeInfo_TypePointer); ok {
+func (m *Type) GetTypePointer() *TypePointer {
+	if x, ok := m.GetType().(*Type_TypePointer); ok {
 		return x.TypePointer
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeSignature() *TypeSignature {
-	if x, ok := m.GetType().(*TypeInfo_TypeSignature); ok {
+func (m *Type) GetTypeSignature() *TypeSignature {
+	if x, ok := m.GetType().(*Type_TypeSignature); ok {
 		return x.TypeSignature
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeSlice() *TypeSlice {
-	if x, ok := m.GetType().(*TypeInfo_TypeSlice); ok {
+func (m *Type) GetTypeSlice() *TypeSlice {
+	if x, ok := m.GetType().(*Type_TypeSlice); ok {
 		return x.TypeSlice
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeStruct() *TypeStruct {
-	if x, ok := m.GetType().(*TypeInfo_TypeStruct); ok {
+func (m *Type) GetTypeStruct() *TypeStruct {
+	if x, ok := m.GetType().(*Type_TypeStruct); ok {
 		return x.TypeStruct
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeTuple() *TypeTuple {
-	if x, ok := m.GetType().(*TypeInfo_TypeTuple); ok {
+func (m *Type) GetTypeTuple() *TypeTuple {
+	if x, ok := m.GetType().(*Type_TypeTuple); ok {
 		return x.TypeTuple
 	}
 	return nil
 }
 
-func (m *TypeInfo) GetTypeVar() *TypeInfo {
-	if x, ok := m.GetType().(*TypeInfo_TypeVar); ok {
+func (m *Type) GetTypeVar() *TypeRef {
+	if x, ok := m.GetType().(*Type_TypeVar); ok {
 		return x.TypeVar
 	}
 	return nil
 }
 
 // XXX_OneofFuncs is for the internal use of the proto package.
-func (*TypeInfo) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
-	return _TypeInfo_OneofMarshaler, _TypeInfo_OneofUnmarshaler, _TypeInfo_OneofSizer, []interface{}{
-		(*TypeInfo_TypeArray)(nil),
-		(*TypeInfo_TypeBasic)(nil),
-		(*TypeInfo_TypeBuiltin)(nil),
-		(*TypeInfo_TypeChan)(nil),
-		(*TypeInfo_TypeConst)(nil),
-		(*TypeInfo_TypeFunc)(nil),
-		(*TypeInfo_TypeInterface)(nil),
-		(*TypeInfo_TypeLabel)(nil),
-		(*TypeInfo_TypeMap)(nil),
-		(*TypeInfo_TypeName)(nil),
-		(*TypeInfo_TypeNamed)(nil),
-		(*TypeInfo_TypeNil)(nil),
-		(*TypeInfo_TypePackage)(nil),
-		(*TypeInfo_TypePointer)(nil),
-		(*TypeInfo_TypeSignature)(nil),
-		(*TypeInfo_TypeSlice)(nil),
-		(*TypeInfo_TypeStruct)(nil),
-		(*TypeInfo_TypeTuple)(nil),
-		(*TypeInfo_TypeVar)(nil),
+func (*Type) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) error, func(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error), func(msg proto.Message) (n int), []interface{}) {
+	return _Type_OneofMarshaler, _Type_OneofUnmarshaler, _Type_OneofSizer, []interface{}{
+		(*Type_TypeArray)(nil),
+		(*Type_TypeBasic)(nil),
+		(*Type_TypeBuiltin)(nil),
+		(*Type_TypeChan)(nil),
+		(*Type_TypeConst)(nil),
+		(*Type_TypeFunc)(nil),
+		(*Type_TypeInterface)(nil),
+		(*Type_TypeLabel)(nil),
+		(*Type_TypeMap)(nil),
+		(*Type_TypeName)(nil),
+		(*Type_TypeNamed)(nil),
+		(*Type_TypeNil)(nil),
+		(*Type_TypePackage)(nil),
+		(*Type_TypePointer)(nil),
+		(*Type_TypeSignature)(nil),
+		(*Type_TypeSlice)(nil),
+		(*Type_TypeStruct)(nil),
+		(*Type_TypeTuple)(nil),
+		(*Type_TypeVar)(nil),
 	}
 }
 
-func _TypeInfo_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
-	m := msg.(*TypeInfo)
+func _Type_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
+	m := msg.(*Type)
 	// type
 	switch x := m.Type.(type) {
-	case *TypeInfo_TypeArray:
+	case *Type_TypeArray:
 		b.EncodeVarint(3<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeArray); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeBasic:
+	case *Type_TypeBasic:
 		b.EncodeVarint(4<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeBasic); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeBuiltin:
+	case *Type_TypeBuiltin:
 		t := uint64(0)
 		if x.TypeBuiltin {
 			t = 1
 		}
 		b.EncodeVarint(5<<3 | proto.WireVarint)
 		b.EncodeVarint(t)
-	case *TypeInfo_TypeChan:
+	case *Type_TypeChan:
 		b.EncodeVarint(6<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeChan); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeConst:
+	case *Type_TypeConst:
 		b.EncodeVarint(7<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeConst); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeFunc:
+	case *Type_TypeFunc:
 		b.EncodeVarint(8<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeFunc); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeInterface:
+	case *Type_TypeInterface:
 		b.EncodeVarint(9<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeInterface); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeLabel:
+	case *Type_TypeLabel:
 		b.EncodeVarint(10<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeLabel); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeMap:
+	case *Type_TypeMap:
 		b.EncodeVarint(11<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeMap); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeName:
+	case *Type_TypeName:
 		b.EncodeVarint(12<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeName); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeNamed:
+	case *Type_TypeNamed:
 		b.EncodeVarint(13<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeNamed); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeNil:
+	case *Type_TypeNil:
 		b.EncodeVarint(14<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeNil); err != nil {
 			return err
 		}
-	case *TypeInfo_TypePackage:
+	case *Type_TypePackage:
 		t := uint64(0)
 		if x.TypePackage {
 			t = 1
 		}
 		b.EncodeVarint(15<<3 | proto.WireVarint)
 		b.EncodeVarint(t)
-	case *TypeInfo_TypePointer:
+	case *Type_TypePointer:
 		b.EncodeVarint(16<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypePointer); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeSignature:
+	case *Type_TypeSignature:
 		b.EncodeVarint(17<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeSignature); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeSlice:
+	case *Type_TypeSlice:
 		b.EncodeVarint(18<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeSlice); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeStruct:
+	case *Type_TypeStruct:
 		b.EncodeVarint(19<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeStruct); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeTuple:
+	case *Type_TypeTuple:
 		b.EncodeVarint(20<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeTuple); err != nil {
 			return err
 		}
-	case *TypeInfo_TypeVar:
+	case *Type_TypeVar:
 		b.EncodeVarint(21<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.TypeVar); err != nil {
 			return err
 		}
 	case nil:
 	default:
-		return fmt.Errorf("TypeInfo.Type has unexpected type %T", x)
+		return fmt.Errorf("Type.Type has unexpected type %T", x)
 	}
 	return nil
 }
 
-func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
-	m := msg.(*TypeInfo)
+func _Type_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
+	m := msg.(*Type)
 	switch tag {
 	case 3: // type.type_array
 		if wire != proto.WireBytes {
@@ -791,7 +829,7 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeArray)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeArray{msg}
+		m.Type = &Type_TypeArray{msg}
 		return true, err
 	case 4: // type.type_basic
 		if wire != proto.WireBytes {
@@ -799,14 +837,14 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeBasic)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeBasic{msg}
+		m.Type = &Type_TypeBasic{msg}
 		return true, err
 	case 5: // type.type_builtin
 		if wire != proto.WireVarint {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeVarint()
-		m.Type = &TypeInfo_TypeBuiltin{x != 0}
+		m.Type = &Type_TypeBuiltin{x != 0}
 		return true, err
 	case 6: // type.type_chan
 		if wire != proto.WireBytes {
@@ -814,7 +852,7 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeChan)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeChan{msg}
+		m.Type = &Type_TypeChan{msg}
 		return true, err
 	case 7: // type.type_const
 		if wire != proto.WireBytes {
@@ -822,7 +860,7 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeConst)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeConst{msg}
+		m.Type = &Type_TypeConst{msg}
 		return true, err
 	case 8: // type.type_func
 		if wire != proto.WireBytes {
@@ -830,7 +868,7 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeSignature)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeFunc{msg}
+		m.Type = &Type_TypeFunc{msg}
 		return true, err
 	case 9: // type.type_interface
 		if wire != proto.WireBytes {
@@ -838,15 +876,15 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeInterface)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeInterface{msg}
+		m.Type = &Type_TypeInterface{msg}
 		return true, err
 	case 10: // type.type_label
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
-		msg := new(TypeInfo)
+		msg := new(TypeRef)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeLabel{msg}
+		m.Type = &Type_TypeLabel{msg}
 		return true, err
 	case 11: // type.type_map
 		if wire != proto.WireBytes {
@@ -854,15 +892,15 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeMap)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeMap{msg}
+		m.Type = &Type_TypeMap{msg}
 		return true, err
 	case 12: // type.type_name
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
-		msg := new(TypeInfo)
+		msg := new(TypeRef)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeName{msg}
+		m.Type = &Type_TypeName{msg}
 		return true, err
 	case 13: // type.type_named
 		if wire != proto.WireBytes {
@@ -870,22 +908,22 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeNamed)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeNamed{msg}
+		m.Type = &Type_TypeNamed{msg}
 		return true, err
 	case 14: // type.type_nil
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
-		msg := new(TypeInfo)
+		msg := new(TypeRef)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeNil{msg}
+		m.Type = &Type_TypeNil{msg}
 		return true, err
 	case 15: // type.type_package
 		if wire != proto.WireVarint {
 			return true, proto.ErrInternalBadWireType
 		}
 		x, err := b.DecodeVarint()
-		m.Type = &TypeInfo_TypePackage{x != 0}
+		m.Type = &Type_TypePackage{x != 0}
 		return true, err
 	case 16: // type.type_pointer
 		if wire != proto.WireBytes {
@@ -893,7 +931,7 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypePointer)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypePointer{msg}
+		m.Type = &Type_TypePointer{msg}
 		return true, err
 	case 17: // type.type_signature
 		if wire != proto.WireBytes {
@@ -901,7 +939,7 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeSignature)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeSignature{msg}
+		m.Type = &Type_TypeSignature{msg}
 		return true, err
 	case 18: // type.type_slice
 		if wire != proto.WireBytes {
@@ -909,7 +947,7 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeSlice)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeSlice{msg}
+		m.Type = &Type_TypeSlice{msg}
 		return true, err
 	case 19: // type.type_struct
 		if wire != proto.WireBytes {
@@ -917,7 +955,7 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeStruct)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeStruct{msg}
+		m.Type = &Type_TypeStruct{msg}
 		return true, err
 	case 20: // type.type_tuple
 		if wire != proto.WireBytes {
@@ -925,112 +963,112 @@ func _TypeInfo_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffe
 		}
 		msg := new(TypeTuple)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeTuple{msg}
+		m.Type = &Type_TypeTuple{msg}
 		return true, err
 	case 21: // type.type_var
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
-		msg := new(TypeInfo)
+		msg := new(TypeRef)
 		err := b.DecodeMessage(msg)
-		m.Type = &TypeInfo_TypeVar{msg}
+		m.Type = &Type_TypeVar{msg}
 		return true, err
 	default:
 		return false, nil
 	}
 }
 
-func _TypeInfo_OneofSizer(msg proto.Message) (n int) {
-	m := msg.(*TypeInfo)
+func _Type_OneofSizer(msg proto.Message) (n int) {
+	m := msg.(*Type)
 	// type
 	switch x := m.Type.(type) {
-	case *TypeInfo_TypeArray:
+	case *Type_TypeArray:
 		s := proto.Size(x.TypeArray)
 		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeBasic:
+	case *Type_TypeBasic:
 		s := proto.Size(x.TypeBasic)
 		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeBuiltin:
+	case *Type_TypeBuiltin:
 		n += 1 // tag and wire
 		n += 1
-	case *TypeInfo_TypeChan:
+	case *Type_TypeChan:
 		s := proto.Size(x.TypeChan)
 		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeConst:
+	case *Type_TypeConst:
 		s := proto.Size(x.TypeConst)
 		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeFunc:
+	case *Type_TypeFunc:
 		s := proto.Size(x.TypeFunc)
 		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeInterface:
+	case *Type_TypeInterface:
 		s := proto.Size(x.TypeInterface)
 		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeLabel:
+	case *Type_TypeLabel:
 		s := proto.Size(x.TypeLabel)
 		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeMap:
+	case *Type_TypeMap:
 		s := proto.Size(x.TypeMap)
 		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeName:
+	case *Type_TypeName:
 		s := proto.Size(x.TypeName)
 		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeNamed:
+	case *Type_TypeNamed:
 		s := proto.Size(x.TypeNamed)
 		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeNil:
+	case *Type_TypeNil:
 		s := proto.Size(x.TypeNil)
 		n += 1 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypePackage:
+	case *Type_TypePackage:
 		n += 1 // tag and wire
 		n += 1
-	case *TypeInfo_TypePointer:
+	case *Type_TypePointer:
 		s := proto.Size(x.TypePointer)
 		n += 2 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeSignature:
+	case *Type_TypeSignature:
 		s := proto.Size(x.TypeSignature)
 		n += 2 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeSlice:
+	case *Type_TypeSlice:
 		s := proto.Size(x.TypeSlice)
 		n += 2 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeStruct:
+	case *Type_TypeStruct:
 		s := proto.Size(x.TypeStruct)
 		n += 2 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeTuple:
+	case *Type_TypeTuple:
 		s := proto.Size(x.TypeTuple)
 		n += 2 // tag and wire
 		n += proto.SizeVarint(uint64(s))
 		n += s
-	case *TypeInfo_TypeVar:
+	case *Type_TypeVar:
 		s := proto.Size(x.TypeVar)
 		n += 2 // tag and wire
 		n += proto.SizeVarint(uint64(s))
@@ -1043,18 +1081,18 @@ func _TypeInfo_OneofSizer(msg proto.Message) (n int) {
 }
 
 type TypeArray struct {
-	Elem                 *TypeInfo `protobuf:"bytes,1,opt,name=elem" json:"elem,omitempty"`
-	Len                  int64     `protobuf:"varint,2,opt,name=len" json:"len,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_unrecognized     []byte    `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
+	Elem                 *TypeRef `protobuf:"bytes,1,opt,name=elem" json:"elem,omitempty"`
+	Len                  int64    `protobuf:"varint,2,opt,name=len" json:"len,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *TypeArray) Reset()         { *m = TypeArray{} }
 func (m *TypeArray) String() string { return proto.CompactTextString(m) }
 func (*TypeArray) ProtoMessage()    {}
 func (*TypeArray) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{2}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{3}
 }
 func (m *TypeArray) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeArray.Unmarshal(m, b)
@@ -1074,7 +1112,7 @@ func (m *TypeArray) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypeArray proto.InternalMessageInfo
 
-func (m *TypeArray) GetElem() *TypeInfo {
+func (m *TypeArray) GetElem() *TypeRef {
 	if m != nil {
 		return m.Elem
 	}
@@ -1100,7 +1138,7 @@ func (m *TypeBasic) Reset()         { *m = TypeBasic{} }
 func (m *TypeBasic) String() string { return proto.CompactTextString(m) }
 func (*TypeBasic) ProtoMessage()    {}
 func (*TypeBasic) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{3}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{4}
 }
 func (m *TypeBasic) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeBasic.Unmarshal(m, b)
@@ -1135,19 +1173,19 @@ func (m *TypeBasic) GetKind() TypeBasic_Kind {
 }
 
 type TypeChan struct {
-	Elem                 *TypeInfo `protobuf:"bytes,1,opt,name=elem" json:"elem,omitempty"`
-	SendDir              bool      `protobuf:"varint,2,opt,name=send_dir,json=sendDir" json:"send_dir,omitempty"`
-	RecvDir              bool      `protobuf:"varint,3,opt,name=recv_dir,json=recvDir" json:"recv_dir,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_unrecognized     []byte    `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
+	Elem                 *TypeRef `protobuf:"bytes,1,opt,name=elem" json:"elem,omitempty"`
+	SendDir              bool     `protobuf:"varint,2,opt,name=send_dir,json=sendDir" json:"send_dir,omitempty"`
+	RecvDir              bool     `protobuf:"varint,3,opt,name=recv_dir,json=recvDir" json:"recv_dir,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *TypeChan) Reset()         { *m = TypeChan{} }
 func (m *TypeChan) String() string { return proto.CompactTextString(m) }
 func (*TypeChan) ProtoMessage()    {}
 func (*TypeChan) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{4}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{5}
 }
 func (m *TypeChan) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeChan.Unmarshal(m, b)
@@ -1167,7 +1205,7 @@ func (m *TypeChan) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypeChan proto.InternalMessageInfo
 
-func (m *TypeChan) GetElem() *TypeInfo {
+func (m *TypeChan) GetElem() *TypeRef {
 	if m != nil {
 		return m.Elem
 	}
@@ -1189,7 +1227,7 @@ func (m *TypeChan) GetRecvDir() bool {
 }
 
 type TypeConst struct {
-	Type                 *TypeInfo      `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
+	Type                 *TypeRef       `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
 	Value                *ConstantValue `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
@@ -1200,7 +1238,7 @@ func (m *TypeConst) Reset()         { *m = TypeConst{} }
 func (m *TypeConst) String() string { return proto.CompactTextString(m) }
 func (*TypeConst) ProtoMessage()    {}
 func (*TypeConst) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{5}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{6}
 }
 func (m *TypeConst) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeConst.Unmarshal(m, b)
@@ -1220,7 +1258,7 @@ func (m *TypeConst) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypeConst proto.InternalMessageInfo
 
-func (m *TypeConst) GetType() *TypeInfo {
+func (m *TypeConst) GetType() *TypeRef {
 	if m != nil {
 		return m.Type
 	}
@@ -1235,18 +1273,18 @@ func (m *TypeConst) GetValue() *ConstantValue {
 }
 
 type TypeInterface struct {
-	ExplicitMethods      []*TypeInfo `protobuf:"bytes,1,rep,name=explicit_methods,json=explicitMethods" json:"explicit_methods,omitempty"`
-	Embedded             []*TypeInfo `protobuf:"bytes,2,rep,name=embedded" json:"embedded,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
-	XXX_unrecognized     []byte      `json:"-"`
-	XXX_sizecache        int32       `json:"-"`
+	ExplicitMethods      []*TypeRef `protobuf:"bytes,1,rep,name=explicit_methods,json=explicitMethods" json:"explicit_methods,omitempty"`
+	Embedded             []*TypeRef `protobuf:"bytes,2,rep,name=embedded" json:"embedded,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *TypeInterface) Reset()         { *m = TypeInterface{} }
 func (m *TypeInterface) String() string { return proto.CompactTextString(m) }
 func (*TypeInterface) ProtoMessage()    {}
 func (*TypeInterface) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{6}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{7}
 }
 func (m *TypeInterface) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeInterface.Unmarshal(m, b)
@@ -1266,14 +1304,14 @@ func (m *TypeInterface) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypeInterface proto.InternalMessageInfo
 
-func (m *TypeInterface) GetExplicitMethods() []*TypeInfo {
+func (m *TypeInterface) GetExplicitMethods() []*TypeRef {
 	if m != nil {
 		return m.ExplicitMethods
 	}
 	return nil
 }
 
-func (m *TypeInterface) GetEmbedded() []*TypeInfo {
+func (m *TypeInterface) GetEmbedded() []*TypeRef {
 	if m != nil {
 		return m.Embedded
 	}
@@ -1281,18 +1319,18 @@ func (m *TypeInterface) GetEmbedded() []*TypeInfo {
 }
 
 type TypeMap struct {
-	Elem                 *TypeInfo `protobuf:"bytes,1,opt,name=elem" json:"elem,omitempty"`
-	Key                  *TypeInfo `protobuf:"bytes,2,opt,name=key" json:"key,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_unrecognized     []byte    `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
+	Elem                 *TypeRef `protobuf:"bytes,1,opt,name=elem" json:"elem,omitempty"`
+	Key                  *TypeRef `protobuf:"bytes,2,opt,name=key" json:"key,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *TypeMap) Reset()         { *m = TypeMap{} }
 func (m *TypeMap) String() string { return proto.CompactTextString(m) }
 func (*TypeMap) ProtoMessage()    {}
 func (*TypeMap) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{7}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{8}
 }
 func (m *TypeMap) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeMap.Unmarshal(m, b)
@@ -1312,14 +1350,14 @@ func (m *TypeMap) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypeMap proto.InternalMessageInfo
 
-func (m *TypeMap) GetElem() *TypeInfo {
+func (m *TypeMap) GetElem() *TypeRef {
 	if m != nil {
 		return m.Elem
 	}
 	return nil
 }
 
-func (m *TypeMap) GetKey() *TypeInfo {
+func (m *TypeMap) GetKey() *TypeRef {
 	if m != nil {
 		return m.Key
 	}
@@ -1327,19 +1365,19 @@ func (m *TypeMap) GetKey() *TypeInfo {
 }
 
 type TypeNamed struct {
-	TypeName             *TypeInfo   `protobuf:"bytes,1,opt,name=type_name,json=typeName" json:"type_name,omitempty"`
-	Type                 *TypeInfo   `protobuf:"bytes,2,opt,name=type" json:"type,omitempty"`
-	Methods              []*TypeInfo `protobuf:"bytes,3,rep,name=methods" json:"methods,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
-	XXX_unrecognized     []byte      `json:"-"`
-	XXX_sizecache        int32       `json:"-"`
+	TypeName             *TypeRef   `protobuf:"bytes,1,opt,name=type_name,json=typeName" json:"type_name,omitempty"`
+	Type                 *TypeRef   `protobuf:"bytes,2,opt,name=type" json:"type,omitempty"`
+	Methods              []*TypeRef `protobuf:"bytes,3,rep,name=methods" json:"methods,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *TypeNamed) Reset()         { *m = TypeNamed{} }
 func (m *TypeNamed) String() string { return proto.CompactTextString(m) }
 func (*TypeNamed) ProtoMessage()    {}
 func (*TypeNamed) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{8}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{9}
 }
 func (m *TypeNamed) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeNamed.Unmarshal(m, b)
@@ -1359,21 +1397,21 @@ func (m *TypeNamed) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypeNamed proto.InternalMessageInfo
 
-func (m *TypeNamed) GetTypeName() *TypeInfo {
+func (m *TypeNamed) GetTypeName() *TypeRef {
 	if m != nil {
 		return m.TypeName
 	}
 	return nil
 }
 
-func (m *TypeNamed) GetType() *TypeInfo {
+func (m *TypeNamed) GetType() *TypeRef {
 	if m != nil {
 		return m.Type
 	}
 	return nil
 }
 
-func (m *TypeNamed) GetMethods() []*TypeInfo {
+func (m *TypeNamed) GetMethods() []*TypeRef {
 	if m != nil {
 		return m.Methods
 	}
@@ -1381,17 +1419,17 @@ func (m *TypeNamed) GetMethods() []*TypeInfo {
 }
 
 type TypePointer struct {
-	Elem                 *TypeInfo `protobuf:"bytes,1,opt,name=elem" json:"elem,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_unrecognized     []byte    `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
+	Elem                 *TypeRef `protobuf:"bytes,1,opt,name=elem" json:"elem,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *TypePointer) Reset()         { *m = TypePointer{} }
 func (m *TypePointer) String() string { return proto.CompactTextString(m) }
 func (*TypePointer) ProtoMessage()    {}
 func (*TypePointer) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{9}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{10}
 }
 func (m *TypePointer) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypePointer.Unmarshal(m, b)
@@ -1411,7 +1449,7 @@ func (m *TypePointer) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypePointer proto.InternalMessageInfo
 
-func (m *TypePointer) GetElem() *TypeInfo {
+func (m *TypePointer) GetElem() *TypeRef {
 	if m != nil {
 		return m.Elem
 	}
@@ -1419,19 +1457,19 @@ func (m *TypePointer) GetElem() *TypeInfo {
 }
 
 type TypeSignature struct {
-	Recv                 *TypeInfo   `protobuf:"bytes,1,opt,name=recv" json:"recv,omitempty"`
-	Params               []*TypeInfo `protobuf:"bytes,2,rep,name=params" json:"params,omitempty"`
-	Results              []*TypeInfo `protobuf:"bytes,3,rep,name=results" json:"results,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
-	XXX_unrecognized     []byte      `json:"-"`
-	XXX_sizecache        int32       `json:"-"`
+	Recv                 *TypeRef   `protobuf:"bytes,1,opt,name=recv" json:"recv,omitempty"`
+	Params               []*TypeRef `protobuf:"bytes,2,rep,name=params" json:"params,omitempty"`
+	Results              []*TypeRef `protobuf:"bytes,3,rep,name=results" json:"results,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *TypeSignature) Reset()         { *m = TypeSignature{} }
 func (m *TypeSignature) String() string { return proto.CompactTextString(m) }
 func (*TypeSignature) ProtoMessage()    {}
 func (*TypeSignature) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{10}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{11}
 }
 func (m *TypeSignature) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeSignature.Unmarshal(m, b)
@@ -1451,21 +1489,21 @@ func (m *TypeSignature) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypeSignature proto.InternalMessageInfo
 
-func (m *TypeSignature) GetRecv() *TypeInfo {
+func (m *TypeSignature) GetRecv() *TypeRef {
 	if m != nil {
 		return m.Recv
 	}
 	return nil
 }
 
-func (m *TypeSignature) GetParams() []*TypeInfo {
+func (m *TypeSignature) GetParams() []*TypeRef {
 	if m != nil {
 		return m.Params
 	}
 	return nil
 }
 
-func (m *TypeSignature) GetResults() []*TypeInfo {
+func (m *TypeSignature) GetResults() []*TypeRef {
 	if m != nil {
 		return m.Results
 	}
@@ -1473,17 +1511,17 @@ func (m *TypeSignature) GetResults() []*TypeInfo {
 }
 
 type TypeSlice struct {
-	Elem                 *TypeInfo `protobuf:"bytes,1,opt,name=elem" json:"elem,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
-	XXX_unrecognized     []byte    `json:"-"`
-	XXX_sizecache        int32     `json:"-"`
+	Elem                 *TypeRef `protobuf:"bytes,1,opt,name=elem" json:"elem,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *TypeSlice) Reset()         { *m = TypeSlice{} }
 func (m *TypeSlice) String() string { return proto.CompactTextString(m) }
 func (*TypeSlice) ProtoMessage()    {}
 func (*TypeSlice) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{11}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{12}
 }
 func (m *TypeSlice) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeSlice.Unmarshal(m, b)
@@ -1503,7 +1541,7 @@ func (m *TypeSlice) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypeSlice proto.InternalMessageInfo
 
-func (m *TypeSlice) GetElem() *TypeInfo {
+func (m *TypeSlice) GetElem() *TypeRef {
 	if m != nil {
 		return m.Elem
 	}
@@ -1511,17 +1549,17 @@ func (m *TypeSlice) GetElem() *TypeInfo {
 }
 
 type TypeStruct struct {
-	Fields               []*TypeInfo `protobuf:"bytes,1,rep,name=fields" json:"fields,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
-	XXX_unrecognized     []byte      `json:"-"`
-	XXX_sizecache        int32       `json:"-"`
+	Fields               []*TypeRef `protobuf:"bytes,1,rep,name=fields" json:"fields,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *TypeStruct) Reset()         { *m = TypeStruct{} }
 func (m *TypeStruct) String() string { return proto.CompactTextString(m) }
 func (*TypeStruct) ProtoMessage()    {}
 func (*TypeStruct) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{12}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{13}
 }
 func (m *TypeStruct) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeStruct.Unmarshal(m, b)
@@ -1541,7 +1579,7 @@ func (m *TypeStruct) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypeStruct proto.InternalMessageInfo
 
-func (m *TypeStruct) GetFields() []*TypeInfo {
+func (m *TypeStruct) GetFields() []*TypeRef {
 	if m != nil {
 		return m.Fields
 	}
@@ -1549,17 +1587,17 @@ func (m *TypeStruct) GetFields() []*TypeInfo {
 }
 
 type TypeTuple struct {
-	Vars                 []*TypeInfo `protobuf:"bytes,1,rep,name=vars" json:"vars,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
-	XXX_unrecognized     []byte      `json:"-"`
-	XXX_sizecache        int32       `json:"-"`
+	Vars                 []*TypeRef `protobuf:"bytes,1,rep,name=vars" json:"vars,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
 }
 
 func (m *TypeTuple) Reset()         { *m = TypeTuple{} }
 func (m *TypeTuple) String() string { return proto.CompactTextString(m) }
 func (*TypeTuple) ProtoMessage()    {}
 func (*TypeTuple) Descriptor() ([]byte, []int) {
-	return fileDescriptor_type_b3d5b7fbfe985d16, []int{13}
+	return fileDescriptor_type_9840b0e3b8798b78, []int{14}
 }
 func (m *TypeTuple) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_TypeTuple.Unmarshal(m, b)
@@ -1579,7 +1617,7 @@ func (m *TypeTuple) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TypeTuple proto.InternalMessageInfo
 
-func (m *TypeTuple) GetVars() []*TypeInfo {
+func (m *TypeTuple) GetVars() []*TypeRef {
 	if m != nil {
 		return m.Vars
 	}
@@ -1588,7 +1626,8 @@ func (m *TypeTuple) GetVars() []*TypeInfo {
 
 func init() {
 	proto.RegisterType((*ConstantValue)(nil), "pb.ConstantValue")
-	proto.RegisterType((*TypeInfo)(nil), "pb.TypeInfo")
+	proto.RegisterType((*TypeRef)(nil), "pb.TypeRef")
+	proto.RegisterType((*Type)(nil), "pb.Type")
 	proto.RegisterType((*TypeArray)(nil), "pb.TypeArray")
 	proto.RegisterType((*TypeBasic)(nil), "pb.TypeBasic")
 	proto.RegisterType((*TypeChan)(nil), "pb.TypeChan")
@@ -1604,76 +1643,77 @@ func init() {
 	proto.RegisterEnum("pb.TypeBasic_Kind", TypeBasic_Kind_name, TypeBasic_Kind_value)
 }
 
-func init() { proto.RegisterFile("type.proto", fileDescriptor_type_b3d5b7fbfe985d16) }
+func init() { proto.RegisterFile("type.proto", fileDescriptor_type_9840b0e3b8798b78) }
 
-var fileDescriptor_type_b3d5b7fbfe985d16 = []byte{
-	// 1074 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x56, 0xdd, 0x6e, 0xe3, 0x44,
-	0x14, 0x4e, 0x6a, 0x27, 0x4e, 0x4e, 0xfe, 0xa6, 0xd3, 0xee, 0x32, 0xcb, 0x05, 0x8a, 0x0c, 0x5a,
-	0x8a, 0xd0, 0x16, 0x9a, 0x56, 0x65, 0xc5, 0x0d, 0xea, 0x2f, 0x89, 0x36, 0x75, 0x23, 0x37, 0xa9,
-	0xe0, 0x2a, 0x9a, 0x38, 0xd3, 0xd6, 0xaa, 0x63, 0x5b, 0x8e, 0x53, 0xb6, 0x57, 0xf0, 0x40, 0x3c,
-	0x07, 0x37, 0x3c, 0x14, 0x68, 0xce, 0x78, 0xdc, 0x84, 0x4d, 0x55, 0xee, 0xe6, 0x3b, 0xbf, 0xdf,
-	0x39, 0x67, 0xe6, 0xd8, 0x00, 0xe9, 0x63, 0x2c, 0x76, 0xe3, 0x24, 0x4a, 0x23, 0xba, 0x11, 0x4f,
-	0xec, 0x3f, 0x8b, 0xd0, 0x38, 0x89, 0xc2, 0x79, 0xca, 0xc3, 0xf4, 0x9a, 0x07, 0x0b, 0x41, 0x3f,
-	0x07, 0x6b, 0x11, 0xde, 0x87, 0xd1, 0x6f, 0x21, 0x2b, 0xb6, 0x8b, 0x3b, 0xd5, 0x6e, 0xc1, 0xd5,
-	0x02, 0xba, 0x0d, 0xe6, 0x24, 0x8a, 0x02, 0xb6, 0xd1, 0x2e, 0xee, 0x54, 0xba, 0x05, 0x17, 0x11,
-	0x65, 0x50, 0x9e, 0xa7, 0x89, 0x1f, 0xde, 0x32, 0x23, 0x73, 0xc8, 0x30, 0xa5, 0x60, 0xf8, 0x61,
-	0xca, 0xcc, 0x4c, 0x2c, 0x01, 0x7d, 0x0d, 0xa5, 0x9b, 0x20, 0xe2, 0x29, 0x2b, 0xb5, 0x8b, 0x3b,
-	0xc5, 0x6e, 0xc1, 0x55, 0x50, 0xe6, 0xf5, 0xa2, 0x59, 0x1c, 0x88, 0x8f, 0xac, 0xac, 0xf3, 0x66,
-	0x82, 0x63, 0x0b, 0x4a, 0x0f, 0x92, 0x9c, 0xfd, 0x97, 0x05, 0x95, 0xe1, 0x63, 0x2c, 0x7a, 0xe1,
-	0x4d, 0x44, 0x19, 0x58, 0x31, 0xf7, 0xee, 0xf9, 0xad, 0x50, 0x4c, 0x5d, 0x0d, 0x29, 0x05, 0x33,
-	0xe4, 0x33, 0x81, 0x3c, 0xab, 0x2e, 0x9e, 0xe9, 0xae, 0xaa, 0x7d, 0xcc, 0x93, 0x84, 0x3f, 0x22,
-	0xd3, 0x5a, 0xa7, 0xb1, 0x1b, 0x4f, 0x76, 0x65, 0xbc, 0x23, 0x29, 0xec, 0x16, 0xdc, 0x6a, 0xaa,
-	0x41, 0x6e, 0x3f, 0xe1, 0x73, 0xdf, 0xc3, 0x12, 0x96, 0xec, 0x8f, 0xa5, 0x50, 0xdb, 0x23, 0xa0,
-	0x5f, 0x42, 0x5d, 0xd9, 0x2f, 0xfc, 0x20, 0xf5, 0x43, 0x2c, 0x4f, 0xf6, 0xa8, 0x86, 0x26, 0x4a,
-	0x48, 0xbf, 0x05, 0xf4, 0x18, 0x7b, 0x77, 0x3c, 0xc4, 0x32, 0x6b, 0x9d, 0xba, 0x8e, 0x79, 0x72,
-	0xc7, 0xc3, 0x6e, 0xc1, 0xad, 0xa4, 0xd9, 0x39, 0x67, 0xe0, 0xc9, 0xf9, 0x30, 0x6b, 0x95, 0x01,
-	0x0e, 0x4d, 0x33, 0x40, 0x40, 0xbf, 0xcf, 0x82, 0xdf, 0x2c, 0x42, 0x8f, 0x55, 0xd0, 0x7c, 0x53,
-	0x9b, 0x5f, 0xf9, 0xb7, 0x21, 0x4f, 0x17, 0x89, 0xd0, 0x19, 0xce, 0x17, 0xa1, 0x47, 0x7f, 0x84,
-	0x26, 0x7a, 0xf8, 0x61, 0x2a, 0x92, 0x1b, 0xee, 0x09, 0x56, 0x5d, 0x75, 0xeb, 0x69, 0x45, 0xb7,
-	0xe0, 0x36, 0xd2, 0x65, 0x01, 0x7d, 0x97, 0xb1, 0x0b, 0xf8, 0x44, 0x04, 0x0c, 0x56, 0x6b, 0x91,
-	0xf3, 0xd1, 0xe4, 0xfa, 0xd2, 0x80, 0xee, 0x00, 0xa6, 0x1d, 0xcf, 0x78, 0xcc, 0x6a, 0x68, 0x5c,
-	0xd3, 0xc6, 0x17, 0x3c, 0x96, 0xc3, 0x4e, 0xd5, 0x31, 0xef, 0x11, 0x4e, 0xb0, 0xbe, 0x36, 0x2e,
-	0x86, 0x72, 0x96, 0xa7, 0x2a, 0x8d, 0xa7, 0xac, 0xb1, 0xda, 0x23, 0x69, 0x31, 0xd5, 0x34, 0x10,
-	0xd0, 0x6f, 0x32, 0x1a, 0xa1, 0x1f, 0xb0, 0xe6, 0xda, 0xd8, 0xc8, 0xc3, 0xf1, 0x83, 0x7c, 0xa0,
-	0xfa, 0x8e, 0xb5, 0x96, 0x07, 0x3a, 0xc8, 0x6e, 0xda, 0x81, 0x36, 0x8a, 0xb0, 0x87, 0x8c, 0x60,
-	0xcc, 0x96, 0x8e, 0x39, 0x50, 0xe2, 0xdc, 0x4b, 0xc1, 0xbc, 0xef, 0x73, 0x3d, 0x15, 0xb6, 0xf9,
-	0xfc, 0xb8, 0xb0, 0xef, 0xb9, 0x20, 0xaf, 0x78, 0x1e, 0xf8, 0x9e, 0x60, 0x74, 0xb5, 0xe2, 0x2b,
-	0x29, 0xd4, 0x15, 0x23, 0xa0, 0x7b, 0x50, 0x53, 0xf6, 0x69, 0xb2, 0xf0, 0x52, 0xb6, 0x85, 0x0e,
-	0xcd, 0xdc, 0x01, 0xa5, 0xdd, 0x82, 0x8b, 0x41, 0x15, 0xca, 0x53, 0xa4, 0x8b, 0x38, 0x10, 0x6c,
-	0x7b, 0x35, 0xc5, 0x50, 0x0a, 0x75, 0x0a, 0x04, 0x79, 0x53, 0x1f, 0x78, 0xc2, 0x5e, 0x3d, 0xdf,
-	0xd4, 0x6b, 0x9e, 0x1c, 0x97, 0xc1, 0x94, 0x47, 0xfb, 0x27, 0xa8, 0xe6, 0xef, 0x8e, 0xb6, 0xc1,
-	0x14, 0x81, 0x98, 0xe1, 0x2b, 0xfe, 0x8f, 0xaf, 0x8b, 0x1a, 0x4a, 0xc0, 0x08, 0x44, 0x88, 0xef,
-	0xd9, 0x70, 0xe5, 0xd1, 0xfe, 0xdb, 0x50, 0x11, 0xd4, 0xe3, 0xdb, 0x96, 0x4b, 0x85, 0xdf, 0xce,
-	0x31, 0x44, 0xc9, 0x55, 0x80, 0xbe, 0x05, 0xf3, 0xde, 0x0f, 0xa7, 0xe8, 0xd6, 0xec, 0xd0, 0x95,
-	0xc7, 0xbb, 0xfb, 0xc1, 0x0f, 0xa7, 0x2e, 0xea, 0xed, 0x7f, 0x36, 0xc0, 0x94, 0x90, 0xd6, 0xc0,
-	0xea, 0x39, 0xd7, 0x47, 0xfd, 0xde, 0x29, 0x29, 0xd0, 0x0a, 0x98, 0xc7, 0x97, 0x97, 0x7d, 0x52,
-	0xa4, 0x16, 0x18, 0x3d, 0x67, 0x48, 0x36, 0x68, 0x15, 0x4a, 0x3d, 0x67, 0x38, 0x7e, 0x4f, 0x0c,
-	0x0a, 0x50, 0x96, 0xc7, 0xbd, 0x43, 0x62, 0xea, 0xf3, 0x7e, 0x87, 0x94, 0xf4, 0xf9, 0xf0, 0x80,
-	0x94, 0x65, 0x84, 0x91, 0x74, 0xb4, 0xa4, 0x74, 0xa4, 0x3c, 0x2b, 0x32, 0xc9, 0x28, 0x73, 0xad,
-	0xe6, 0x60, 0xbf, 0x43, 0x20, 0x07, 0x87, 0x07, 0xa4, 0x46, 0xeb, 0x50, 0x41, 0x30, 0x18, 0xba,
-	0xa4, 0x2e, 0xd1, 0x79, 0xff, 0xf2, 0x08, 0x0d, 0x1b, 0x4f, 0xe8, 0xf0, 0x80, 0x34, 0x69, 0x13,
-	0xe0, 0xe4, 0xf2, 0x62, 0xd0, 0x3f, 0xfb, 0x45, 0xe2, 0x16, 0x6d, 0x41, 0x4d, 0xe3, 0xbd, 0xce,
-	0x7b, 0x42, 0x64, 0xf6, 0xab, 0xa1, 0xdb, 0x73, 0x7e, 0x26, 0x9b, 0x94, 0x42, 0x73, 0xe4, 0x5c,
-	0x1d, 0x9d, 0x9f, 0x8d, 0x07, 0x97, 0x3d, 0x67, 0x78, 0xe6, 0x12, 0x4a, 0x09, 0xd4, 0x47, 0xce,
-	0xf0, 0xd7, 0xc1, 0xd9, 0xe9, 0x18, 0x2b, 0xde, 0x92, 0x21, 0xb4, 0x44, 0x16, 0xb0, 0xbd, 0x6c,
-	0xe2, 0x8e, 0x9c, 0x33, 0xf2, 0x8a, 0x6e, 0x42, 0x43, 0x4b, 0x90, 0x0b, 0x79, 0x4d, 0xb7, 0xa0,
-	0xa5, 0x45, 0x19, 0x01, 0xf2, 0x99, 0x4a, 0xa8, 0x84, 0x19, 0x09, 0xb6, 0x1c, 0xde, 0xe9, 0xf5,
-	0xc9, 0x1b, 0x7b, 0xa2, 0xd6, 0x3a, 0xae, 0xbd, 0x97, 0x6f, 0xc3, 0x1b, 0xa8, 0xcc, 0x45, 0x38,
-	0x1d, 0x4f, 0xfd, 0x44, 0x7d, 0x8a, 0x5c, 0x4b, 0xe2, 0x53, 0x3f, 0x91, 0xaa, 0x44, 0x78, 0x0f,
-	0xa8, 0x32, 0x94, 0x4a, 0xe2, 0x53, 0x3f, 0xb1, 0xaf, 0xd5, 0x85, 0x51, 0xbb, 0xb2, 0xad, 0xee,
-	0xe1, 0xfa, 0x24, 0x52, 0x43, 0xbf, 0xce, 0xbe, 0x39, 0x98, 0x21, 0x7b, 0x9a, 0x2b, 0x5f, 0x4a,
-	0x37, 0xfb, 0x26, 0x25, 0xd0, 0x58, 0x59, 0x95, 0xf4, 0x07, 0x20, 0xe2, 0x63, 0x1c, 0xf8, 0x9e,
-	0x9f, 0x8e, 0x67, 0x22, 0xbd, 0x8b, 0xa6, 0xf2, 0x5e, 0x1a, 0x9f, 0xe4, 0x69, 0x69, 0xab, 0x0b,
-	0x65, 0x24, 0x77, 0xa4, 0x98, 0x4d, 0xc4, 0x74, 0x2a, 0xe4, 0x9d, 0xfd, 0xd4, 0x21, 0xd7, 0xda,
-	0x1f, 0xc0, 0xca, 0x36, 0xe7, 0xff, 0x68, 0xd7, 0x17, 0x60, 0xdc, 0x8b, 0xc7, 0xac, 0x8e, 0x55,
-	0x03, 0xa9, 0xb0, 0xff, 0x28, 0xaa, 0xce, 0xe8, 0x0d, 0xb9, 0xb4, 0x7e, 0xd7, 0x05, 0x7d, 0x5a,
-	0xbe, 0xba, 0x89, 0x1b, 0xcf, 0x36, 0xf1, 0x2d, 0x58, 0xba, 0x03, 0xc6, 0x9a, 0x82, 0xb4, 0xd2,
-	0xfe, 0x0e, 0x6a, 0x4b, 0xeb, 0xf2, 0xe5, 0x9a, 0xec, 0xdf, 0x55, 0xd3, 0x9f, 0xd6, 0x62, 0x1b,
-	0x4c, 0x39, 0xe8, 0xf5, 0x2e, 0x52, 0x43, 0xbf, 0x82, 0x72, 0xcc, 0x13, 0x3e, 0x9b, 0xaf, 0xed,
-	0x6d, 0xa6, 0x93, 0x8c, 0x13, 0x31, 0x5f, 0x04, 0xe9, 0x33, 0x8c, 0x33, 0xa5, 0xfd, 0x4e, 0xf5,
-	0x4c, 0xed, 0xd8, 0x97, 0xf9, 0x76, 0x00, 0x9e, 0xd6, 0xad, 0xa4, 0x72, 0xe3, 0x8b, 0xe0, 0x99,
-	0x7b, 0x91, 0xe9, 0x74, 0x0a, 0xb5, 0x63, 0xdb, 0x60, 0x3e, 0xf0, 0x64, 0xbd, 0x03, 0x6a, 0x26,
-	0x65, 0xfc, 0xab, 0xdb, 0xff, 0x37, 0x00, 0x00, 0xff, 0xff, 0xd9, 0xdc, 0x28, 0x36, 0xe3, 0x09,
-	0x00, 0x00,
+var fileDescriptor_type_9840b0e3b8798b78 = []byte{
+	// 1089 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x56, 0xed, 0x6e, 0xe2, 0x46,
+	0x17, 0x06, 0x6c, 0x30, 0x1c, 0xbe, 0x26, 0xb3, 0xd9, 0x7d, 0x27, 0xaf, 0x54, 0x25, 0xf2, 0xaa,
+	0xdd, 0xa8, 0x5d, 0xa1, 0x86, 0x44, 0xd1, 0xaa, 0x3f, 0x2a, 0xe5, 0xb3, 0xa0, 0x12, 0x07, 0x4d,
+	0x20, 0x6a, 0x7f, 0xa1, 0xc1, 0x1e, 0x12, 0x2b, 0xc6, 0x58, 0xc6, 0xa4, 0x1b, 0xa9, 0xbd, 0xa3,
+	0x5e, 0x43, 0x6f, 0xa0, 0x17, 0xd5, 0x6a, 0x66, 0x3c, 0x0e, 0xee, 0x12, 0xe5, 0xdf, 0x3c, 0xe7,
+	0xf3, 0x39, 0x67, 0xce, 0x1c, 0x1b, 0x20, 0x79, 0x8a, 0x78, 0x27, 0x8a, 0x17, 0xc9, 0x02, 0x97,
+	0xa2, 0xa9, 0xfd, 0x67, 0x11, 0x9a, 0x67, 0x8b, 0x70, 0x99, 0xb0, 0x30, 0xb9, 0x65, 0xc1, 0x8a,
+	0xe3, 0xff, 0x83, 0xb5, 0x0a, 0x1f, 0xc2, 0xc5, 0x6f, 0x21, 0x29, 0xee, 0x15, 0xf7, 0x6b, 0xbd,
+	0x02, 0xd5, 0x02, 0xbc, 0x0d, 0xe6, 0x74, 0xb1, 0x08, 0x48, 0x69, 0xaf, 0xb8, 0x5f, 0xed, 0x15,
+	0xa8, 0x44, 0x98, 0x40, 0x65, 0x99, 0xc4, 0x7e, 0x78, 0x47, 0x8c, 0xd4, 0x21, 0xc5, 0x18, 0x83,
+	0xe1, 0x87, 0x09, 0x31, 0x53, 0xb1, 0x00, 0xf8, 0x1d, 0x94, 0x67, 0xc1, 0x82, 0x25, 0xa4, 0xbc,
+	0x57, 0xdc, 0x2f, 0xf6, 0x0a, 0x54, 0x41, 0x91, 0xd7, 0x5d, 0xcc, 0xa3, 0x80, 0x7f, 0x26, 0x15,
+	0x9d, 0x37, 0x15, 0x9c, 0x5a, 0x50, 0x7e, 0x14, 0xe4, 0xec, 0x1d, 0xb0, 0x46, 0x4f, 0x11, 0xa7,
+	0x7c, 0x86, 0x5b, 0x50, 0xf2, 0x3d, 0x49, 0xb1, 0x49, 0x4b, 0xbe, 0x67, 0xff, 0x65, 0x81, 0x29,
+	0x74, 0x98, 0x80, 0x15, 0x31, 0xf7, 0x81, 0xdd, 0x71, 0x55, 0x00, 0xd5, 0x10, 0x63, 0x30, 0x43,
+	0x36, 0xe7, 0x92, 0x7e, 0x8d, 0xca, 0x33, 0xee, 0xa8, 0x96, 0x4c, 0x58, 0x1c, 0xb3, 0x27, 0x59,
+	0x40, 0xbd, 0xdb, 0xec, 0x44, 0xd3, 0x8e, 0x88, 0x75, 0x22, 0x84, 0xbd, 0x02, 0xad, 0x25, 0x1a,
+	0x64, 0xf6, 0x53, 0xb6, 0xf4, 0x5d, 0x59, 0xd9, 0x9a, 0xfd, 0xa9, 0x10, 0x6a, 0x7b, 0x09, 0xf0,
+	0x7b, 0x68, 0x28, 0xfb, 0x95, 0x1f, 0x24, 0x7e, 0x28, 0xab, 0x16, 0xad, 0xab, 0x4b, 0x13, 0x25,
+	0xc4, 0xdf, 0x81, 0xf4, 0x98, 0xb8, 0xf7, 0x2c, 0x94, 0xd5, 0xd7, 0xbb, 0x0d, 0x1d, 0xf3, 0xec,
+	0x9e, 0x85, 0xbd, 0x02, 0xad, 0x26, 0xe9, 0x39, 0x63, 0xe0, 0x8a, 0x6b, 0x23, 0x56, 0x9e, 0x81,
+	0xbc, 0x4b, 0xcd, 0x40, 0x02, 0xfc, 0x7d, 0x1a, 0x7c, 0xb6, 0x0a, 0x5d, 0x52, 0x95, 0xe6, 0x5b,
+	0xda, 0xfc, 0xc6, 0xbf, 0x0b, 0x59, 0xb2, 0x8a, 0xb9, 0xce, 0x70, 0xb9, 0x0a, 0x5d, 0xfc, 0x03,
+	0xb4, 0xa4, 0x87, 0x1f, 0x26, 0x3c, 0x9e, 0x31, 0x97, 0x93, 0x5a, 0xde, 0xad, 0xaf, 0x15, 0xbd,
+	0x02, 0x6d, 0x26, 0xeb, 0x02, 0xfc, 0x31, 0x65, 0x17, 0xb0, 0x29, 0x0f, 0x08, 0x48, 0xbf, 0xba,
+	0xf6, 0xa3, 0x7c, 0xa6, 0xb9, 0x0d, 0x84, 0x1e, 0xef, 0x83, 0xcc, 0x3a, 0x99, 0xb3, 0x88, 0xd4,
+	0xf3, 0xb6, 0x57, 0x2c, 0x12, 0x23, 0x90, 0xa8, 0x23, 0xfe, 0x36, 0xad, 0x42, 0x5e, 0x60, 0x63,
+	0x53, 0x58, 0x19, 0xc9, 0x59, 0xbf, 0x53, 0x61, 0xeb, 0x91, 0x66, 0xbe, 0x43, 0xc2, 0xc2, 0xd3,
+	0x2c, 0x24, 0xc8, 0x58, 0x84, 0x7e, 0x40, 0x5a, 0x9b, 0x42, 0x4b, 0x16, 0x8e, 0x1f, 0x64, 0xb7,
+	0xa9, 0x07, 0xac, 0xbd, 0x7e, 0x9b, 0xc3, 0x74, 0xcc, 0x8e, 0xb4, 0xd1, 0x42, 0x36, 0x90, 0x20,
+	0x19, 0xb2, 0xad, 0x43, 0x0e, 0x95, 0x38, 0xf3, 0x52, 0x30, 0x6b, 0xfa, 0x52, 0x5f, 0x09, 0xd9,
+	0x7a, 0xf9, 0xae, 0x64, 0xd3, 0x33, 0x41, 0x56, 0xf0, 0x32, 0xf0, 0x5d, 0x4e, 0x70, 0xbe, 0xe0,
+	0x1b, 0x21, 0xd4, 0x05, 0x4b, 0x80, 0x0f, 0xa0, 0xae, 0xec, 0x93, 0x78, 0xe5, 0x26, 0xe4, 0x8d,
+	0x74, 0x68, 0x65, 0x0e, 0x52, 0xda, 0x2b, 0x50, 0x19, 0x54, 0xa1, 0x2c, 0x45, 0xb2, 0x8a, 0x02,
+	0x4e, 0xb6, 0xf3, 0x29, 0x46, 0x42, 0xa8, 0x53, 0x48, 0x90, 0xf5, 0xf4, 0x91, 0xc5, 0xe4, 0xed,
+	0x8b, 0x3d, 0xbd, 0x65, 0xf1, 0x69, 0x05, 0x4c, 0x71, 0xb4, 0x7f, 0x84, 0x5a, 0xf6, 0xe6, 0xf0,
+	0x2e, 0x98, 0x3c, 0xe0, 0x73, 0xf9, 0x82, 0xf3, 0xae, 0x54, 0x2a, 0x30, 0x02, 0x23, 0xe0, 0xa1,
+	0x7c, 0xca, 0x06, 0x15, 0x47, 0xfb, 0x6f, 0x43, 0x05, 0x50, 0xef, 0x6e, 0x5b, 0xac, 0x19, 0x76,
+	0xb7, 0x94, 0x11, 0xca, 0x54, 0x01, 0xfc, 0x0d, 0x98, 0x0f, 0x7e, 0xe8, 0x49, 0xb7, 0x56, 0x17,
+	0xe7, 0xde, 0x6d, 0xe7, 0x67, 0x3f, 0xf4, 0xa8, 0xd4, 0xdb, 0xff, 0x94, 0xc0, 0x14, 0x10, 0xd7,
+	0xc1, 0xea, 0x3b, 0xb7, 0x27, 0x83, 0xfe, 0x39, 0x2a, 0xe0, 0x2a, 0x98, 0xa7, 0xd7, 0xd7, 0x03,
+	0x54, 0xc4, 0x16, 0x18, 0x7d, 0x67, 0x84, 0x4a, 0xb8, 0x06, 0xe5, 0xbe, 0x33, 0x9a, 0x7c, 0x42,
+	0x06, 0x06, 0xa8, 0x88, 0xe3, 0xc1, 0x31, 0x32, 0xf5, 0xf9, 0xb0, 0x8b, 0xca, 0xfa, 0x7c, 0x7c,
+	0x84, 0x2a, 0x22, 0xc2, 0x58, 0x38, 0x5a, 0x42, 0x3a, 0x56, 0x9e, 0x55, 0x91, 0x64, 0x9c, 0xba,
+	0xd6, 0x32, 0x70, 0xd8, 0x45, 0x90, 0x81, 0xe3, 0x23, 0x54, 0xc7, 0x0d, 0xa8, 0x4a, 0x30, 0x1c,
+	0x51, 0xd4, 0x10, 0xe8, 0x72, 0x70, 0x7d, 0x22, 0x0d, 0x9b, 0xcf, 0xe8, 0xf8, 0x08, 0xb5, 0x70,
+	0x0b, 0xe0, 0xec, 0xfa, 0x6a, 0x38, 0xb8, 0xf8, 0x45, 0xe0, 0x36, 0x6e, 0x43, 0x5d, 0xe3, 0x83,
+	0xee, 0x27, 0x84, 0x44, 0xf6, 0x9b, 0x11, 0xed, 0x3b, 0x3f, 0xa1, 0x2d, 0x8c, 0xa1, 0x35, 0x76,
+	0x6e, 0x4e, 0x2e, 0x2f, 0x26, 0xc3, 0xeb, 0xbe, 0x33, 0xba, 0xa0, 0x08, 0x63, 0x04, 0x8d, 0xb1,
+	0x33, 0xfa, 0x75, 0x78, 0x71, 0x3e, 0x91, 0x15, 0xbf, 0x11, 0x21, 0xb4, 0x44, 0x14, 0xb0, 0xbd,
+	0x6e, 0x42, 0xc7, 0xce, 0x05, 0x7a, 0x8b, 0xb7, 0xa0, 0xa9, 0x25, 0x92, 0x0b, 0x7a, 0x87, 0xdf,
+	0x40, 0x5b, 0x8b, 0x52, 0x02, 0xe8, 0x7f, 0x2a, 0xa1, 0x12, 0xa6, 0x24, 0xc8, 0x7a, 0x78, 0xa7,
+	0x3f, 0x40, 0x3b, 0x36, 0x83, 0xaa, 0xde, 0x7e, 0xaf, 0x0f, 0xc3, 0x0e, 0x54, 0x97, 0x3c, 0xf4,
+	0x26, 0x9e, 0x1f, 0xab, 0x6f, 0x13, 0xb5, 0x04, 0x3e, 0xf7, 0x63, 0xa1, 0x8a, 0xb9, 0xfb, 0x28,
+	0x55, 0x86, 0x52, 0x09, 0x7c, 0xee, 0xc7, 0xf6, 0x58, 0xcd, 0x8b, 0xda, 0x92, 0xbb, 0x6a, 0x0a,
+	0x37, 0xe6, 0x10, 0x0a, 0xfc, 0x21, 0xfd, 0x06, 0xc9, 0x04, 0xe9, 0xb3, 0xcc, 0x7d, 0x39, 0x69,
+	0xfa, 0x8d, 0x8a, 0xa0, 0x99, 0xdb, 0x91, 0xf8, 0x18, 0x10, 0xff, 0x1c, 0x05, 0xbe, 0xeb, 0x27,
+	0x93, 0x39, 0x4f, 0xee, 0x17, 0x9e, 0x98, 0x4a, 0xe3, 0xbf, 0x69, 0xda, 0xda, 0xe8, 0x4a, 0xd9,
+	0xe0, 0x0f, 0x50, 0xe5, 0xf3, 0x29, 0xf7, 0x3c, 0x2e, 0x06, 0xf6, 0x0b, 0xfb, 0x4c, 0x69, 0xf7,
+	0xd5, 0x57, 0x51, 0xac, 0xc9, 0x57, 0x5b, 0xf5, 0x15, 0x18, 0x0f, 0xfc, 0x29, 0x2d, 0x22, 0xa7,
+	0x17, 0x72, 0xfb, 0x0f, 0xd5, 0x13, 0xbd, 0x17, 0xd7, 0x76, 0xee, 0x86, 0x88, 0xcf, 0x1b, 0x57,
+	0x77, 0xaf, 0xf4, 0x52, 0xf7, 0xbe, 0x06, 0x4b, 0x97, 0x6e, 0x7c, 0x59, 0x8a, 0xd6, 0xd9, 0x1d,
+	0xa8, 0xaf, 0xad, 0xc8, 0x57, 0xab, 0xb1, 0x7f, 0x57, 0xbd, 0x7e, 0xde, 0x84, 0xbb, 0x60, 0x8a,
+	0xeb, 0xdd, 0xe8, 0x21, 0x14, 0xf8, 0x3d, 0x54, 0x22, 0x16, 0xb3, 0xf9, 0x72, 0x53, 0x4b, 0x53,
+	0x95, 0x60, 0x1b, 0xf3, 0xe5, 0x2a, 0x48, 0x36, 0xb3, 0x4d, 0x75, 0xf6, 0x47, 0xd5, 0x2c, 0xb5,
+	0x53, 0x5f, 0xe5, 0x7a, 0x00, 0xf0, 0xbc, 0x5d, 0x05, 0x8f, 0x99, 0xcf, 0x83, 0xcd, 0xa3, 0x90,
+	0xaa, 0x74, 0x02, 0xb5, 0x51, 0x77, 0xc1, 0x7c, 0x64, 0xf1, 0x46, 0x7b, 0xa9, 0x98, 0x56, 0xe4,
+	0x6f, 0xdd, 0xe1, 0xbf, 0x01, 0x00, 0x00, 0xff, 0xff, 0xb6, 0xf6, 0xd2, 0x90, 0xe4, 0x09, 0x00,
+	0x00,
 }
