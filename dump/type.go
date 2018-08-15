@@ -5,6 +5,8 @@ import (
 	"go/ast"
 	"go/constant"
 	"go/types"
+	"math/big"
+	"strings"
 
 	"github.com/cretz/go-dump/pb"
 )
@@ -199,8 +201,20 @@ func (c *ConversionContext) ConvertTypeConstantValue(v constant.Value) *pb.Const
 	case constant.Int:
 		ret.Value = &pb.ConstantValue_Int{Int: v.ExactString()}
 	case constant.Float:
-		f, _ := constant.Float64Val(v)
-		ret.Value = &pb.ConstantValue_Float{Float: f}
+		// This can be a rational number, which is "a / b", which is not ok for us right now
+		str := v.ExactString()
+		if strings.Contains(str, "/") {
+			// Make into rat, divide as float, get text
+			rat, _ := new(big.Rat).SetString(str)
+			if rat == nil {
+				panic(fmt.Errorf("Unexpected bad rational string: %v", str))
+			}
+			// Similar to what constant package does
+			flt := new(big.Float).SetPrec(512).Quo(
+				new(big.Float).SetPrec(512).SetInt(rat.Num()), new(big.Float).SetPrec(512).SetInt(rat.Denom()))
+			str = flt.String()
+		}
+		ret.Value = &pb.ConstantValue_Float{Float: str}
 	case constant.Complex:
 		ret.Value = &pb.ConstantValue_Complex{Complex: v.ExactString()}
 	default:
