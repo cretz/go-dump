@@ -102,7 +102,7 @@ func (c *ConversionContext) ConvertType(t types.Type) *pb.Type {
 		}
 		return &pb.Type{Type: &pb.Type_TypeStruct{TypeStruct: st}}
 	case *types.Signature:
-		sig := &pb.TypeSignature{}
+		sig := &pb.TypeSignature{Variadic: v.Variadic()}
 		if recv := v.Recv(); recv != nil {
 			sig.Recv = c.ConvertTypeRef(recv)
 		}
