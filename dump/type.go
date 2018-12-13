@@ -170,8 +170,12 @@ func (c *ConversionContext) ConvertTypeObject(t types.Object) *pb.Type {
 	case *types.PkgName:
 		ret.Type = &pb.Type_TypePackage{TypePackage: true}
 	case *types.Var:
-		if t.Type() != nil {
-			ret.Type = &pb.Type_TypeVar{TypeVar: c.ConvertTypeRef(t.Type())}
+		if v.Type() != nil {
+			ret.Type = &pb.Type_TypeVar{TypeVar: &pb.TypeVar{
+				Name:     v.Name(),
+				Type:     c.ConvertTypeRef(v.Type()),
+				Embedded: v.Embedded(),
+			}}
 		}
 	default:
 		panic(fmt.Sprintf("Unknown type: %T", t))
